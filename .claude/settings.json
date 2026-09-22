@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(uv run:*)",
+      "Bash(uv run pytest:*)",
+      "Read",
+      "Write",
+      "Glob",
+      "Grep",
+      "Agent"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"$CLAUDE_PROJECT_DIR\" && uv run python .claude/hooks/validate_extraction.py",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  }
+}

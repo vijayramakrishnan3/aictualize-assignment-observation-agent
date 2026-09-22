@@ -1,0 +1,8 @@
+Message-ID: <1005.fixture@thyme>
+This line has no colon and breaks the strict parser
+Date: Tues, 32 Febuary 2001 25:61:00
+From: dave@example.com
+To: alice@example.com
+Subject: Broken header
+
+The header block above is not well formed but the body is fine.
