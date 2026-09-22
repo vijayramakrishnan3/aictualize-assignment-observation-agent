@@ -1,0 +1,4947 @@
+{
+ "generated_at": "2026-09-22T20:50:46Z",
+ "corpus_hash": "dcf6d96bd91e76a7baee9487c4d981fc81042c71",
+ "rate_per_hour": 85.0,
+ "artifact_threshold": 30.0,
+ "span_months": 27.38,
+ "frequency_basis": "active_window",
+ "frequency_note": "Each process is rated over its own active window, first matching message to last. The conservative figure divides by the full archive span instead.",
+ "totals": {
+  "messages": 3240,
+  "unique": 3198,
+  "duplicates": 42,
+  "undated": 3,
+  "processes": 15,
+  "opportunities": 15,
+  "above_threshold": 5,
+  "hours_per_month": 5.04,
+  "dollars_per_month": 426.87,
+  "hours_per_month_corpus_span": 2.09,
+  "dollars_per_month_corpus_span": 179.15
+ },
+ "processes": [
+  {
+   "process_id": "p01",
+   "name": "Extending or creating a Sitara deal ticket for meter flow with no covering deal",
+   "description": "Schedulers and volume management analysts find gas flowing at a meter that no active Sitara deal covers, because the ticket expired, the evergreen flag was never set, or no deal was ever entered, and email Daren Farmer to extend the prior deal or create a new one so the volume can be allocated and paid. 15 minutes because each request means pulling the meter's deal history in Sitara, confirming the date range, and re-entering or extending the ticket, which the batch estimates put between 10 and 20.",
+   "actors": [
+    "daren.farmer@enron.com",
+    "jackie.young@enron.com",
+    "aimee.lannou@enron.com",
+    "mary.poorman@enron.com",
+    "charlotte.hawkins@enron.com",
+    "stella.morris@enron.com",
+    "michael.olsen@enron.com"
+   ],
+   "stall": "Nothing links measured flow to an active deal, so every gap is found by a person reading a flow report or the UA4 report and then waits in Daren's inbox until he traces the meter and re-keys the ticket.",
+   "match_rule": {
+    "subject_regex": "",
+    "body_any": [
+     "extend sitara deal",
+     "extend deal",
+     "extend the deal",
+     "extend this deal",
+     "extend that deal",
+     "flow with no nom",
+     "without a nom",
+     "without a deal",
+     "but there is no deal",
+     "evergreen flag",
+     "ua4"
+    ],
+    "from_any": []
+   },
+   "minutes_per_instance": 15.0,
+   "expected_matches": [
+    "2ccf3e9de5dd",
+    "8f6a51a09b44",
+    "bd77d5723ce5",
+    "c3fb116d26be",
+    "a081ad55db4e"
+   ],
+   "evidence": [
+    {
+     "message_id": "2ccf3e9de5dd",
+     "quote": "Can you please extend sitara deal ticket 16888 to the 15th?  14 dec. flowed\non this day.",
+     "from": "jackie.young@enron.com",
+     "date": "2000-02-17",
+     "subject": "98-6892 Overflow",
+     "path": "farmer-d/logistics/806."
+    },
+    {
+     "message_id": "833ea24c1a58",
+     "quote": "This deal expired 3/2000.  There was no new deal # referenced nor was the\nevergreen flag applied.\n\nThis meter flowed 556 MMBTU's on April 1, 2000.",
+     "from": "jackie.young@enron.com",
+     "date": "2000-04-03",
+     "subject": "980432",
+     "path": "farmer-d/logistics/1005."
+    },
+    {
+     "message_id": "8f6a51a09b44",
+     "quote": "98-6892 has a spill-over of 15 decatherms for 5/24/2000.  Can you please\nextend deal ticket 274443 for cover this?",
+     "from": "jackie.young@enron.com",
+     "date": "2000-05-31",
+     "subject": "98-6892",
+     "path": "farmer-d/logistics/1158."
+    },
+    {
+     "message_id": "4b18dcf16fe4",
+     "quote": "Daren - canyou get a deal set up for meter 5593 for Aug 00?  There has been a\nsmall amount of flow everyday.",
+     "from": "aimee.lannou@enron.com",
+     "date": "2000-08-29",
+     "subject": "Meter 5593",
+     "path": "farmer-d/logistics/1372."
+    },
+    {
+     "message_id": "bd77d5723ce5",
+     "quote": "Daren - meter 1517 has a nom of 0/day for Jan.  It flowed about 5.400 on day\n1. This is a valid flow.  Could you please extend the deal from Dec. (deal #\n506192) or create a new one?  Thanks.",
+     "from": "aimee.lannou@enron.com",
+     "date": "2001-01-02",
+     "subject": "Meter 1517",
+     "path": "farmer-d/logistics/2023."
+    },
+    {
+     "message_id": "c3fb116d26be",
+     "quote": "Daren - meter 6387 for Dec. 00 has flow with no nom.  Avg flow is 273/day.\nLast deal associated with this meter was 519467 in Nov. 00 for Duke Energy\nTrading & Mktg. There is also a little bit of flow on 1/1 and 1/2.  Please\nlet me know if you create a new deal or extend the current one.",
+     "from": "aimee.lannou@enron.com",
+     "date": "2001-01-09",
+     "subject": "Meter 6387 - Dec 00",
+     "path": "farmer-d/logistics/2039."
+    },
+    {
+     "message_id": "a081ad55db4e",
+     "quote": "For Dec. and Jan. production there are flow volumes without a deal.  Deal\n502952 was good for November.  Do you want to extend this deal or should\nthere be another counterparty added?",
+     "from": "michael.olsen@enron.com",
+     "date": "2001-02-05",
+     "subject": "meter 986315",
+     "path": "farmer-d/logistics/2078."
+    },
+    {
+     "message_id": "d84b70fd3ab2",
+     "quote": "We are currently working to clear some UA4 issues for 1998.",
+     "from": "aimee.lannou@enron.com",
+     "date": "2000-01-11",
+     "subject": "UA4 - 1998",
+     "path": "farmer-d/logistics/669."
+    }
+   ],
+   "match_rule_error": null,
+   "match_count": 68,
+   "matched_message_ids": [
+    "0970428b624a",
+    "d84b70fd3ab2",
+    "d6130ec3f858",
+    "a7666e0a8721",
+    "9e8670ff2498",
+    "2ccf3e9de5dd",
+    "1cf5f56c8bca",
+    "d70dc2e00d70",
+    "73955fa8ace2",
+    "e85fc593962d",
+    "76c4e6401eff",
+    "34d9730cdf58",
+    "0d427a91eb88",
+    "efb963c9e224",
+    "d98a0a9c820d",
+    "6645ccf1e244",
+    "e4946958c5ec",
+    "833ea24c1a58",
+    "9a5b44a43b3a",
+    "5b75cb17f5a9",
+    "35bbe6fda06a",
+    "af234c48792c",
+    "e878b070d6d1",
+    "a26a74a7caea",
+    "8f6a51a09b44",
+    "2ea6c24ec1dd",
+    "6c6a634d91fa",
+    "57c4fa7f1b77",
+    "faf0ee1be8c4",
+    "a40a3551918b",
+    "649f44ea1070",
+    "6ee461104dd8",
+    "c97f65a22452",
+    "d3b71d833dfd",
+    "01b2a501ae1c",
+    "331384374f3a",
+    "e695e22fc6cb",
+    "abe9968b4c47",
+    "3d17ee2d22f5",
+    "e9db60e298c4",
+    "b97213f58b92",
+    "191e328ce931",
+    "6e5bc9797547",
+    "8521253697a1",
+    "961556dcdada",
+    "d0451d6e0365",
+    "da6d47ed4720",
+    "4b9d79d9170a",
+    "4df078892e1b",
+    "1fa8d7048a97",
+    "4bd39a97e7bf",
+    "de995f1a7f18",
+    "bd77d5723ce5",
+    "89274ca4a243",
+    "c3fb116d26be",
+    "071a1dc2a4ad",
+    "0c21f6ec1008",
+    "8640d7bf1c56",
+    "9f9bdf10a8c0",
+    "a081ad55db4e",
+    "0722c2238747",
+    "3ad22a3ad33c",
+    "16f3a11b90c6",
+    "5f71eca6de7a",
+    "64f28aeb06b0",
+    "982aa1087a6a",
+    "298ab8cd07d2",
+    "89b436dc85ee"
+   ],
+   "first_match": "1999-12-27",
+   "last_match": "2001-11-08",
+   "active_months": 22.41,
+   "instances_per_month": 3.03,
+   "instances_per_month_corpus_span": 2.48,
+   "expected_matches_missed": []
+  },
+  {
+   "process_id": "p02",
+   "name": "Unaccounted for Gas writeoff approvals for stray meter volumes",
+   "description": "Clem Cernosek in Logistics finds small volumes booked to the HPL Strangers Gas Contract at meters with no deal for the month, and sends Daren Farmer a per-meter statement asking him to supply a deal or sign and return a printed approval to write the volume off to Unaccounted for Gas. 20 minutes because each case needs the meter's flow history pulled, checked against Sitara, and a paper form signed and returned, and the two batch estimates were 15 and 20.",
+   "actors": [
+    "clem.cernosek@enron.com",
+    "daren.farmer@enron.com"
+   ],
+   "stall": "Each stray volume is handled as its own case through a printed sign-and-return form, often months after the flow, instead of a threshold rule or a routed digital approval.",
+   "match_rule": {
+    "subject_regex": "",
+    "body_any": [
+     "writeoff",
+     "strangers gas"
+    ],
+    "from_any": []
+   },
+   "minutes_per_instance": 20.0,
+   "expected_matches": [
+    "85141cb3f0e2",
+    "36912cbd53cf",
+    "b7ed38f73dea",
+    "c4e883d4c147"
+   ],
+   "evidence": [
+    {
+     "message_id": "85141cb3f0e2",
+     "quote": "Currently, these volumes are being booked under the HPL Strangers Gas\nContract.  Logistics needs either a deal to record these volumes which have\nflowed into HPL's Pipeline or  Logistics need approval to writeoff these\nvolumes to Unaccounted for Gas.",
+     "from": "clem.cernosek@enron.com",
+     "date": "2000-08-18",
+     "subject": "HPL Meter #985355 Brown Common Point",
+     "path": "farmer-d/logistics/1346."
+    },
+    {
+     "message_id": "36912cbd53cf",
+     "quote": "Currently, this\nvolume is booked to the HPL Strangers Gas Contract.  Logistics needs approval\nto writeoff this volume to Unaccounted for Gas Loss.",
+     "from": "clem.cernosek@enron.com",
+     "date": "2000-11-07",
+     "subject": "HPL Meter #981525 Texoma D/P- GSU HPL",
+     "path": "farmer-d/logistics/1499."
+    },
+    {
+     "message_id": "b7ed38f73dea",
+     "quote": "On 11/30/99, the above meter has recorded flow of 26 Mmbtus.   There were no\ndeals at this meter during November 1999 or December 1999.  Logistics needs\napproval to writeoff these volumes to Unaccounted for Gas.",
+     "from": "clem.cernosek@enron.com",
+     "date": "2000-12-14",
+     "subject": "HPL Meter #980417 HPL/KMID - SEVEN OAKS",
+     "path": "farmer-d/logistics/1974."
+    },
+    {
+     "message_id": "c4e883d4c147",
+     "quote": "On 4/18/99, the above meter recorded flow of 101 Mmbtus.  There were no deals\nat this meter during  March, April, or May 1999.   Logistics needs approval\nto writeoff these volumes to Unaccounted for Gas.",
+     "from": "clem.cernosek@enron.com",
+     "date": "2000-12-14",
+     "subject": "HPL Meter #985369 TAFT PLANT RESID ARCO HPL",
+     "path": "farmer-d/logistics/1975."
+    }
+   ],
+   "match_rule_error": null,
+   "match_count": 36,
+   "matched_message_ids": [
+    "6267751eb549",
+    "ae0cad8613a8",
+    "e6aa13b96801",
+    "7f5feff24efa",
+    "85141cb3f0e2",
+    "36912cbd53cf",
+    "414f4dc86cfd",
+    "fb7988cdfc8e",
+    "435aa3f570da",
+    "2031ec898149",
+    "3cc9e0461bb6",
+    "b7ed38f73dea",
+    "c4e883d4c147",
+    "961556dcdada",
+    "c2548feed9f5",
+    "d0451d6e0365",
+    "4363c049bacb",
+    "475973244488",
+    "abba148154c0",
+    "6adce1893124",
+    "4bd39a97e7bf",
+    "dfc277e28e4d",
+    "29d86e0f347d",
+    "0bc114d335cf",
+    "61dd30531394",
+    "233dcdaf3d00",
+    "7becfe409d8c",
+    "db52c42cd1da",
+    "509b52eaee2c",
+    "de8466dfff4f",
+    "0c2508e9c50b",
+    "73179b9d9bd6",
+    "2fc075d76f91",
+    "b1c04209c35e",
+    "0ce9ef59fe52",
+    "c411a56c9dc5"
+   ],
+   "first_match": "2000-03-11",
+   "last_match": "2001-10-31",
+   "active_months": 19.69,
+   "instances_per_month": 1.83,
+   "instances_per_month_corpus_span": 1.31,
+   "expected_matches_missed": []
+  },
+  {
+   "process_id": "p03",
+   "name": "Counterparty and plant nominations received as attachments and re-keyed",
+   "description": "Calpine sends a daily and monthly gas nomination as a Word document, TXU sends a daily HPL nomination spreadsheet, and Enron Methanol sends a monthly plant nomination, and a scheduler has to open each one and key the volumes into the scheduling system by hand. 10 minutes because the email body carries no usable data, so each nomination is opened, read, and re-entered, and the batch estimates ranged from 5 to 15.",
+   "actors": [
+    "rickya@calpine.com",
+    "timpowell@txu.com",
+    "michael.mitcham@enron.com",
+    "robert.lloyd@enron.com",
+    "aimee.lannou@enron.com",
+    "daren.farmer@enron.com"
+   ],
+   "stall": "Nominations arrive only as attached documents or prose, sometimes after a phone call that already said the same thing, so every one is opened and re-keyed into the scheduling system instead of flowing in.",
+   "match_rule": {
+    "subject_regex": "",
+    "body_any": [
+     "gas nomination 1.doc",
+     "calpine monthly gas",
+     "nominates the following requirements",
+     "(see attached file: hpl"
+    ],
+    "from_any": []
+   },
+   "minutes_per_instance": 10.0,
+   "expected_matches": [
+    "e9273e5803f6",
+    "b582989db190",
+    "46ffd7ec1d8f",
+    "1291e4d7e37d",
+    "6f8f1a18931d"
+   ],
+   "evidence": [
+    {
+     "message_id": "e9273e5803f6",
+     "quote": "- CALPINE DAILY GAS NOMINATION 1.doc",
+     "from": "rickya@calpine.com",
+     "date": "1999-12-14",
+     "subject": "Calpine Daily Gas Nomination",
+     "path": "farmer-d/logistics/579."
+    },
+    {
+     "message_id": "87fa4d84ce2d",
+     "quote": "- CALPINE MONTHLY GAS NOMINATION___.doc",
+     "from": "rickya@calpine.com",
+     "date": "1999-12-28",
+     "subject": "Calpine January 2000 Nomination",
+     "path": "farmer-d/logistics/619."
+    },
+    {
+     "message_id": "b582989db190",
+     "quote": "(See attached file: hpl1228.xls)",
+     "from": "timpowell@txu.com",
+     "date": "1999-12-27",
+     "subject": "HPL Nominations for December 28, 1999",
+     "path": "farmer-d/logistics/615."
+    },
+    {
+     "message_id": "1bf6aa982b2a",
+     "quote": "(See attached file: hpl0118.xls)",
+     "from": "timpowell@txu.com",
+     "date": "2000-01-17",
+     "subject": "HPL Nomination for January 18, 2000",
+     "path": "farmer-d/logistics/688."
+    },
+    {
+     "message_id": "46ffd7ec1d8f",
+     "quote": "Enron Methanol Company nominates the following requirements for the Methanol",
+     "from": "michael.mitcham@enron.com",
+     "date": "1999-12-21",
+     "subject": "01/00 NATURAL GAS NOMINATION",
+     "path": "farmer-d/logistics/607."
+    },
+    {
+     "message_id": "6f8f1a18931d",
+     "quote": "As we spoke about by phone, here is the nomination, Thanks. <<CALPINE DAILY\nGAS NOMINATION 1.doc>>",
+     "from": "rickya@calpine.com",
+     "date": "2000-04-10",
+     "subject": "Calpine Daily Gas Nomination",
+     "path": "farmer-d/logistics/1027."
+    },
+    {
+     "message_id": "1291e4d7e37d",
+     "quote": "<<CALPINE DAILY GAS NOMINATION 1.doc>>\n\nRICKY A. ARCHER\nFuel Supply",
+     "from": "rickya@calpine.com",
+     "date": "2000-08-10",
+     "subject": "Calpine Daily Gas Nomination",
+     "path": "farmer-d/logistics/1329."
+    }
+   ],
+   "match_rule_error": null,
+   "match_count": 30,
+   "matched_message_ids": [
+    "e9273e5803f6",
+    "46ffd7ec1d8f",
+    "b582989db190",
+    "87fa4d84ce2d",
+    "573cdc6daa81",
+    "b2f31522f678",
+    "1bf6aa982b2a",
+    "3ce1d00cb80e",
+    "8790664c769e",
+    "719bcc9491e0",
+    "3b719121be49",
+    "42eaf7cb7346",
+    "6f8f1a18931d",
+    "b832d3a0db9e",
+    "7594ae3f19c3",
+    "c02c4ca7c626",
+    "2b7f28f139fb",
+    "5fcbc9bca9a2",
+    "31fe2a451bc9",
+    "1291e4d7e37d",
+    "bc8b9813a510",
+    "b1b09441b09e",
+    "4d7236dcfcd6",
+    "d7a0d20e4769",
+    "577e0b304c8f",
+    "5ed257dee4c6",
+    "52dac75843d4",
+    "9ce0bfbe246a",
+    "f3ef4c7d2b8a",
+    "d9e7fbe0a6d3"
+   ],
+   "first_match": "1999-12-14",
+   "last_match": "2001-04-19",
+   "active_months": 16.17,
+   "instances_per_month": 1.86,
+   "instances_per_month_corpus_span": 1.1,
+   "expected_matches_missed": []
+  },
+  {
+   "process_id": "p04",
+   "name": "Revising nominations when actual flow, plant output, or pipeline cuts change",
+   "description": "Schedulers revise nominated volumes by hand when a well or customer's metered flow drifts, when the Methanol or MTBE plant goes down or ramps up, or when a pipeline such as El Paso on Oasis cuts volumes, each announced in a prose email that someone reads and acts on. 10 minutes because each change is a quick read and a manual volume edit, which is what every batch estimate settled on.",
+   "actors": [
+    "daren.farmer@enron.com",
+    "tom.acton@enron.com",
+    "lauri.allen@enron.com",
+    "maritta.mullet@enron.com",
+    "mark.mccoy@enron.com"
+   ],
+   "stall": "There is no feed from wells, plants, or pipeline confirmations into the nomination system, so a person has to notice the change, relay it by email, and re-key the nomination or MOPS estimate.",
+   "match_rule": {
+    "subject_regex": "",
+    "body_any": [
+     "nom revised",
+     "plant went down",
+     "making spec product",
+     "full production",
+     "was cut:",
+     "(cut of",
+     "changed the volume"
+    ],
+    "from_any": []
+   },
+   "minutes_per_instance": 10.0,
+   "expected_matches": [
+    "6bbe1ee3b5aa",
+    "b44260517fee",
+    "820e9fcc6f02",
+    "6fcfcde2f76c",
+    "ee63969afbb2"
+   ],
+   "evidence": [
+    {
+     "message_id": "6bbe1ee3b5aa",
+     "quote": "want to look at getting this nom revised for the rest of the month.",
+     "from": "lauri.allen@enron.com",
+     "date": "2000-02-16",
+     "subject": "Meter 9682",
+     "path": "farmer-d/logistics/802."
+    },
+    {
+     "message_id": "b44260517fee",
+     "quote": "Daren I since you were at the offsite I went ahead and changed the volume\ndown to 12,400 from 13,000.",
+     "from": "tom.acton@enron.com",
+     "date": "2000-02-16",
+     "subject": "Re: 1st rev Feb. 2000 Josey Ranch nom",
+     "path": "farmer-d/logistics/803."
+    },
+    {
+     "message_id": "820e9fcc6f02",
+     "quote": "The Methanol Plant is up and making spec product.  Rates will be increased to\nfull rates on Thursday, March 30, if oxygen is available.",
+     "from": "maritta.mullet@enron.com",
+     "date": "2000-03-27",
+     "subject": "MeOH Upsets",
+     "path": "farmer-d/logistics/971."
+    },
+    {
+     "message_id": "6fcfcde2f76c",
+     "quote": "The MTBE plant went down about 1 a.m. on Saturday morning, May 20, as a\nresult of power failure.",
+     "from": "maritta.mullet@enron.com",
+     "date": "2000-05-22",
+     "subject": "MTBE PLANT SHUT-DOWN",
+     "path": "farmer-d/logistics/1128."
+    },
+    {
+     "message_id": "ee63969afbb2",
+     "quote": "Some of the gas purchased from Dynegy on gas day 6/6 was cut:\n\n9B5P\n\n662 cut to 599\n10,000 cut to 9,061",
+     "from": "mark.mccoy@enron.com",
+     "date": "2000-06-07",
+     "subject": "El Paso cuts on Oasis",
+     "path": "farmer-d/logistics/1182."
+    },
+    {
+     "message_id": "eb79a4d126dc",
+     "quote": "6/8/00\n9J49  Exxon 6,500 cut to 6,016\n(cut of 484)\n202K\nOasis kept delivery whole",
+     "from": "mark.mccoy@enron.com",
+     "date": "2000-06-13",
+     "subject": "El Paso Cuts to Oasis",
+     "path": "farmer-d/logistics/1201."
+    }
+   ],
+   "match_rule_error": null,
+   "match_count": 13,
+   "matched_message_ids": [
+    "816e51d7b91a",
+    "6bbe1ee3b5aa",
+    "b44260517fee",
+    "a1a05c91035b",
+    "2ae5f84262da",
+    "820e9fcc6f02",
+    "23dd08673e9e",
+    "6fcfcde2f76c",
+    "8ffd4d3be85a",
+    "ee63969afbb2",
+    "eb79a4d126dc",
+    "dae76d82962f",
+    "ceb059b75cb9"
+   ],
+   "first_match": "2000-01-21",
+   "last_match": "2001-02-01",
+   "active_months": 12.4,
+   "instances_per_month": 1.05,
+   "instances_per_month_corpus_span": 0.47,
+   "expected_matches_missed": []
+  },
+  {
+   "process_id": "p05",
+   "name": "Reconciling volume imbalances and variances with counterparties and interconnects",
+   "description": "HPL Logistics and Transwestern staff chase volume, allocation, and imbalance differences between MOPS and POPS, and with counterparties and interconnecting pipelines such as PG&E Texas, TXU Lone Star, Hesco, and El Paso at Mojave, by re-sending allocation data, spreadsheets, and faxes until each variance closes. 30 minutes because each round means pulling records from two systems, contacting the counterparty, and reallocating by hand, set between the 15 minute El Paso exchanges and the 45 minute MOPS and POPS investigations.",
+   "actors": [
+    "sherlyn.schumack@enron.com",
+    "stacey.neuweiler@enron.com",
+    "charlotte.hawkins@enron.com",
+    "daren.farmer@enron.com",
+    "michelle.lokay@enron.com",
+    "susan.mayher@elpaso.com"
+   ],
+   "stall": "Nominated and actual volumes are not diffed automatically, so variances surface weeks or months later and sit open with no owner or deadline while one side keeps re-sending the same data.",
+   "match_rule": {
+    "subject_regex": "",
+    "body_any": [
+     "imbalance numbers",
+     "variance on",
+     "mojave interconnect",
+     "mirrored meters",
+     "shortpaid",
+     "still unresolved",
+     "faxed the daily"
+    ],
+    "from_any": []
+   },
+   "minutes_per_instance": 30.0,
+   "expected_matches": [
+    "d98a0a9c820d",
+    "a6d7e21df5fe",
+    "4252f367e060",
+    "b27f5fb123c8",
+    "6645ccf1e244"
+   ],
+   "evidence": [
+    {
+     "message_id": "2e3fb8bd2b59",
+     "quote": "Daren you are correct in that this was only in MOPS for the 26th.  It was",
+     "from": "charlotte.hawkins@enron.com",
+     "date": "2000-02-14",
+     "subject": "Re: Sale to Shoreline",
+     "path": "farmer-d/logistics/792."
+    },
+    {
+     "message_id": "d98a0a9c820d",
+     "quote": "In reviewing some of the imbalance numbers, I discovered that Valero Texoma",
+     "from": "lauri.allen@enron.com",
+     "date": "2000-03-21",
+     "subject": "PG&E Texoma Volumes",
+     "path": "farmer-d/logistics/925."
+    },
+    {
+     "message_id": "6645ccf1e244",
+     "quote": "We do have a problem with some of our mirrored meters.  When MIPS receives an",
+     "from": "charlotte.hawkins@enron.com",
+     "date": "2000-03-21",
+     "subject": "Re: PG&E Texoma Volumes",
+     "path": "farmer-d/logistics/928."
+    },
+    {
+     "message_id": "a6d7e21df5fe",
+     "quote": "this issue is still unresolved as well as a 6,000 variance on\ncontract 5098-695.",
+     "from": "sherlyn.schumack@enron.com",
+     "date": "2000-03-28",
+     "subject": "PG&E Texas contract 5095-037 for 2/00",
+     "path": "farmer-d/logistics/972."
+    },
+    {
+     "message_id": "9627c322fee7",
+     "quote": "I have sent several emails, faxed the daily's and left\nvoice messages, but have not received any updates to this issue.",
+     "from": "sherlyn.schumack@enron.com",
+     "date": "2000-05-22",
+     "subject": "Re: PG&E Texas contract 5098-695 for 2/00",
+     "path": "farmer-d/logistics/1126."
+    },
+    {
+     "message_id": "b27f5fb123c8",
+     "quote": "I am working on clearing an old TXU Lone Star/Gas Distribution balance from\n8/99 and 9/99.  We originally billed TXU on nominated quantities and they\nhave shortpaid us due to meter adjustments.",
+     "from": "rebecca.griffin@enron.com",
+     "date": "2000-12-07",
+     "subject": "TXU Lone Star",
+     "path": "farmer-d/logistics/1554."
+    },
+    {
+     "message_id": "4252f367e060",
+     "quote": "Here is a spreadsheet that will hopefully help with reconciling the Mojave interconnect.  Let's talk soon.",
+     "from": "michelle.lokay@enron.com",
+     "date": "2002-01-24",
+     "subject": "Mojave Imbalances",
+     "path": "lokay-m/sent_items/29."
+    }
+   ],
+   "match_rule_error": null,
+   "match_count": 8,
+   "matched_message_ids": [
+    "d98a0a9c820d",
+    "6645ccf1e244",
+    "df2fb4eba0bb",
+    "a6d7e21df5fe",
+    "9627c322fee7",
+    "b27f5fb123c8",
+    "848b9a0810c5",
+    "4252f367e060"
+   ],
+   "first_match": "2000-03-21",
+   "last_match": "2002-01-24",
+   "active_months": 22.16,
+   "instances_per_month": 0.36,
+   "instances_per_month_corpus_span": 0.29,
+   "expected_matches_missed": []
+  },
+  {
+   "process_id": "p06",
+   "name": "Correcting Sitara deal prices and charges to match invoices and statements",
+   "description": "Settlements and counterparties find a price, rate, or demand charge in Sitara that does not match the counterparty invoice, confirmation, or actualized pipeline statement, and email the desk to verify the right figure and re-key it into Sitara, including a standing monthly EnerVest rate change. 15 minutes because each fix is a deal lookup, a comparison against the source document, and a manual edit plus confirmation, which four of the five batch estimates chose.",
+   "actors": [
+    "katherine.herrera@enron.com",
+    "cynthia.hakemack@enron.com",
+    "megan.parker@enron.com",
+    "kevin.drachenberg@enron.com",
+    "tricia.truong@enron.com",
+    "daren.farmer@enron.com",
+    "darron.giron@enron.com"
+   ],
+   "stall": "The correct number already exists on the invoice or in settlements' spreadsheet, but nothing compares it to Sitara, so each mismatch is spotted by eye, emailed over, and re-typed before the invoice can go out.",
+   "match_rule": {
+    "subject_regex": "",
+    "body_any": [
+     "invoiced hpl",
+     "confirm the pricing",
+     "verify the pricing",
+     "confirm the price",
+     "changed in sitara",
+     "sitara demand charges",
+     "change rate on",
+     "the deal in sitara"
+    ],
+    "from_any": []
+   },
+   "minutes_per_instance": 15.0,
+   "expected_matches": [
+    "1e5f47d1b14d",
+    "6b8515f6426a",
+    "2dd4a40887e5",
+    "37caf7d83d0e",
+    "cf856acdac89"
+   ],
+   "evidence": [
+    {
+     "message_id": "1e5f47d1b14d",
+     "quote": "Daren, Conoco invoiced HPL at $5.87 for 03/23 at PGEV/Waha and deal ticket 685350 shows $4.87.  Can you confirm the price?  Thanks.",
+     "from": "cynthia.hakemack@enron.com",
+     "date": "2001-04-12",
+     "subject": "HPL/Conoco - Teco Waha 03/23/01 Purchase",
+     "path": "farmer-d/logistics/181."
+    },
+    {
+     "message_id": "6b8515f6426a",
+     "quote": "Daren, BP invoiced HPL at $4.955 for the deal below, and Sitara shows $4.95.  Can you please verify the pricing?  Thanks.",
+     "from": "cynthia.hakemack@enron.com",
+     "date": "2001-05-07",
+     "subject": "S709101 - 04/03/01",
+     "path": "farmer-d/logistics/147."
+    },
+    {
+     "message_id": "2dd4a40887e5",
+     "quote": "Please confirm the pricing for TXU Gas deal #646679 for March 8, 2001.  We are currently showing the Katy Hub Gas Daily Midpoint for that day, but TXU shows the Waha Hub Gas Daily Midpoint.",
+     "from": "rebecca.griffin@enron.com",
+     "date": "2001-04-24",
+     "subject": "TXU Gas Distribution deal #646679",
+     "path": "farmer-d/logistics/164."
+    },
+    {
+     "message_id": "c69b464ea2e0",
+     "quote": "For June, I need a couple of things changed in Sitara:\nDeal 819592 - the commodity price needs to be 3.6318",
+     "from": "valerie.vela@enron.com",
+     "date": "2001-08-17",
+     "subject": "RE: error repairs",
+     "path": "farmer-d/logistics/74."
+    },
+    {
+     "message_id": "37caf7d83d0e",
+     "quote": "Please update the Sitara demand charges on the following deals to match the\nactualized pipeline statements:\n\n#131389 -    $172,588.94\n#131405 - $1,297,419.61",
+     "from": "darron.giron@enron.com",
+     "date": "2000-07-18",
+     "subject": "Re: Peoples/North Shore - 6/00 Transportation - Sitara demand charge adjustments",
+     "path": "giron-d/sent/738."
+    },
+    {
+     "message_id": "cf856acdac89",
+     "quote": "Could you please change rate on the above Sitara to $4.878216 for Oct. 00\nproduction?",
+     "from": "darron.giron@enron.com",
+     "date": "2000-11-21",
+     "subject": "Re: EnerVest S# 27239",
+     "path": "giron-d/sent/469."
+    },
+    {
+     "message_id": "d00a08ab5c7c",
+     "quote": "Can you please\nupdate the deal in Sitara to reflect the correct price for 03/01?",
+     "from": "darron.giron@enron.com",
+     "date": "2001-04-09",
+     "subject": "Re: 03/01 Price Update - # 27253",
+     "path": "giron-d/sent/81."
+    }
+   ],
+   "match_rule_error": null,
+   "match_count": 13,
+   "matched_message_ids": [
+    "7f5feff24efa",
+    "37caf7d83d0e",
+    "e8fea4b16107",
+    "ed01a0f0c821",
+    "cf856acdac89",
+    "4cb59d9ffccf",
+    "6bef9c0df335",
+    "d00a08ab5c7c",
+    "1e5f47d1b14d",
+    "360892eb96a0",
+    "2dd4a40887e5",
+    "6b8515f6426a",
+    "c69b464ea2e0"
+   ],
+   "first_match": "2000-06-22",
+   "last_match": "2001-08-17",
+   "active_months": 13.84,
+   "instances_per_month": 0.94,
+   "instances_per_month_corpus_span": 0.47,
+   "expected_matches_missed": []
+  },
+  {
+   "process_id": "p07",
+   "name": "Monthly activity driver and hours survey for the cost model",
+   "description": "Financial Operations sends every RC manager a monthly activity driver survey and hours survey, plus an RC report review, with a hard return date, then sends reminders and follow-up questions to whoever is late or unclear. 20 minutes because each response means estimating the team's hours and driver counts and filling the spreadsheet by hand, the middle of the 15 to 30 minute batch estimates.",
+   "actors": [
+    "shari.mao@enron.com",
+    "james.scribner@enron.com",
+    "lisa.cousino@enron.com",
+    "suzanne.nicholie@enron.com",
+    "daren.farmer@enron.com"
+   ],
+   "stall": "Nothing carries forward from last month or from system activity counts, so every manager reconstructs hours and drivers from memory and Financial Operations chases each late response individually.",
+   "match_rule": {
+    "subject_regex": "",
+    "body_any": [
+     "driver survey",
+     "opm survey",
+     "survey for each position",
+     "attached survey",
+     "review your rc reports"
+    ],
+    "from_any": []
+   },
+   "minutes_per_instance": 20.0,
+   "expected_matches": [
+    "4edc3274cefb",
+    "d8a0b9665f4a",
+    "fdf8e5c374e3",
+    "c5bbb0fdf8e5",
+    "12a66104da87"
+   ],
+   "evidence": [
+    {
+     "message_id": "12a66104da87",
+     "quote": "For the month of March, please provide a\ncompleted \"Hours\" survey for each position within your group.  This survey\nwill collect the  time your team spent on performing their activities in the\nmonth of March.",
+     "from": "shari.mao@enron.com",
+     "date": "2000-03-31",
+     "subject": "March Surveys",
+     "path": "farmer-d/logistics/997."
+    },
+    {
+     "message_id": "4edc3274cefb",
+     "quote": "Please fill out the attached activity\ndriver survey with May numbers for your RC and return to Shari Mao by end of\nday Friday, June 2.",
+     "from": "james.scribner@enron.com",
+     "date": "2000-05-30",
+     "subject": "May Activity Survey",
+     "path": "farmer-d/logistics/1154."
+    },
+    {
+     "message_id": "d8a0b9665f4a",
+     "quote": "Please fill out the attached activity\ndriver survey with June numbers for your RC and return to Shari Mao by end of\nday Friday, July 7,",
+     "from": "shari.mao@enron.com",
+     "date": "2000-06-27",
+     "subject": "Activity Survey - June 2000",
+     "path": "farmer-d/logistics/1244."
+    },
+    {
+     "message_id": "fdf8e5c374e3",
+     "quote": "Please fill\nout the attached activity driver survey with July numbers for your RC and\nreturn to Shari Mao by end of day Friday, August 11.",
+     "from": "james.scribner@enron.com",
+     "date": "2000-08-03",
+     "subject": "July Activity Driver Survey",
+     "path": "farmer-d/logistics/1319."
+    },
+    {
+     "message_id": "c5bbb0fdf8e5",
+     "quote": "As a reminder, today is the deadline for completion of the OPM Survey.",
+     "from": "james.scribner@enron.com",
+     "date": "2000-10-06",
+     "subject": "OPM Survey",
+     "path": "farmer-d/logistics/1445."
+    },
+    {
+     "message_id": "aa9da649ffc5",
+     "quote": "One more thing I need for each of you to do.  Please review your RC reports",
+     "from": "lisa.cousino@enron.com",
+     "date": "2000-02-22",
+     "subject": "Purchasing Computer Equipment",
+     "path": "farmer-d/logistics/825."
+    },
+    {
+     "message_id": "733b7d6922f6",
+     "quote": "We are starting to collect data for April.  The attached survey drives your\ncosts from your activities to the commercial teams.",
+     "from": "shari.mao@enron.com",
+     "date": "2000-05-02",
+     "subject": "April Activity Surveys",
+     "path": "farmer-d/logistics/1084."
+    }
+   ],
+   "match_rule_error": null,
+   "match_count": 12,
+   "matched_message_ids": [
+    "aa9da649ffc5",
+    "087ce5243857",
+    "899e3a760c0c",
+    "12a66104da87",
+    "733b7d6922f6",
+    "4edc3274cefb",
+    "22016ee5a25e",
+    "d8a0b9665f4a",
+    "fdf8e5c374e3",
+    "ff3a0450aa0f",
+    "c5bbb0fdf8e5",
+    "e4381fe3be96"
+   ],
+   "first_match": "2000-02-22",
+   "last_match": "2000-10-10",
+   "active_months": 7.58,
+   "instances_per_month": 1.58,
+   "instances_per_month_corpus_span": 0.44,
+   "expected_matches_missed": []
+  },
+  {
+   "process_id": "p08",
+   "name": "Weekend and holiday on-call notes written up after the shift",
+   "description": "The scheduler who covered the weekend or holiday on-call shift writes a call-by-call narrative of gas control pages, cuts, and well issues and emails it to the desk on Monday, and recipients then check each meter it mentions against the system. 30 minutes because the whole weekend is reconstructed from memory or scattered notes after the fact, and two of the three batch estimates said 30.",
+   "actors": [
+    "robert.cotten@enron.com",
+    "mary.poorman@enron.com",
+    "michael.olsen@enron.com",
+    "robert.lloyd@enron.com",
+    "tom.acton@enron.com",
+    "daren.farmer@enron.com"
+   ],
+   "stall": "Nothing is logged as the calls happen, so the narrative is rebuilt afterward in free text and every recipient has to cross-check the meters by hand.",
+   "match_rule": {
+    "subject_regex": "",
+    "body_any": [
+     "notes from this weekend",
+     "on-call notes",
+     "received a page from",
+     "notified by gas control",
+     "received a call from"
+    ],
+    "from_any": []
+   },
+   "minutes_per_instance": 30.0,
+   "expected_matches": [
+    "0c4428ce9278",
+    "6d98361e6ed8",
+    "afb2990b7e07",
+    "978821804a23"
+   ],
+   "evidence": [
+    {
+     "message_id": "0c4428ce9278",
+     "quote": "Attached are the notes from this weekend.",
+     "from": "robert.lloyd@enron.com",
+     "date": "2000-08-14",
+     "subject": "On Call Notes for Weekend Dated ; August 12th thru 13th",
+     "path": "farmer-d/logistics/1334."
+    },
+    {
+     "message_id": "e8fea4b16107",
+     "quote": "Here are my notes, please let me know if you have any questions.",
+     "from": "mary.poorman@enron.com",
+     "date": "2000-08-28",
+     "subject": "Weekend Notes",
+     "path": "farmer-d/logistics/1369."
+    },
+    {
+     "message_id": "6d98361e6ed8",
+     "quote": "Friday 1/19/01 - Received a call from Sheila at Basin regarding a well which\nmay be coming on this weekend (meter 9696).  Phone Lee in Gas Control\nregarding same.",
+     "from": "mary.poorman@enron.com",
+     "date": "2001-01-22",
+     "subject": "Weekend OnCall Notes",
+     "path": "farmer-d/logistics/2050."
+    },
+    {
+     "message_id": "7dffc1a5ad97",
+     "quote": "Saturday:\n\nMark from Aquilla was short 5000 into the Valero Hub and it appeared that\nPG&E may have to cut Aquilla's delivery into us, but Mark was able to get the\n5000 he needed to make the delivery.",
+     "from": "michael.olsen@enron.com",
+     "date": "2001-03-05",
+     "subject": "On Call Notes",
+     "path": "farmer-d/logistics/2110."
+    },
+    {
+     "message_id": "afb2990b7e07",
+     "quote": "Friday 3/23 - Received a page from Silver in Gas Control at 8:00 pm regarding the Gulf Plains Plant.  They were cut into another pipeline (Tennessee), and wanted to overdeliver to us by 10M for the night.",
+     "from": "mary.poorman@enron.com",
+     "date": "2001-03-26",
+     "subject": "On Call Notes",
+     "path": "farmer-d/logistics/210."
+    },
+    {
+     "message_id": "978821804a23",
+     "quote": "Friday - April 13th\n\n6:00pm Notified by gas control that we needed to deliver to Centana for operational reasons, approx. 30-50 MMBTU rate.",
+     "from": "mark.mccoy@enron.com",
+     "date": "2001-04-16",
+     "subject": "On Call Notes April 13th-15th",
+     "path": "farmer-d/logistics/180."
+    }
+   ],
+   "match_rule_error": null,
+   "match_count": 9,
+   "matched_message_ids": [
+    "a90e5e2cc93d",
+    "0c4428ce9278",
+    "8521253697a1",
+    "06fbe9e608fd",
+    "6d98361e6ed8",
+    "01a43c7da73d",
+    "afb2990b7e07",
+    "978821804a23",
+    "72e8fa165c92"
+   ],
+   "first_match": "2000-01-17",
+   "last_match": "2001-07-28",
+   "active_months": 18.31,
+   "instances_per_month": 0.49,
+   "instances_per_month_corpus_span": 0.33,
+   "expected_matches_missed": []
+  },
+  {
+   "process_id": "p09",
+   "name": "Out of office coverage handoff notices",
+   "description": "Before a vacation or absence, each scheduler writes a note naming who covers their meters, pipelines, or accounts, with extensions and pager numbers, and sends it to the desk. 10 minutes because the coverage list is retyped from scratch each time, which both batch estimates agreed on.",
+   "actors": [
+    "aimee.lannou@enron.com",
+    "carlos.rodriguez@enron.com",
+    "robert.lloyd@enron.com",
+    "mark.mccoy@enron.com",
+    "daren.farmer@enron.com"
+   ],
+   "stall": "There is no standing coverage roster, so every absence means rewriting who covers what and how to reach them.",
+   "match_rule": {
+    "subject_regex": "",
+    "body_any": [
+     "i will be on vacation",
+     "i will be out on vacation",
+     "i will be out of the",
+     "in my absence",
+     "backing me up",
+     "my back up"
+    ],
+    "from_any": []
+   },
+   "minutes_per_instance": 10.0,
+   "expected_matches": [
+    "061a91d5ed81",
+    "71e2b417d6b9",
+    "093071741743",
+    "08a02ffda803",
+    "dabe5d15b570"
+   ],
+   "evidence": [
+    {
+     "message_id": "061a91d5ed81",
+     "quote": "I will be on vacation Friday, June 2 through  Monday, June 12.  In my absence\nplease direct any questions or issues to these people.",
+     "from": "aimee.lannou@enron.com",
+     "date": "2000-05-31",
+     "subject": "Vacation",
+     "path": "farmer-d/logistics/3215."
+    },
+    {
+     "message_id": "71e2b417d6b9",
+     "quote": "I will be out on vacation the week of July 3, back at the office on July\n10th. My main contact will be Stella Morris at ext. 3319.",
+     "from": "carlos.rodriguez@enron.com",
+     "date": "2000-06-29",
+     "subject": "Vacation",
+     "path": "farmer-d/logistics/3217."
+    },
+    {
+     "message_id": "093071741743",
+     "quote": "FYI-- I will be out of the office Wednesday, Feb. 7th through Friday the 9th,\nreturning on Monday.\n\nMary Poorman and Tom Acton will be backing me up.",
+     "from": "mark.mccoy@enron.com",
+     "date": "2001-02-06",
+     "subject": "Out of the Office 7th-9th",
+     "path": "farmer-d/logistics/2079."
+    },
+    {
+     "message_id": "08a02ffda803",
+     "quote": "I will be out of the office from 3/15 thru 3/25 on vacation. If you have any\nquestions Mike Olsen ext - 35796 will be the point person.",
+     "from": "carlos.rodriguez@enron.com",
+     "date": "2001-03-14",
+     "subject": "OTO",
+     "path": "farmer-d/logistics/2117."
+    },
+    {
+     "message_id": "dabe5d15b570",
+     "quote": "I will be on vacation from Thursday 5/10 thru Wednesday 5/16. Tom Acton will be my back up  713-571-3256, pager 713-707-3527 and Bob Cotten will do the NNGB (Black Marlin) and help Tom.",
+     "from": "carlos.rodriguez@enron.com",
+     "date": "2001-05-09",
+     "subject": "Out of the office",
+     "path": "farmer-d/logistics/142."
+    }
+   ],
+   "match_rule_error": null,
+   "match_count": 33,
+   "matched_message_ids": [
+    "8f80c23e12f7",
+    "5357386f5d2a",
+    "273e24f542f3",
+    "9e77aad94411",
+    "889fd1d474cd",
+    "f89415abc5fb",
+    "df505218aff7",
+    "dfdb672f5ed1",
+    "cfb48fc3ed7c",
+    "061a91d5ed81",
+    "71e2b417d6b9",
+    "20aa19d37b98",
+    "5977bb6b1d1c",
+    "f34e719c7e23",
+    "d77fb256220b",
+    "1d29ff4e8cb2",
+    "5c3d9a242324",
+    "2fd583637667",
+    "dd49803de1c3",
+    "28e125e44770",
+    "7f03a67c7a87",
+    "338dd8f940c6",
+    "093071741743",
+    "08a02ffda803",
+    "dabe5d15b570",
+    "c18aad4baccc",
+    "6786051465c6",
+    "aa6069b03ba8",
+    "9f09a277aafe",
+    "6df6c056e52f",
+    "1402a320ba3e",
+    "1cc15907d6b3",
+    "5868136f61a4"
+   ],
+   "first_match": "1999-12-15",
+   "last_match": "2002-01-25",
+   "active_months": 25.37,
+   "instances_per_month": 1.3,
+   "instances_per_month_corpus_span": 1.21,
+   "expected_matches_missed": []
+  },
+  {
+   "process_id": "p10",
+   "name": "Trading book, curve, and access setup requests in Tagg, TDS, and RiskTrac",
+   "description": "Desk controllers and traders email the Tagg, TDS, and RiskTrac administrators to create books and curves, map books to traders and EOL products, update the Book Admin list, and grant access, and during the Netco and UBS transition they rebuilt access matrices and curve mappings and re-pointed macros after each rename. 20 minutes because each request means spelling out naming, mappings, and user lists, then following up until it is live, the most common batch estimate across the range of 10 to 30.",
+   "actors": [
+    "darron.giron@enron.com",
+    "kam.keiser@enron.com",
+    "m..love@enron.com",
+    "susan.trevino@enron.com",
+    "gary.stadler@enron.com",
+    "jeremy.wong@enron.com",
+    "burton.mcintyre@enron.com"
+   ],
+   "stall": "Setup is not self service, so every book, curve, or access change is an email to whichever admin currently owns it, often incomplete and sent back for another round.",
+   "match_rule": {
+    "subject_regex": "",
+    "body_any": [
+     "book to tagg",
+     "added to tagg",
+     "set up in tds",
+     "book admin list",
+     "book requests",
+     "separate books",
+     "eol product",
+     "mapped to curves",
+     "copy physical macro",
+     "refresh booklist"
+    ],
+    "from_any": []
+   },
+   "minutes_per_instance": 20.0,
+   "expected_matches": [
+    "31eb3e8bfefe",
+    "3981f4d6af91",
+    "460269329baa",
+    "07a67cfb7b3f",
+    "b91e90955d7d"
+   ],
+   "evidence": [
+    {
+     "message_id": "31eb3e8bfefe",
+     "quote": "Please add the following book to Tagg:\n\n IM-CENT-MID2",
+     "from": "darron.giron@enron.com",
+     "date": "2000-06-14",
+     "subject": "New Tagg Book",
+     "path": "giron-d/sent/772."
+    },
+    {
+     "message_id": "3981f4d6af91",
+     "quote": "I set up these new curves this morning and need them added to Tagg\n\n NGI-MOJAVE\n GDP-MOJAVE\n GDP-PGE/TOPOCK",
+     "from": "darron.giron@enron.com",
+     "date": "2000-12-07",
+     "subject": "New West Curves",
+     "path": "giron-d/sent/411."
+    },
+    {
+     "message_id": "460269329baa",
+     "quote": "I need to have FT-DENVER set up in TDS.  The trader is Jay Reitmeyer.  There\nare two Tagg books that need to be mapped to this:  FT-DENVER and\nINTRA-DENVER.",
+     "from": "darron.giron@enron.com",
+     "date": "2001-01-11",
+     "subject": "Denver in TDS",
+     "path": "giron-d/sent/337."
+    },
+    {
+     "message_id": "07a67cfb7b3f",
+     "quote": "Please add Elizabeth Shim to the Book Admin list on the Web sight.  Her Tagg\nuser name is:  ESHIM.  Thanks.",
+     "from": "darron.giron@enron.com",
+     "date": "2001-05-04",
+     "subject": "Updated Book Admin",
+     "path": "giron-d/sent/18."
+    },
+    {
+     "message_id": "b91e90955d7d",
+     "quote": "These are book requests for the Netco books for all regions.",
+     "from": "kam.keiser@enron.com",
+     "date": "2002-01-04",
+     "subject": "new book req",
+     "path": "giron-d/inbox/161."
+    },
+    {
+     "message_id": "f1e6e6f16bcc",
+     "quote": "Check your regions and if you see any locations mapped to curves we won't be setting anymore, make a list of those and what the new mappings should be.",
+     "from": "kam.keiser@enron.com",
+     "date": "2002-01-07",
+     "subject": "sitara mappings",
+     "path": "giron-d/inbox/155."
+    },
+    {
+     "message_id": "4d81aa465ccf",
+     "quote": "We need to assign EOL products to traders.",
+     "from": "kam.keiser@enron.com",
+     "date": "2002-01-11",
+     "subject": "EOL products",
+     "path": "giron-d/inbox/132."
+    },
+    {
+     "message_id": "ad871179f11a",
+     "quote": "you may need to edit your Copy Physical Macro in your P&L's that are saved in the Netco/Regions folder",
+     "from": "d..winfree@enron.com",
+     "date": "2002-01-30",
+     "subject": "Heads up",
+     "path": "giron-d/inbox/50."
+    }
+   ],
+   "match_rule_error": null,
+   "match_count": 18,
+   "matched_message_ids": [
+    "156ba70a7abe",
+    "998068ef036f",
+    "31eb3e8bfefe",
+    "824f8022df7b",
+    "d8c3eff015eb",
+    "3981f4d6af91",
+    "460269329baa",
+    "07a67cfb7b3f",
+    "453132c39451",
+    "5c10a6f86068",
+    "b91e90955d7d",
+    "1881cb19a399",
+    "f1e6e6f16bcc",
+    "4d81aa465ccf",
+    "0d6111a4b2b8",
+    "ad871179f11a",
+    "3b47654876ab",
+    "8bba16dea5a0"
+   ],
+   "first_match": "2000-03-28",
+   "last_match": "2002-02-04",
+   "active_months": 22.27,
+   "instances_per_month": 0.81,
+   "instances_per_month_corpus_span": 0.66,
+   "expected_matches_missed": []
+  },
+  {
+   "process_id": "p11",
+   "name": "Moving deals between books and linking deal numbers across Tagg, Sitara, SCI, and EOL",
+   "description": "The desk flags deals that sit in the wrong book and must be flipped into FT-US/CAND-ERMS or, after the bankruptcy filing, moved into the bankruptcy books, and separately chases missing cross-references so each deal carries its Tagg, Sitara, SCI, and EOL numbers. 15 minutes because a single flip or link is about 10 minutes and the bankruptcy moves ran longer at 25, so 15 reflects the typical request.",
+   "actors": [
+    "darron.giron@enron.com",
+    "stacey.vallejo@enron.com",
+    "carole.frank@enron.com",
+    "stacey.richardson@enron.com",
+    "cecilia.cheung@enron.com",
+    "m..love@enron.com"
+   ],
+   "stall": "The list of deals to move or link lives in someone's head or a spreadsheet rather than in Tagg, so deals are missed and moved only after a second or third reminder email.",
+   "match_rule": {
+    "subject_regex": "",
+    "body_any": [
+     "flipped",
+     "flip these",
+     "bankruptcy book",
+     "link field",
+     "link up all deals"
+    ],
+    "from_any": []
+   },
+   "minutes_per_instance": 15.0,
+   "expected_matches": [
+    "c31f511e108f",
+    "edd075957b31",
+    "3b622b6efc87",
+    "84f9d6656bc9",
+    "374338c78618"
+   ],
+   "evidence": [
+    {
+     "message_id": "c31f511e108f",
+     "quote": "I've come across this deal that needs to be flipped right away.\nThis deal is in the MGMT-WEST book with Aquila Canada Corp. and\nENA.  It needs to be in the FT-US/CAND-ERMS book settling between\nECC and Aquila Canada Corp.",
+     "from": "darron.giron@enron.com",
+     "date": "2001-03-05",
+     "subject": "Re: Q50979.1",
+     "path": "giron-d/sent/168."
+    },
+    {
+     "message_id": "edd075957b31",
+     "quote": "I just came across one more deal that needs to be flipped.\n\nQU4190.1",
+     "from": "darron.giron@enron.com",
+     "date": "2001-03-28",
+     "subject": "Re: G-Daily-EST book",
+     "path": "giron-d/sent/110."
+    },
+    {
+     "message_id": "3b622b6efc87",
+     "quote": "The WEST-PERM deals have been flipped.",
+     "from": "darron.giron@enron.com",
+     "date": "2001-05-02",
+     "subject": "Re: Deals to be flipped to FT-US/CAND-ERMS book right away.",
+     "path": "giron-d/sent/23."
+    },
+    {
+     "message_id": "84f9d6656bc9",
+     "quote": "Attached please find some \"stragglers\" that need to moved into the bankruptcy books.",
+     "from": "stacey.richardson@enron.com",
+     "date": "2002-01-25",
+     "subject": "more deals to move to bankruptcy books",
+     "path": "giron-d/inbox/72."
+    },
+    {
+     "message_id": "374338c78618",
+     "quote": "2923 deals with NG-PRICE book attached have been moved to the Bankruptcy bookand retranslated successfully.",
+     "from": "cecilia.cheung@enron.com",
+     "date": "2002-01-24",
+     "subject": "RE: 6 more counterparties to move",
+     "path": "giron-d/inbox/82."
+    },
+    {
+     "message_id": "3bff55c13fd2",
+     "quote": "Please remember to link up all deals.  By this, I mean Tagg numbers in\nSitara, Sitara numbers in Tagg, Tagg numbers in SCI, and especially EOL\nnumbers in Tagg.",
+     "from": "darron.giron@enron.com",
+     "date": "2000-10-17",
+     "subject": "Reminder",
+     "path": "giron-d/sent/591."
+    },
+    {
+     "message_id": "b974ef09ec82",
+     "quote": "The deals look good in both Tagg and Sitara, but the link field in Tagg has\nnot been populated with the Sitara number.  When will this be ready?",
+     "from": "darron.giron@enron.com",
+     "date": "2000-12-20",
+     "subject": "Re: confirmation of deals",
+     "path": "giron-d/sent/383."
+    }
+   ],
+   "match_rule_error": null,
+   "match_count": 23,
+   "matched_message_ids": [
+    "37e8d1123e8a",
+    "3bff55c13fd2",
+    "b974ef09ec82",
+    "eebc6d94499d",
+    "76855166e6fc",
+    "d6bd4ff4fc0e",
+    "61aad4260cbe",
+    "c31f511e108f",
+    "edd075957b31",
+    "3b622b6efc87",
+    "c9fb746c080e",
+    "dcaeedb14be3",
+    "1ca622d825e7",
+    "8ef3ad5a859a",
+    "8d711ce7b013",
+    "56f4c1f8a99c",
+    "20a285af1149",
+    "374338c78618",
+    "84f9d6656bc9",
+    "3144838be86b",
+    "1ab32515f63b",
+    "1059914da808",
+    "cc97b98a4d8a"
+   ],
+   "first_match": "2000-08-10",
+   "last_match": "2002-01-31",
+   "active_months": 17.71,
+   "instances_per_month": 1.3,
+   "instances_per_month_corpus_span": 0.84,
+   "expected_matches_missed": []
+  },
+  {
+   "process_id": "p12",
+   "name": "Real-time power desk short and long position notices",
+   "description": "Bill Williams emails the real-time group whenever the desk is short or long for an upcoming day, with megawatts, prices, delivery points, and the book, and traders then buy or sell and key the deals into Enpower and CAPS. 15 minutes because each notice means pulling positions, confirming prices with other desks, and re-keying the result into two systems, which both batch estimates said.",
+   "actors": [
+    "bill.williams@enron.com",
+    "kate.symes@enron.com"
+   ],
+   "stall": "Positions are typed into free-text emails and re-keyed by hand into Enpower and CAPS, with follow-up emails whenever the day's shape changes.",
+   "match_rule": {
+    "subject_regex": "",
+    "body_any": [
+     "we are short",
+     "we are long",
+     "we will be short",
+     "we will be long"
+    ],
+    "from_any": []
+   },
+   "minutes_per_instance": 15.0,
+   "expected_matches": [
+    "affa2dd11baa",
+    "3593d0497185",
+    "439d7e125bd2",
+    "6789811edc8d",
+    "5845610dc77c"
+   ],
+   "evidence": [
+    {
+     "message_id": "affa2dd11baa",
+     "quote": "We are long 25 mws on peak for 06/27/01 in SP-15.  This should be in CAPS under ST-WBOM, deals should be under ST-WBOM in Enpower as well.",
+     "from": "bill.williams@enron.com",
+     "date": "2001-06-27",
+     "subject": "Length for Wednesday",
+     "path": "williams-w3/sent_items/466."
+    },
+    {
+     "message_id": "3593d0497185",
+     "quote": "We are short 50 mws in SP-15 for HE 7-22 on Wednesday at $61.44.  Please purchase this 50 mws under ST-WBOM.",
+     "from": "bill.williams@enron.com",
+     "date": "2001-07-11",
+     "subject": "Short for 07/11/01 at SP-15",
+     "path": "williams-w3/sent_items/414."
+    },
+    {
+     "message_id": "439d7e125bd2",
+     "quote": "We are short 25 mws in SP15 at $43 for Tuesday.  I am unsure if ST-CALI is doing anything.\nWe are short 25 mws at PV at @$50 with ST-SW on EPE lending for Tuesday.",
+     "from": "bill.williams@enron.com",
+     "date": "2001-08-13",
+     "subject": "Lending at PV and SP",
+     "path": "williams-w3/sent_items/310."
+    },
+    {
+     "message_id": "6789811edc8d",
+     "quote": "Kate,\nWe are short 3 pieces tomorrow at $27.20, $28.00, and a piece at the ST-CALI index.",
+     "from": "bill.williams@enron.com",
+     "date": "2001-10-17",
+     "subject": "Short, Long",
+     "path": "williams-w3/sent_items/171."
+    },
+    {
+     "message_id": "5845610dc77c",
+     "quote": "Kate,\nWe are short 2 pieces of BOM at SP-15 7-22.\nPrice of $27.20 and $28.00.\nWe are also short 1 daily piece in SP-15 at the ST-CALI index price.",
+     "from": "bill.williams@enron.com",
+     "date": "2001-10-15",
+     "subject": "Lending for 10/16/01",
+     "path": "williams-w3/sent_items/175."
+    }
+   ],
+   "match_rule_error": null,
+   "match_count": 20,
+   "matched_message_ids": [
+    "df2fb4eba0bb",
+    "464380bf8dd4",
+    "78acf74975c5",
+    "edeeb14a3ee3",
+    "affa2dd11baa",
+    "3593d0497185",
+    "0a5285e8d676",
+    "c61aebbefd59",
+    "ad0d1600ceea",
+    "a3a5930ea0cd",
+    "9e9ed973e1d8",
+    "9f38bc39dba6",
+    "439d7e125bd2",
+    "93939ee3eede",
+    "39c7b428c338",
+    "5845610dc77c",
+    "6789811edc8d",
+    "e1a90c73e034",
+    "e73725e7949c",
+    "5226bfec407f"
+   ],
+   "first_match": "2000-03-22",
+   "last_match": "2001-11-14",
+   "active_months": 19.76,
+   "instances_per_month": 1.01,
+   "instances_per_month_corpus_span": 0.73,
+   "expected_matches_missed": []
+  },
+  {
+   "process_id": "p13",
+   "name": "Reconciling real-time congestion revenue and Enpower deals against settlements",
+   "description": "Bill Williams hand-calculates CAISO congestion relief revenue and checks it against the inc sheet and the flash, and separately compares Enpower deal entries with the PMA sheet, the DPR, and the SAR to get double entries, wrong prices, and counterparty changes corrected by settlements. 20 minutes because each case means pulling CAISO or settlement data, comparing it line by line, and writing up the specific deals and dollars, which most batch estimates chose.",
+   "actors": [
+    "bill.williams@enron.com",
+    "jim.reyes@enron.com",
+    "kourtney.nelson@enron.com",
+    "darren.cavanaugh@enron.com",
+    "virginia.thompson@enron.com",
+    "heather.dunton@enron.com"
+   ],
+   "stall": "CAISO awards and Enpower deal changes are not reconciled against the settlement records automatically, so revenue goes missing from the flash until Bill compares the two by hand and chases a fix.",
+   "match_rule": {
+    "subject_regex": "",
+    "body_any": [
+     "congestion revenue",
+     "congestion that we relieved",
+     "pma sheet",
+     "bom sar",
+     "new deal summary"
+    ],
+    "from_any": []
+   },
+   "minutes_per_instance": 20.0,
+   "expected_matches": [
+    "d963c25b9710",
+    "0365cbab23e0",
+    "4debc9c2f9cc",
+    "d908e32bce60",
+    "d2933ba141a4"
+   ],
+   "evidence": [
+    {
+     "message_id": "038407f3df33",
+     "quote": "I just wanted to bring to your attention the volume of congestion that we relieved last night.\nIt looks like 28 mws at $198 and 75 mws at $223.00.\nThis should be at total revenue of $22,269.00.",
+     "from": "bill.williams@enron.com",
+     "date": "2001-08-07",
+     "subject": "Congestion",
+     "path": "williams-w3/sent_items/322."
+    },
+    {
+     "message_id": "d963c25b9710",
+     "quote": "We have congestion revenue again for 08_07.\nWe moved 272 mws at $194.\nTotal revenue should be $52768.",
+     "from": "bill.williams@enron.com",
+     "date": "2001-08-08",
+     "subject": "Congestion for 08-07",
+     "path": "williams-w3/sent_items/318."
+    },
+    {
+     "message_id": "0365cbab23e0",
+     "quote": "We are missing the congestion revenue from HE 7 on Saturday morning (10 mws at $99.00) in the flash we received yesterday.  Remember, the awarded congestion wheel caused the 10 mw variance we discussed on Monday.",
+     "from": "bill.williams@enron.com",
+     "date": "2001-08-15",
+     "subject": "Congestion for Saturday",
+     "path": "williams-w3/sent_items/302."
+    },
+    {
+     "message_id": "4debc9c2f9cc",
+     "quote": "Darren,\nCould you meet with me regarding congestion revenue for 10/05?\nWe had two wheels that were not in the inc sheet but were awarded by the CAISO and are in finals in CAPS.",
+     "from": "bill.williams@enron.com",
+     "date": "2001-10-08",
+     "subject": "Congestion Revenue for 10/05",
+     "path": "williams-w3/sent_items/194."
+    },
+    {
+     "message_id": "d908e32bce60",
+     "quote": "We have resolved almost all of the recent PMA sheet.  The Tacoma/MPC deal is fine if its zeroed out for HE 3.  I just need to have the cost zeroed out as well as the revenue.",
+     "from": "bill.williams@enron.com",
+     "date": "2001-07-06",
+     "subject": "PMA's",
+     "path": "williams-w3/sent_items/424."
+    },
+    {
+     "message_id": "d2933ba141a4",
+     "quote": "We had some double deal-entry last night under the ST-WBOM book.  Consequently I zeroed the following deals out this morning after receiving the DPR and running a BOM SAR.",
+     "from": "bill.williams@enron.com",
+     "date": "2001-06-29",
+     "subject": "Adjustments for ST-WBOM for 06/27/01",
+     "path": "williams-w3/sent_items/453."
+    },
+    {
+     "message_id": "cd021560b0d1",
+     "quote": "First, for deal #549162, this deal was originally put in incorrectly as counterparty TacomaSupp.  This counterparty was then changed to Tacomapubuit.  Why does a change in counterparty result in a loss of revenue?",
+     "from": "bill.williams@enron.com",
+     "date": "2001-07-03",
+     "subject": "PMA's",
+     "path": "williams-w3/sent_items/442."
+    }
+   ],
+   "match_rule_error": null,
+   "match_count": 14,
+   "matched_message_ids": [
+    "d2933ba141a4",
+    "d908e32bce60",
+    "85543dff4916",
+    "2bf23b5872ec",
+    "83b622674d2f",
+    "a4f2e6e743b1",
+    "038407f3df33",
+    "d963c25b9710",
+    "0365cbab23e0",
+    "237aa65cd92f",
+    "aa6069b03ba8",
+    "4debc9c2f9cc",
+    "7cc075b316f3",
+    "0093a2b108a7"
+   ],
+   "first_match": "2001-06-29",
+   "last_match": "2001-11-15",
+   "active_months": 4.58,
+   "instances_per_month": 3.06,
+   "instances_per_month_corpus_span": 0.51,
+   "expected_matches_missed": []
+  },
+  {
+   "process_id": "p14",
+   "name": "Weekly California Capacity Report",
+   "description": "Michelle Lokay compiles Transwestern and El Paso delivery volumes by point, capacity percentages, and Gas Daily prices into the same report and sends it to the same distribution list every week. 30 minutes because the volumes and four price lines come from separate sources and are hand-typed into the template each week, as the batch estimate said.",
+   "actors": [
+    "michelle.lokay@enron.com"
+   ],
+   "stall": "The same data is gathered from separate sources and retyped into an identical email format every week.",
+   "match_rule": {
+    "subject_regex": "",
+    "body_any": [
+     "average deliveries to california",
+     "san juan lateral throughput"
+    ],
+    "from_any": []
+   },
+   "minutes_per_instance": 30.0,
+   "expected_matches": [
+    "86c805170e90",
+    "a5fb48e9c2c6",
+    "b16581b00998"
+   ],
+   "evidence": [
+    {
+     "message_id": "86c805170e90",
+     "quote": "Transwestern's average deliveries to California were 945 MMBtu/d (87%), with San Juan lateral throughput at 865 MMBtu/d.  Total East deliveries averaged 525 MMBtu/d.",
+     "from": "michelle.lokay@enron.com",
+     "date": "2001-10-26",
+     "subject": "California Capacity Report for Week of 10/22-10/26",
+     "path": "lokay-m/inbox/10."
+    },
+    {
+     "message_id": "a5fb48e9c2c6",
+     "quote": "Transwestern's average deliveries to California were 1122 MMBtu/d (103%), with San Juan lateral throughput at 844 MMBtu/d.  Total East deliveries averaged 270 MMBtu/d.",
+     "from": "michelle.lokay@enron.com",
+     "date": "2001-12-14",
+     "subject": "California Capacity Report for Week of 12/10-12/14",
+     "path": "lokay-m/sent_items/18."
+    },
+    {
+     "message_id": "b16581b00998",
+     "quote": "Transwestern's average deliveries to California were 884 MMBtu/d (81%), with San Juan lateral throughput at 773 MMBtu/d.  Total East deliveries averaged 391 MMBtu/d.",
+     "from": "michelle.lokay@enron.com",
+     "date": "2002-03-22",
+     "subject": "California Capacity Report for Week of 03/18-03/22",
+     "path": "lokay-m/inbox/32."
+    }
+   ],
+   "match_rule_error": null,
+   "match_count": 16,
+   "matched_message_ids": [
+    "86c805170e90",
+    "a5fb48e9c2c6",
+    "84e4da1d95b5",
+    "aa6500eea824",
+    "8692bc3347b1",
+    "f846d37fa8a1",
+    "d88fbf82c0b9",
+    "5add4afaa304",
+    "927df30838ea",
+    "dcb884e59f4d",
+    "2e97be5cde00",
+    "0a8ab81323a5",
+    "9ca9c242541e",
+    "e800bfa76bf5",
+    "2d68b14ed0c2",
+    "b16581b00998"
+   ],
+   "first_match": "2001-10-26",
+   "last_match": "2002-03-22",
+   "active_months": 4.83,
+   "instances_per_month": 3.31,
+   "instances_per_month_corpus_span": 0.58,
+   "expected_matches_missed": []
+  },
+  {
+   "process_id": "p15",
+   "name": "Daily Energy Market Report forward to the West power desk",
+   "description": "Jill Chatterton opens the Economic Insight Energy Market Report PDF each trading day and forwards it unchanged to the same West Desk distribution list. 3 minutes because it is a straight forward with no editing, which both batch estimates agreed on, and the cost comes from repeating it every day.",
+   "actors": [
+    "jill.chatterton@enron.com"
+   ],
+   "stall": "The report is forwarded by hand each morning instead of being routed to the list when it arrives.",
+   "match_rule": {
+    "subject_regex": "",
+    "body_any": [
+     "energy market report"
+    ],
+    "from_any": []
+   },
+   "minutes_per_instance": 3.0,
+   "expected_matches": [
+    "1c3b3d510170",
+    "8e2e1e5ce651",
+    "309449405256",
+    "c8376d50b73d"
+   ],
+   "evidence": [
+    {
+     "message_id": "1c3b3d510170",
+     "quote": "Subject: Energy Market Report - 01/29/02\n\nEnergy Market Report\nTuesday, January 29, 2002\n\n*See attached pdf file.",
+     "from": "jill.chatterton@enron.com",
+     "date": "2002-01-30",
+     "subject": "FW: Energy Market Report - 01/29/02",
+     "path": "williams-w3/inbox/75."
+    },
+    {
+     "message_id": "8e2e1e5ce651",
+     "quote": "Subject: Energy Market Report - 01/30/02\n\nEnergy Market Report\nWednesday, January 30, 2002\n\n*See attached pdf file.",
+     "from": "jill.chatterton@enron.com",
+     "date": "2002-01-31",
+     "subject": "FW: Energy Market Report - 01/30/02",
+     "path": "williams-w3/inbox/62."
+    },
+    {
+     "message_id": "309449405256",
+     "quote": "Subject: Energy Market Report - 02/04/02\n\nEnergy Market Report\nMonday, February 4, 2002\n\n*See attached pdf file.",
+     "from": "jill.chatterton@enron.com",
+     "date": "2002-02-05",
+     "subject": "FW: Energy Market Report - 02/04/02",
+     "path": "williams-w3/inbox/35."
+    },
+    {
+     "message_id": "c8376d50b73d",
+     "quote": "Subject: Energy Market Report - 02/05/02\n\nEnergy Market Report\nTuesday, February 5, 2002\n\n*See attached pdf file.",
+     "from": "jill.chatterton@enron.com",
+     "date": "2002-02-06",
+     "subject": "FW: Energy Market Report - 02/05/02",
+     "path": "williams-w3/inbox/23."
+    }
+   ],
+   "match_rule_error": null,
+   "match_count": 7,
+   "matched_message_ids": [
+    "2d3284c5fee8",
+    "1c3b3d510170",
+    "8e2e1e5ce651",
+    "8d3ae817d78d",
+    "82aacfb3d79d",
+    "309449405256",
+    "c8376d50b73d"
+   ],
+   "first_match": "2002-01-29",
+   "last_match": "2002-02-06",
+   "active_months": 1.0,
+   "instances_per_month": 7.0,
+   "instances_per_month_corpus_span": 0.26,
+   "expected_matches_missed": []
+  }
+ ],
+ "opportunities": [
+  {
+   "opportunity_id": "o14",
+   "process_id": "p14",
+   "title": "Auto-generated weekly California Capacity Report",
+   "automation": "Pull Transwestern and El Paso delivery volumes by point and the Gas Daily prices from their sources each Friday, fill the fixed report template, and send it to the standing list for a quick review before release.",
+   "minutes_saved_per_instance": 25.0,
+   "rationale": "Every line of the report comes from a source system in the same format each week, so only a review is left. Template because the recurring work is filling the same report.",
+   "evidence": [
+    {
+     "message_id": "86c805170e90",
+     "quote": "Transwestern's average deliveries to California were 945 MMBtu/d (87%), with San Juan lateral throughput at 865 MMBtu/d.  Total East deliveries averaged 525 MMBtu/d.",
+     "from": "michelle.lokay@enron.com",
+     "date": "2001-10-26",
+     "subject": "California Capacity Report for Week of 10/22-10/26",
+     "path": "lokay-m/inbox/10."
+    },
+    {
+     "message_id": "a5fb48e9c2c6",
+     "quote": "Transwestern's average deliveries to California were 1122 MMBtu/d (103%), with San Juan lateral throughput at 844 MMBtu/d.  Total East deliveries averaged 270 MMBtu/d.",
+     "from": "michelle.lokay@enron.com",
+     "date": "2001-12-14",
+     "subject": "California Capacity Report for Week of 12/10-12/14",
+     "path": "lokay-m/sent_items/18."
+    }
+   ],
+   "artifact_type": "template",
+   "threshold": 30,
+   "minutes_capped_to_process": false,
+   "match_count": 16,
+   "first_match": "2001-10-26",
+   "last_match": "2002-03-22",
+   "active_months": 4.83,
+   "span_months": 27.38,
+   "rate_per_hour": 85,
+   "instances_per_month": 3.31,
+   "hours_per_month": 1.38,
+   "dollars_per_month": 117.32,
+   "instances_per_month_corpus_span": 0.58,
+   "hours_per_month_corpus_span": 0.24,
+   "dollars_per_month_corpus_span": 20.69,
+   "above_threshold": true,
+   "artifact_path": "run/artifacts/o14-auto-generated-weekly-california-capacity-report.md",
+   "artifact_exists": true,
+   "rank": 1,
+   "artifact_markdown": "# Weekly California Capacity Report Template\n\nThis is the fill-in-the-blanks version of the report Michelle Lokay sends every Friday.\nWhoever pulls the week's numbers uses this instead of retyping the report from scratch.\n\n## Fields\n\n| Field | Where the value comes from |\n|---|---|\n| Week range | The Monday through Friday of the reporting week |\n| Transwestern average deliveries to California (MMBtu/d and %) | Transwestern delivery data for the week |\n| San Juan lateral throughput (MMBtu/d) | Transwestern delivery data, San Juan lateral only |\n| Total East deliveries average (MMBtu/d) | Transwestern delivery data, East side only |\n| El Paso average deliveries to California (MMBtu/d and %) | El Paso delivery data for the week |\n| PG&ETop capacity, deliveries, % | El Paso delivery data, PG&ETop point |\n| SoCalEhr capacity, deliveries, % | El Paso delivery data, SoCalEhr point |\n| SoCalTop capacity, deliveries, % | El Paso delivery data, SoCalTop point |\n| Posting day (Thursday or Friday, whichever the week's data lands on) | Gas Daily publication date |\n| SoCal gas, large pkgs price and change | Gas Daily |\n| PG&E, large pkgs price and change | Gas Daily |\n| TW San Juan (or \"San Juan (non-Bondad)\") price and change | Gas Daily. Mark n/a if Gas Daily did not post a San Juan price that day |\n| TW Permian price and change | Gas Daily |\n| Enron basis table (Perm-CA, SJ-CA, SJ-Waha, Perm-Waha) | Enron Online or internal basis sheet, if published that week. Skip this block entirely on weeks it is not available, the same way the source reports do |\n\n## Template\n\n```\nSubject: California Capacity Report for Week of {start_date}-{end_date}\n\nTranswestern's average deliveries to California were {tw_volume} MMBtu/d ({tw_pct}%), with San Juan lateral throughput at {sj_volume} MMBtu/d. Total East deliveries averaged {east_volume} MMBtu/d.\n\nEl Paso's average deliveries to California were {ep_volume} MMBtu/d ({ep_pct}%):\n- PG&ETop, capacity of {pgetop_cap} MMBtu/d, deliveries of {pgetop_vol} MMBtu/d ({pgetop_pct}%)\n- SoCalEhr, capacity {socalehr_cap} MMBtu/d, deliveries of {socalehr_vol} MMBtu/d ({socalehr_pct}%)\n- SoCalTop, capacity {socaltop_cap} MMBtu/d, deliveries of {socaltop_vol} MMBtu/d ({socaltop_pct}%)\n\n{posting_day}'s posted Gas Daily prices:\n\tSoCal gas, large pkgs\t  {socal_price} ({socal_change})\n\tPG&E, large pkgs\t  {pge_price} ({pge_change})\n\tTW San Juan\t\t  {twsj_price} ({twsj_change})\n\tTW Permian\t\t  {twperm_price} ({twperm_change})\n\n[Enron basis table, if published this week]\n```\n\nSend to the standing list: steven.harris@enron.com, kimberly.watson@enron.com,\nlorraine.lindberg@enron.com, tk.lohman@enron.com, lindy.donoho@enron.com,\nmark.mcconnell@enron.com, paul.y'barbo@enron.com, cc audrey.robertson@enron.com.\n\n## Example, filled from the week of 10/22-10/26\n\n```\nSubject: California Capacity Report for Week of 10/22-10/26\n\nTranswestern's average deliveries to California were 945 MMBtu/d (87%), with San Juan lateral throughput at 865 MMBtu/d. Total East deliveries averaged 525 MMBtu/d.\n\nEl Paso's average deliveries to California were 1782 MMBtu/d (66%):\n- PG&ETop, capacity of 1140 MMBtu/d, deliveries of 667 MMBtu/d (59%)\n- SoCalEhr, capacity 1042 MMBtu/d, deliveries of 707 MMBtu/d (68%)\n- SoCalTop, capacity 512 MMBtu/d, deliveries of 408 MMBtu/d (80%)\n\nFriday's posted Gas Daily prices:\n\tSoCal gas, large pkgs\t  3.03 (+.69)\n\tPG&E, large pkgs\t  3.02 (+.67)\n\tTW San Juan\t\t  n/a\n\tTW Permian\t\t  2.86 (+.695)\n```\n\n## Before sending\n\nThe volumes and the four price lines come from separate sources each week, so the one\nstep that stays manual is a quick check that the pulled numbers look right (no MMBtu/d\nfigure of zero, no price missing without an n/a) before the report goes out.\n\n## Evidence\n\nSource: 86c805170e90, michelle.lokay@enron.com, 2001-10-26, \"California Capacity Report for Week of 10/22-10/26\"\nSource: a5fb48e9c2c6, michelle.lokay@enron.com, 2001-12-14, \"California Capacity Report for Week of 12/10-12/14\"\nSource: b16581b00998, michelle.lokay@enron.com, 2002-03-22, \"California Capacity Report for Week of 03/18-03/22\"\n"
+  },
+  {
+   "opportunity_id": "o13",
+   "process_id": "p13",
+   "title": "Morning pre-flash reconciliation checklist for congestion and deal entries",
+   "automation": "Before the morning flash, run a fixed checklist backed by an automated diff, CAISO congestion awards against the inc sheet and CAPS finals, Enpower new deals against the DPR and SAR for duplicates and price outliers, and PMA sheet lines against Enpower deal history, and send settlements one exception list with computed revenue.",
+   "minutes_saved_per_instance": 12.0,
+   "rationale": "Missing congestion wheels and double entries are steps skipped in a daily comparison, and a checklist with a generated exception list catches them before the flash. Checklist because the stall is a missed check, not a document.",
+   "evidence": [
+    {
+     "message_id": "4debc9c2f9cc",
+     "quote": "Darren,\nCould you meet with me regarding congestion revenue for 10/05?\nWe had two wheels that were not in the inc sheet but were awarded by the CAISO and are in finals in CAPS.",
+     "from": "bill.williams@enron.com",
+     "date": "2001-10-08",
+     "subject": "Congestion Revenue for 10/05",
+     "path": "williams-w3/sent_items/194."
+    },
+    {
+     "message_id": "d2933ba141a4",
+     "quote": "We had some double deal-entry last night under the ST-WBOM book.  Consequently I zeroed the following deals out this morning after receiving the DPR and running a BOM SAR.",
+     "from": "bill.williams@enron.com",
+     "date": "2001-06-29",
+     "subject": "Adjustments for ST-WBOM for 06/27/01",
+     "path": "williams-w3/sent_items/453."
+    }
+   ],
+   "artifact_type": "checklist",
+   "threshold": 30,
+   "minutes_capped_to_process": false,
+   "match_count": 14,
+   "first_match": "2001-06-29",
+   "last_match": "2001-11-15",
+   "active_months": 4.58,
+   "span_months": 27.38,
+   "rate_per_hour": 85,
+   "instances_per_month": 3.06,
+   "hours_per_month": 0.61,
+   "dollars_per_month": 51.97,
+   "instances_per_month_corpus_span": 0.51,
+   "hours_per_month_corpus_span": 0.1,
+   "dollars_per_month_corpus_span": 8.69,
+   "above_threshold": true,
+   "artifact_path": "run/artifacts/o13-morning-pre-flash-reconciliation-checklist-for-congestion-an.md",
+   "artifact_exists": true,
+   "rank": 2,
+   "artifact_markdown": "# Morning Pre-Flash Reconciliation Checklist for Congestion and Deal Entries\n\nRun this before the morning flash goes out. It catches the congestion wheels and deal entry errors that otherwise turn up as a correction email after the fact.\n\n## Stage 1: CAISO congestion revenue against the inc sheet and CAPS finals\n\n- [ ] Pull every CAISO congestion award for the prior gas day from CAPS finals.\n- [ ] **Check each award against the inc sheet. This is the step that usually gets skipped**, and a missed wheel is exactly what goes wrong. On 10/08/01 two wheels, EPMI_CISO_GREEN for HE 17 and HE 18, were awarded by CAISO and sitting in CAPS finals but were never in the inc sheet, worth $3,891.31 at $54.90 per mw (38.96 mws HE 17, 31.92 mws HE 18).\n- [ ] Check each award against the prior day's flash. A wheel can be in the inc sheet and still miss the flash. On 8/11/01 a 10 mw congestion wheel for HE 7 on Saturday, 10 mws at $99.00, was missing from the flash even though it had already been flagged as a variance days earlier.\n- [ ] Total the mws and dollars for every award found this way. Write the total next to each entry, the way Bill Williams reports it: mws moved, price, total revenue (example: \"272 mws at $194, total revenue $52,768\").\n\n## Stage 2: Enpower deal entries against the DPR and BOM SAR\n\n- [ ] Pull the Daily Position Report (DPR) and run a BOM SAR for the book being reconciled.\n- [ ] Compare Enpower deal entries against the DPR for duplicate entries. On 6/27/01, a double deal entry under ST-WBOM (deals 665907, buy from imbalance, and 665913, sell to PowerX) added $10,875 of revenue that should not have been there.\n- [ ] Zero out any duplicate found, and note which deal number was zeroed and why.\n- [ ] Flag any deal whose price looks like an outlier against the book's normal range for that day.\n\n## Stage 3: PMA sheet against Enpower deal history\n\n- [ ] Pull the current PMA sheet and match each line to its Enpower deal number.\n- [ ] Check for a counterparty change on any deal. A counterparty change from TacomaSupp to Tacomapubuit on deal #549162 caused a loss of revenue with no explanation on file, the kind of change that needs a reason recorded before it goes through.\n- [ ] Check for a price change that was made in Enpower but never came through as revenue. Deal #590753 needed a $108,000 PMA for a price change, originally input as a buy at $320 and a sell at $30, later corrected to $320 and $300, and the revenue never appeared until someone tracked it down by hand.\n- [ ] Confirm both the cost and the revenue side were zeroed out together. The Tacoma/MPC deal for HE 3 had only the revenue side zeroed out at first, leaving the cost side still open.\n\n## Stage 4: Send the exception list\n\n- [ ] Combine everything flagged in Stages 1 through 3 into one list: meter or deal number, mws or dollar amount, what is wrong, what system it lives in.\n- [ ] Send the list to settlements before the flash goes out, the same people who currently get these one at a time: Jim Reyes and Darren Cavanaugh for congestion items, Virginia Thompson and Heather Dunton for PMA and deal entry items.\n- [ ] Hold the flash until every item on the list is either cleared or explicitly accepted as-is.\n\n## Evidence\n\n- Source: 4debc9c2f9cc, 2001-10-08, bill.williams@enron.com, \"Congestion Revenue for 10/05\"\n- Source: d2933ba141a4, 2001-06-29, bill.williams@enron.com, \"Adjustments for ST-WBOM for 06/27/01\"\n- Source: cd021560b0d1, 2001-07-03, bill.williams@enron.com, \"PMA's\"\n- Source: 0365cbab23e0, 2001-08-15, bill.williams@enron.com, \"Congestion for Saturday\"\n"
+  },
+  {
+   "opportunity_id": "o01",
+   "process_id": "p01",
+   "title": "Nightly flow-without-deal exception report with a prefilled extension request",
+   "automation": "Run a nightly job that joins metered flow by meter and day against active and evergreen Sitara deals, lists every meter with flow and no covering deal, and prefills a request with the meter, the flow dates and volumes, the last deal number, and the counterparty. Daren gets one morning queue and approves an extend or a new deal from it, instead of schedulers finding each gap by eye and writing a fresh email.",
+   "minutes_saved_per_instance": 10.0,
+   "rationale": "The lookup of the prior deal and the drafting of the request are what take time, and both are mechanical, while the decision to extend or create a new deal stays human. Template because the recurring work is filling the same request fields for every meter.",
+   "evidence": [
+    {
+     "message_id": "c3fb116d26be",
+     "quote": "Daren - meter 6387 for Dec. 00 has flow with no nom.  Avg flow is 273/day.\nLast deal associated with this meter was 519467 in Nov. 00 for Duke Energy\nTrading & Mktg. There is also a little bit of flow on 1/1 and 1/2.  Please\nlet me know if you create a new deal or extend the current one.",
+     "from": "aimee.lannou@enron.com",
+     "date": "2001-01-09",
+     "subject": "Meter 6387 - Dec 00",
+     "path": "farmer-d/logistics/2039."
+    },
+    {
+     "message_id": "833ea24c1a58",
+     "quote": "This deal expired 3/2000.  There was no new deal # referenced nor was the\nevergreen flag applied.\n\nThis meter flowed 556 MMBTU's on April 1, 2000.",
+     "from": "jackie.young@enron.com",
+     "date": "2000-04-03",
+     "subject": "980432",
+     "path": "farmer-d/logistics/1005."
+    }
+   ],
+   "artifact_type": "template",
+   "threshold": 30,
+   "minutes_capped_to_process": false,
+   "match_count": 68,
+   "first_match": "1999-12-27",
+   "last_match": "2001-11-08",
+   "active_months": 22.41,
+   "span_months": 27.38,
+   "rate_per_hour": 85,
+   "instances_per_month": 3.03,
+   "hours_per_month": 0.51,
+   "dollars_per_month": 42.99,
+   "instances_per_month_corpus_span": 2.48,
+   "hours_per_month_corpus_span": 0.41,
+   "dollars_per_month_corpus_span": 35.18,
+   "above_threshold": true,
+   "artifact_path": "run/artifacts/o01-nightly-flow-without-deal-exception-report-with-a-prefilled.md",
+   "artifact_exists": true,
+   "rank": 3,
+   "artifact_markdown": "# Nightly Flow-Without-Deal Exception Queue\n\nThis is Daren's morning queue for meters that flowed gas with no active Sitara deal covering them. Each row is prefilled by the nightly job so he only has to pick extend, new deal, or add counterparty.\n\n## How it works now, and what changes\n\nToday a scheduler spots the gap by reading a flow report or the UA4 report, looks up the meter's deal history in Sitara by hand, and emails Daren the meter, the flow, and the last deal number. Daren then has to look the meter up again before he can answer.\n\nThe nightly job removes the lookup on both ends. It joins metered flow by meter and day against active and evergreen Sitara deals, and for every meter with flow and no covering deal it writes one row below, prefilled from Sitara. Daren opens the queue, reads the suggested action, and picks extend, new deal, or add counterparty. No re-typing, no second Sitara lookup.\n\n## Queue row (one per meter)\n\n| Field | Where it comes from |\n|---|---|\n| Meter number | The meter on the flow report with no matching deal for the period |\n| Period | The month(s) the uncovered flow falls in |\n| Flow detail | The day(s) and volume(s) that flowed with no deal, or the average flow per day |\n| Last deal number | The most recent Sitara deal ticket tied to this meter |\n| Last deal counterparty | The counterparty on that last deal |\n| Last deal end date | The date that deal expired or the last month it covered |\n| Evergreen flag | Whether the expired deal had the evergreen flag set, yes or no |\n| Suggested action | \"Extend deal {last deal number} through {period end}\" if a prior deal exists and the meter and counterparty look unchanged, otherwise \"No prior deal in range, create new\" |\n| Daren's decision | Extend / New deal / Add counterparty, left blank for Daren |\n| New or extended deal number | Left blank until Daren enters the result |\n| Date actioned | Left blank until Daren closes the row |\n\n## Example row, filled from the evidence\n\n| Field | Value |\n|---|---|\n| Meter number | 6387 |\n| Period | Dec 00 |\n| Flow detail | Avg flow 273/day for Dec, plus a little flow on 1/1 and 1/2 |\n| Last deal number | 519467 |\n| Last deal counterparty | Duke Energy Trading & Mktg |\n| Last deal end date | Nov 00 |\n| Evergreen flag | No |\n| Suggested action | Extend deal 519467 through Dec 00, or create new if counterparty changed |\n| Daren's decision | (blank, pending) |\n| New or extended deal number | (blank, pending) |\n| Date actioned | (blank, pending) |\n\n## What the queue catches that a person misses\n\nThe evergreen flag matters. Deal 156657 expired 3/2000 with no evergreen flag set and no new deal referenced, and the meter still flowed 556 MMBTU on April 1, so the gap sat until Jackie Young caught it by hand and emailed Daren to roll the deal. The nightly join flags this the first night it happens instead of whenever someone next reads the flow report.\n\nNot every row needs Daren to decide alone. Michael Olsen's meter 986315 row shows flow without a deal for Dec and Jan, with deal 502952 good only through November, and he asks whether to extend it or add a new counterparty. The queue carries that same open question as the suggested action so Daren has the same context without a second email.\n\n## Evidence\n\nSource: c3fb116d26be, 2001-01-09, aimee.lannou@enron.com, \"Meter 6387 - Dec 00\"\nSource: 833ea24c1a58, 2000-04-03, jackie.young@enron.com, \"980432\"\nSource: a081ad55db4e, 2001-02-05, michael.olsen@enron.com, \"meter 986315\"\nSource: bd77d5723ce5, 2001-01-02, aimee.lannou@enron.com, \"Meter 1517\"\nSource: 2ccf3e9de5dd, 2000-02-17, jackie.young@enron.com, \"98-6892 Overflow\"\nSource: 8f6a51a09b44, 2000-05-31, jackie.young@enron.com, \"98-6892\"\nSource: 4b18dcf16fe4, 2000-08-29, aimee.lannou@enron.com, \"Meter 5593\"\nSource: d84b70fd3ab2, 2000-01-11, aimee.lannou@enron.com, \"UA4 - 1998\"\n"
+  },
+  {
+   "opportunity_id": "o07",
+   "process_id": "p07",
+   "title": "Prefilled monthly activity and hours survey",
+   "automation": "Prefill each RC's survey with last month's answers, headcount from the Org Database, and deal and ticket counts from Sitara and Unify, so managers only confirm or correct the exceptions. Track returns in the same sheet and send reminders automatically to RCs that have not responded by the deadline.",
+   "minutes_saved_per_instance": 15.0,
+   "rationale": "Most answers repeat month to month or already exist in systems, so the manager's work drops to a review. Template because the recurring work is filling the same survey form.",
+   "evidence": [
+    {
+     "message_id": "4edc3274cefb",
+     "quote": "Please fill out the attached activity\ndriver survey with May numbers for your RC and return to Shari Mao by end of\nday Friday, June 2.",
+     "from": "james.scribner@enron.com",
+     "date": "2000-05-30",
+     "subject": "May Activity Survey",
+     "path": "farmer-d/logistics/1154."
+    },
+    {
+     "message_id": "c5bbb0fdf8e5",
+     "quote": "As a reminder, today is the deadline for completion of the OPM Survey.",
+     "from": "james.scribner@enron.com",
+     "date": "2000-10-06",
+     "subject": "OPM Survey",
+     "path": "farmer-d/logistics/1445."
+    }
+   ],
+   "artifact_type": "template",
+   "threshold": 30,
+   "minutes_capped_to_process": false,
+   "match_count": 12,
+   "first_match": "2000-02-22",
+   "last_match": "2000-10-10",
+   "active_months": 7.58,
+   "span_months": 27.38,
+   "rate_per_hour": 85,
+   "instances_per_month": 1.58,
+   "hours_per_month": 0.4,
+   "dollars_per_month": 33.64,
+   "instances_per_month_corpus_span": 0.44,
+   "hours_per_month_corpus_span": 0.11,
+   "dollars_per_month_corpus_span": 9.31,
+   "above_threshold": true,
+   "artifact_path": "run/artifacts/o07-prefilled-monthly-activity-and-hours-survey.md",
+   "artifact_exists": true,
+   "rank": 4,
+   "artifact_markdown": "# Prefilled Monthly Activity and Hours Survey\n\nThis is the field-by-field survey Financial Operations sends every RC manager each\nmonth. It comes prefilled with last month's numbers and the Org Database position\nlist, so the manager only reviews, corrects, and confirms instead of rebuilding the\nform from scratch.\n\n## Fields\n\n| Field | Where it comes from |\n|---|---|\n| RC number (4 digits) | Entered once, carried forward every month. |\n| Position (Staff, Specialist, etc.) | Pulled from the Org Database dropdown. If a position you need is missing, call Shari Mao so the database gets corrected. |\n| Activity | Pulled from the RC's existing activity list. If your team performs something not listed, contact Shari Mao for a copy of the Activity Dictionary before the deadline. |\n| Physical (PH) or Financial (FI) | Required for Nat Gas activities. Mark which one applies to each line. |\n| Last Month Hours | Prefilled automatically from the prior month's returned survey, summed across everyone in that position on that activity. |\n| This Month Hours (draft) | Prefilled with the Last Month figure as a starting estimate. The manager overwrites it with the real number for the current month, or leaves it if nothing changed. |\n| Confirmed Hours | The final number the manager signs off on and returns. |\n| Standing report opt-out | If your RC already produces a report that captures this same data, check this box and send the report to Jennifer Reside and Shari Mao instead of filling out the rest of the form. |\n\n## Example row, filled from a past survey\n\nRC: {RC number}. Position: Specialist. Activity: {activity name from your Activity\nDictionary}. Driver type: PH. Last Month Hours: 40 (two specialists at 20 hours each\non this activity). This Month Hours (draft): 40, carried forward. Confirmed Hours:\n{manager fills in after review}.\n\n## How this replaces the current process\n\n- The survey opens already carrying last month's hours and the current RC's roster\n  from the Org Database, instead of a blank spreadsheet.\n- The manager's job is to confirm each line or correct the ones that changed, not to\n  re-estimate every position and activity from memory.\n- Anyone who has not returned the survey by the deadline gets an automatic reminder,\n  the same reminder Financial Operations currently sends by hand on the due date.\n- If a position or activity is missing, the manager still calls Shari Mao or James\n  Scribner to get it added, the same escalation path as today.\n\n## When it changes\n\nA new activity (EOL-related work, for example) needs the Activity Dictionary updated\nbefore it can be prefilled. Until then, the manager adds it manually and flags it so\nnext month's prefill picks it up.\n\n## Evidence\n\nSource: 12a66104da87, shari.mao@enron.com, 2000-03-31, \"March Surveys\"\nSource: 4edc3274cefb, james.scribner@enron.com, 2000-05-30, \"May Activity Survey\"\nSource: d8a0b9665f4a, shari.mao@enron.com, 2000-06-27, \"Activity Survey - June 2000\"\nSource: c5bbb0fdf8e5, james.scribner@enron.com, 2000-10-06, \"OPM Survey\"\n"
+  },
+  {
+   "opportunity_id": "o02",
+   "process_id": "p02",
+   "title": "Routed digital writeoff approval for small Strangers Gas volumes",
+   "automation": "When volume lands on the HPL Strangers Gas Contract at a meter with no deal, generate a writeoff approval with the meter's flow history and the months checked for deals already attached, and route it for a single approve or supply-a-deal decision. Volumes under an agreed threshold can be written off automatically and reported in a monthly list.",
+   "minutes_saved_per_instance": 12.0,
+   "rationale": "Pulling the history and printing, signing, and returning the form is the bulk of the time, and the decision is almost always the same for tiny volumes. Template because the approval is the same form filled with different meter numbers each time.",
+   "evidence": [
+    {
+     "message_id": "85141cb3f0e2",
+     "quote": "Currently, these volumes are being booked under the HPL Strangers Gas\nContract.  Logistics needs either a deal to record these volumes which have\nflowed into HPL's Pipeline or  Logistics need approval to writeoff these\nvolumes to Unaccounted for Gas.",
+     "from": "clem.cernosek@enron.com",
+     "date": "2000-08-18",
+     "subject": "HPL Meter #985355 Brown Common Point",
+     "path": "farmer-d/logistics/1346."
+    },
+    {
+     "message_id": "b7ed38f73dea",
+     "quote": "On 11/30/99, the above meter has recorded flow of 26 Mmbtus.   There were no\ndeals at this meter during November 1999 or December 1999.  Logistics needs\napproval to writeoff these volumes to Unaccounted for Gas.",
+     "from": "clem.cernosek@enron.com",
+     "date": "2000-12-14",
+     "subject": "HPL Meter #980417 HPL/KMID - SEVEN OAKS",
+     "path": "farmer-d/logistics/1974."
+    }
+   ],
+   "artifact_type": "template",
+   "threshold": 30,
+   "minutes_capped_to_process": false,
+   "match_count": 36,
+   "first_match": "2000-03-11",
+   "last_match": "2001-10-31",
+   "active_months": 19.69,
+   "span_months": 27.38,
+   "rate_per_hour": 85,
+   "instances_per_month": 1.83,
+   "hours_per_month": 0.37,
+   "dollars_per_month": 31.08,
+   "instances_per_month_corpus_span": 1.31,
+   "hours_per_month_corpus_span": 0.26,
+   "dollars_per_month_corpus_span": 22.35,
+   "above_threshold": true,
+   "artifact_path": "run/artifacts/o02-routed-digital-writeoff-approval-for-small-strangers-gas-vol.md",
+   "artifact_exists": true,
+   "rank": 5,
+   "artifact_markdown": "# Writeoff Approval Request, HPL Strangers Gas Contract Meter\n\nThis is the form Logistics fills out and routes to Daren Farmer whenever a meter has\nflow booked to the HPL Strangers Gas Contract with no deal covering it, so he can\napprove the writeoff to Unaccounted for Gas or supply a deal in one pass instead of a\nprinted sign-and-return round trip.\n\n## Fields\n\n| Field | Where it comes from |\n|---|---|\n| Meter number and name | The flow report line that flagged the stray volume, for example \"985355 Brown Common Point.\" |\n| Requesting analyst | The Logistics person who pulled the flow history and is sending the request. |\n| Period checked for a deal | The date range Logistics searched in Sitara and found no deal at this meter. |\n| Flow history (date, MMBtu per day) | Pulled straight from the meter's flow record for the period above. |\n| Total volume (MMBtu) | Sum of the flow history rows. |\n| Contract currently booking the volume | Fixed value, HPL Strangers Gas Contract, unless the meter is on a different stranger contract. |\n| Auto-writeoff threshold check | Compare total volume against the threshold Logistics management sets for automatic approval. That threshold number is not in any of these emails and has to be set before this field can be checked automatically. Until it is set, route every request to Daren. |\n| Decision | Approve writeoff to Unaccounted for Gas, or supply a deal. Daren's choice. |\n| If supplying a deal | Deal number, counterparty, and the dates the deal should cover. |\n| Approver | Daren Farmer, or whoever owns deal entry for this meter. |\n| Date approved | The date Daren returns the decision. |\n\n## Example, filled from a real request\n\n| Field | Value |\n|---|---|\n| Meter number and name | 985355, Brown Common Point |\n| Requesting analyst | Clem Cernosek |\n| Period checked for a deal | 1/1/99 through 7/31/00 |\n| Flow history | 3/30/99: 22, 4/30/99: 21, 8/3/99: 5, 8/30/99: 73, 10/28/99: 10, 10/29/99: 5, 1/30/00: 7, 1/31/00: 29, 4/27/00: 13, 7/31/00: 18 (MMBtu) |\n| Total volume | 203 MMBtu |\n| Contract currently booking the volume | HPL Strangers Gas Contract |\n| Auto-writeoff threshold check | Not yet defined, route to Daren |\n| Decision | Approve writeoff to Unaccounted for Gas |\n| Approver | Daren Farmer |\n| Date approved | (fill in when returned) |\n\n## How this replaces the old process\n\nClem used to type the flow history into a plain email or a printed form, mail or print\nit for a signature, and wait for it to come back before the volume could clear. Filling\nthis form once, with the flow history pulled automatically instead of typed by hand,\ngets the same decision to Daren in one message. Once a threshold is agreed, any request\nwhose total volume falls under it can skip Daren entirely and go straight to a monthly\nwriteoff list, with only the requests over threshold routed for his approval.\n\n## Evidence\n\nSource: 85141cb3f0e2, 2000-08-18, clem.cernosek@enron.com, \"HPL Meter #985355 Brown Common Point\"\nSource: b7ed38f73dea, 2000-12-14, clem.cernosek@enron.com, \"HPL Meter #980417 HPL/KMID - SEVEN OAKS\"\nSource: 36912cbd53cf, 2000-11-07, clem.cernosek@enron.com, \"HPL Meter #981525 Texoma D/P- GSU HPL\"\nSource: c4e883d4c147, 2000-12-14, clem.cernosek@enron.com, \"HPL Meter #985369 TAFT PLANT RESID ARCO HPL\"\n"
+  },
+  {
+   "opportunity_id": "o15",
+   "process_id": "p15",
+   "title": "Auto-forward the Energy Market Report to the West desk list",
+   "automation": "Add a mail rule that forwards the Economic Insight Energy Market Report to the West Desk distribution list the moment it arrives, so no one has to open and forward it each morning.",
+   "minutes_saved_per_instance": 3.0,
+   "rationale": "The forward involves no editing, so a rule removes the whole step. None because a mail rule is the entire fix and no document would help.",
+   "evidence": [
+    {
+     "message_id": "1c3b3d510170",
+     "quote": "Subject: Energy Market Report - 01/29/02\n\nEnergy Market Report\nTuesday, January 29, 2002\n\n*See attached pdf file.",
+     "from": "jill.chatterton@enron.com",
+     "date": "2002-01-30",
+     "subject": "FW: Energy Market Report - 01/29/02",
+     "path": "williams-w3/inbox/75."
+    },
+    {
+     "message_id": "309449405256",
+     "quote": "Subject: Energy Market Report - 02/04/02\n\nEnergy Market Report\nMonday, February 4, 2002\n\n*See attached pdf file.",
+     "from": "jill.chatterton@enron.com",
+     "date": "2002-02-05",
+     "subject": "FW: Energy Market Report - 02/04/02",
+     "path": "williams-w3/inbox/35."
+    }
+   ],
+   "artifact_type": "none",
+   "threshold": 30,
+   "minutes_capped_to_process": false,
+   "match_count": 7,
+   "first_match": "2002-01-29",
+   "last_match": "2002-02-06",
+   "active_months": 1.0,
+   "span_months": 27.38,
+   "rate_per_hour": 85,
+   "instances_per_month": 7.0,
+   "hours_per_month": 0.35,
+   "dollars_per_month": 29.75,
+   "instances_per_month_corpus_span": 0.26,
+   "hours_per_month_corpus_span": 0.01,
+   "dollars_per_month_corpus_span": 1.09,
+   "above_threshold": false,
+   "artifact_path": null,
+   "artifact_exists": false,
+   "rank": 6,
+   "artifact_markdown": null
+  },
+  {
+   "opportunity_id": "o03",
+   "process_id": "p03",
+   "title": "Parse nomination attachments straight into the scheduling system",
+   "automation": "Watch the scheduling inbox for the known nomination senders, parse the Calpine Word documents and TXU spreadsheets for date, point, and volume, and load them into the scheduling system as pending nominations with a variance flag against the prior day. The scheduler reviews and confirms instead of opening each file and re-keying it.",
+   "minutes_saved_per_instance": 7.0,
+   "rationale": "The attachments follow fixed layouts, so extraction is reliable and only a quick review is left. None because the fix is an ingestion script and no document would change what happens tomorrow morning.",
+   "evidence": [
+    {
+     "message_id": "e9273e5803f6",
+     "quote": "- CALPINE DAILY GAS NOMINATION 1.doc",
+     "from": "rickya@calpine.com",
+     "date": "1999-12-14",
+     "subject": "Calpine Daily Gas Nomination",
+     "path": "farmer-d/logistics/579."
+    },
+    {
+     "message_id": "b582989db190",
+     "quote": "(See attached file: hpl1228.xls)",
+     "from": "timpowell@txu.com",
+     "date": "1999-12-27",
+     "subject": "HPL Nominations for December 28, 1999",
+     "path": "farmer-d/logistics/615."
+    }
+   ],
+   "artifact_type": "none",
+   "threshold": 30,
+   "minutes_capped_to_process": false,
+   "match_count": 30,
+   "first_match": "1999-12-14",
+   "last_match": "2001-04-19",
+   "active_months": 16.17,
+   "span_months": 27.38,
+   "rate_per_hour": 85,
+   "instances_per_month": 1.86,
+   "hours_per_month": 0.22,
+   "dollars_per_month": 18.4,
+   "instances_per_month_corpus_span": 1.1,
+   "hours_per_month_corpus_span": 0.13,
+   "dollars_per_month_corpus_span": 10.86,
+   "above_threshold": false,
+   "artifact_path": null,
+   "artifact_exists": false,
+   "rank": 7,
+   "artifact_markdown": null
+  },
+  {
+   "opportunity_id": "o11",
+   "process_id": "p11",
+   "title": "Deal entry checklist for book assignment and cross-system links",
+   "automation": "Add a checklist to deal entry that confirms the correct book for the counterparty and entity and that the Tagg, Sitara, SCI, and EOL numbers are cross-entered, backed by a nightly report of deals in the wrong book or with an empty link field sent to the book admin.",
+   "minutes_saved_per_instance": 10.0,
+   "rationale": "Most flips and missing links come from a step skipped at entry, so catching it there prevents the reminder chain. Checklist because the stall is a missed step, not a document that gets rewritten.",
+   "evidence": [
+    {
+     "message_id": "3bff55c13fd2",
+     "quote": "Please remember to link up all deals.  By this, I mean Tagg numbers in\nSitara, Sitara numbers in Tagg, Tagg numbers in SCI, and especially EOL\nnumbers in Tagg.",
+     "from": "darron.giron@enron.com",
+     "date": "2000-10-17",
+     "subject": "Reminder",
+     "path": "giron-d/sent/591."
+    },
+    {
+     "message_id": "c31f511e108f",
+     "quote": "I've come across this deal that needs to be flipped right away.\nThis deal is in the MGMT-WEST book with Aquila Canada Corp. and\nENA.  It needs to be in the FT-US/CAND-ERMS book settling between\nECC and Aquila Canada Corp.",
+     "from": "darron.giron@enron.com",
+     "date": "2001-03-05",
+     "subject": "Re: Q50979.1",
+     "path": "giron-d/sent/168."
+    }
+   ],
+   "artifact_type": "checklist",
+   "threshold": 30,
+   "minutes_capped_to_process": false,
+   "match_count": 23,
+   "first_match": "2000-08-10",
+   "last_match": "2002-01-31",
+   "active_months": 17.71,
+   "span_months": 27.38,
+   "rate_per_hour": 85,
+   "instances_per_month": 1.3,
+   "hours_per_month": 0.22,
+   "dollars_per_month": 18.4,
+   "instances_per_month_corpus_span": 0.84,
+   "hours_per_month_corpus_span": 0.14,
+   "dollars_per_month_corpus_span": 11.9,
+   "above_threshold": false,
+   "artifact_path": null,
+   "artifact_exists": false,
+   "rank": 8,
+   "artifact_markdown": null
+  },
+  {
+   "opportunity_id": "o12",
+   "process_id": "p12",
+   "title": "Position notice email template generated from Enpower and CAPS",
+   "automation": "Pull the open short and long positions by book, point, hour ending, and price from Enpower and CAPS and generate the group notice in a fixed format, with the matching deal entries staged for the trader to confirm.",
+   "minutes_saved_per_instance": 10.0,
+   "rationale": "Composing the summary and re-keying it into two systems is mechanical once positions are pulled, and price checks with other desks remain. Email template because the recurring work is sending the same position message.",
+   "evidence": [
+    {
+     "message_id": "3593d0497185",
+     "quote": "We are short 50 mws in SP-15 for HE 7-22 on Wednesday at $61.44.  Please purchase this 50 mws under ST-WBOM.",
+     "from": "bill.williams@enron.com",
+     "date": "2001-07-11",
+     "subject": "Short for 07/11/01 at SP-15",
+     "path": "williams-w3/sent_items/414."
+    },
+    {
+     "message_id": "affa2dd11baa",
+     "quote": "We are long 25 mws on peak for 06/27/01 in SP-15.  This should be in CAPS under ST-WBOM, deals should be under ST-WBOM in Enpower as well.",
+     "from": "bill.williams@enron.com",
+     "date": "2001-06-27",
+     "subject": "Length for Wednesday",
+     "path": "williams-w3/sent_items/466."
+    }
+   ],
+   "artifact_type": "email_template",
+   "threshold": 30,
+   "minutes_capped_to_process": false,
+   "match_count": 20,
+   "first_match": "2000-03-22",
+   "last_match": "2001-11-14",
+   "active_months": 19.76,
+   "span_months": 27.38,
+   "rate_per_hour": 85,
+   "instances_per_month": 1.01,
+   "hours_per_month": 0.17,
+   "dollars_per_month": 14.34,
+   "instances_per_month_corpus_span": 0.73,
+   "hours_per_month_corpus_span": 0.12,
+   "dollars_per_month_corpus_span": 10.35,
+   "above_threshold": false,
+   "artifact_path": null,
+   "artifact_exists": false,
+   "rank": 9,
+   "artifact_markdown": null
+  },
+  {
+   "opportunity_id": "o08",
+   "process_id": "p08",
+   "title": "Structured on-call log filled in during the shift",
+   "automation": "Give the on-call scheduler a shared log with one row per call, time, caller, meter, action taken, and system updated, filled in as calls come in. The Monday note is generated from the log and each meter row links to its system entry so recipients verify by exception instead of reading a narrative.",
+   "minutes_saved_per_instance": 20.0,
+   "rationale": "Reconstructing the weekend from memory and cross-checking a free-text narrative is the cost, and logging as it happens removes both. Template because the fix is a fixed form filled in for every call.",
+   "evidence": [
+    {
+     "message_id": "afb2990b7e07",
+     "quote": "Friday 3/23 - Received a page from Silver in Gas Control at 8:00 pm regarding the Gulf Plains Plant.  They were cut into another pipeline (Tennessee), and wanted to overdeliver to us by 10M for the night.",
+     "from": "mary.poorman@enron.com",
+     "date": "2001-03-26",
+     "subject": "On Call Notes",
+     "path": "farmer-d/logistics/210."
+    },
+    {
+     "message_id": "0c4428ce9278",
+     "quote": "Attached are the notes from this weekend.",
+     "from": "robert.lloyd@enron.com",
+     "date": "2000-08-14",
+     "subject": "On Call Notes for Weekend Dated ; August 12th thru 13th",
+     "path": "farmer-d/logistics/1334."
+    }
+   ],
+   "artifact_type": "template",
+   "threshold": 30,
+   "minutes_capped_to_process": false,
+   "match_count": 9,
+   "first_match": "2000-01-17",
+   "last_match": "2001-07-28",
+   "active_months": 18.31,
+   "span_months": 27.38,
+   "rate_per_hour": 85,
+   "instances_per_month": 0.49,
+   "hours_per_month": 0.16,
+   "dollars_per_month": 13.93,
+   "instances_per_month_corpus_span": 0.33,
+   "hours_per_month_corpus_span": 0.11,
+   "dollars_per_month_corpus_span": 9.31,
+   "above_threshold": false,
+   "artifact_path": null,
+   "artifact_exists": false,
+   "rank": 10,
+   "artifact_markdown": null
+  },
+  {
+   "opportunity_id": "o10",
+   "process_id": "p10",
+   "title": "Single book, curve, and access request form",
+   "automation": "Replace ad hoc emails with one request form that captures region, entity, book or curve name, trader, mapped books, and users, generates names by the naming convention, and routes to the admin who owns that system. Keep the trader to book to product mapping in one table that macros and hedgestrips read, so a rename updates everywhere at once.",
+   "minutes_saved_per_instance": 12.0,
+   "rationale": "Requests go out incomplete or to the wrong admin and come back for another round, and a structured form fixes both, while the admin's setup work remains. Template because the recurring work is filling in the same request fields.",
+   "evidence": [
+    {
+     "message_id": "460269329baa",
+     "quote": "I need to have FT-DENVER set up in TDS.  The trader is Jay Reitmeyer.  There\nare two Tagg books that need to be mapped to this:  FT-DENVER and\nINTRA-DENVER.",
+     "from": "darron.giron@enron.com",
+     "date": "2001-01-11",
+     "subject": "Denver in TDS",
+     "path": "giron-d/sent/337."
+    },
+    {
+     "message_id": "1881cb19a399",
+     "quote": "Please add Financial and Control group to these book requests if they are missing.  We would like for everyone to have access to these books that is on that matrix we sent you.  Thanks.",
+     "from": "m..love@enron.com",
+     "date": "2002-01-04",
+     "subject": "RE: new book req",
+     "path": "giron-d/inbox/159."
+    }
+   ],
+   "artifact_type": "template",
+   "threshold": 30,
+   "minutes_capped_to_process": false,
+   "match_count": 18,
+   "first_match": "2000-03-28",
+   "last_match": "2002-02-04",
+   "active_months": 22.27,
+   "span_months": 27.38,
+   "rate_per_hour": 85,
+   "instances_per_month": 0.81,
+   "hours_per_month": 0.16,
+   "dollars_per_month": 13.74,
+   "instances_per_month_corpus_span": 0.66,
+   "hours_per_month_corpus_span": 0.13,
+   "dollars_per_month_corpus_span": 11.17,
+   "above_threshold": false,
+   "artifact_path": null,
+   "artifact_exists": false,
+   "rank": 11,
+   "artifact_markdown": null
+  },
+  {
+   "opportunity_id": "o06",
+   "process_id": "p06",
+   "title": "Standard price verification request with invoice to Sitara match",
+   "automation": "Match each incoming counterparty invoice or confirmation line against the Sitara deal price and flag mismatches over a small threshold, then send one standard verification email with the deal number, date, point, invoiced price, and Sitara price to the responsible trader. A recurring rate like the EnerVest monthly price is loaded through an upload instead of an email per month.",
+   "minutes_saved_per_instance": 10.0,
+   "rationale": "Finding the mismatch and writing up the comparison is mechanical, and the trader's answer on which price is right is the only human step left. Email template because the recurring work is sending the same kind of verification message.",
+   "evidence": [
+    {
+     "message_id": "1e5f47d1b14d",
+     "quote": "Daren, Conoco invoiced HPL at $5.87 for 03/23 at PGEV/Waha and deal ticket 685350 shows $4.87.  Can you confirm the price?  Thanks.",
+     "from": "cynthia.hakemack@enron.com",
+     "date": "2001-04-12",
+     "subject": "HPL/Conoco - Teco Waha 03/23/01 Purchase",
+     "path": "farmer-d/logistics/181."
+    },
+    {
+     "message_id": "6bef9c0df335",
+     "quote": "As usual, could you please change rate on S# 27239 for 12/00 production to\n$5.811329?",
+     "from": "darron.giron@enron.com",
+     "date": "2001-01-23",
+     "subject": "Re: Enervest for 12/00",
+     "path": "giron-d/sent/301."
+    }
+   ],
+   "artifact_type": "email_template",
+   "threshold": 30,
+   "minutes_capped_to_process": false,
+   "match_count": 13,
+   "first_match": "2000-06-22",
+   "last_match": "2001-08-17",
+   "active_months": 13.84,
+   "span_months": 27.38,
+   "rate_per_hour": 85,
+   "instances_per_month": 0.94,
+   "hours_per_month": 0.16,
+   "dollars_per_month": 13.31,
+   "instances_per_month_corpus_span": 0.47,
+   "hours_per_month_corpus_span": 0.08,
+   "dollars_per_month_corpus_span": 6.73,
+   "above_threshold": false,
+   "artifact_path": null,
+   "artifact_exists": false,
+   "rank": 12,
+   "artifact_markdown": null
+  },
+  {
+   "opportunity_id": "o09",
+   "process_id": "p09",
+   "title": "Coverage notice email template backed by a standing roster",
+   "automation": "Keep a standing roster of each scheduler's meters, pipelines, and default backups with extensions and pagers, and generate the out of office notice from it so the sender only enters dates and confirms the backup.",
+   "minutes_saved_per_instance": 7.0,
+   "rationale": "The contact details and coverage splits are the same each time, so only the dates change. Email template because the recurring work is sending the same notice.",
+   "evidence": [
+    {
+     "message_id": "dabe5d15b570",
+     "quote": "I will be on vacation from Thursday 5/10 thru Wednesday 5/16. Tom Acton will be my back up  713-571-3256, pager 713-707-3527 and Bob Cotten will do the NNGB (Black Marlin) and help Tom.",
+     "from": "carlos.rodriguez@enron.com",
+     "date": "2001-05-09",
+     "subject": "Out of the office",
+     "path": "farmer-d/logistics/142."
+    },
+    {
+     "message_id": "061a91d5ed81",
+     "quote": "I will be on vacation Friday, June 2 through  Monday, June 12.  In my absence\nplease direct any questions or issues to these people.",
+     "from": "aimee.lannou@enron.com",
+     "date": "2000-05-31",
+     "subject": "Vacation",
+     "path": "farmer-d/logistics/3215."
+    }
+   ],
+   "artifact_type": "email_template",
+   "threshold": 30,
+   "minutes_capped_to_process": false,
+   "match_count": 33,
+   "first_match": "1999-12-15",
+   "last_match": "2002-01-25",
+   "active_months": 25.37,
+   "span_months": 27.38,
+   "rate_per_hour": 85,
+   "instances_per_month": 1.3,
+   "hours_per_month": 0.15,
+   "dollars_per_month": 12.9,
+   "instances_per_month_corpus_span": 1.21,
+   "hours_per_month_corpus_span": 0.14,
+   "dollars_per_month_corpus_span": 11.95,
+   "above_threshold": false,
+   "artifact_path": null,
+   "artifact_exists": false,
+   "rank": 13,
+   "artifact_markdown": null
+  },
+  {
+   "opportunity_id": "o05",
+   "process_id": "p05",
+   "title": "Open variance log with age, owner, and automatic resend",
+   "automation": "Keep every open interconnect or counterparty variance in one log with the meter, contract, amount, owner, and date opened, and have it resend the allocation data to the counterparty contact and escalate internally once an item passes a set age. A daily MOPS to POPS diff feeds new variances into the log the day they appear.",
+   "minutes_saved_per_instance": 15.0,
+   "rationale": "The repeated chasing and re-sending of the same data is where the time goes, and a tracked log with automatic resends removes it, while the actual reallocation still takes a person. Template because the log is a standing form every variance is entered into.",
+   "evidence": [
+    {
+     "message_id": "a6d7e21df5fe",
+     "quote": "this issue is still unresolved as well as a 6,000 variance on\ncontract 5098-695.",
+     "from": "sherlyn.schumack@enron.com",
+     "date": "2000-03-28",
+     "subject": "PG&E Texas contract 5095-037 for 2/00",
+     "path": "farmer-d/logistics/972."
+    },
+    {
+     "message_id": "9627c322fee7",
+     "quote": "I have sent several emails, faxed the daily's and left\nvoice messages, but have not received any updates to this issue.",
+     "from": "sherlyn.schumack@enron.com",
+     "date": "2000-05-22",
+     "subject": "Re: PG&E Texas contract 5098-695 for 2/00",
+     "path": "farmer-d/logistics/1126."
+    }
+   ],
+   "artifact_type": "template",
+   "threshold": 30,
+   "minutes_capped_to_process": false,
+   "match_count": 8,
+   "first_match": "2000-03-21",
+   "last_match": "2002-01-24",
+   "active_months": 22.16,
+   "span_months": 27.38,
+   "rate_per_hour": 85,
+   "instances_per_month": 0.36,
+   "hours_per_month": 0.09,
+   "dollars_per_month": 7.67,
+   "instances_per_month_corpus_span": 0.29,
+   "hours_per_month_corpus_span": 0.07,
+   "dollars_per_month_corpus_span": 6.21,
+   "above_threshold": false,
+   "artifact_path": null,
+   "artifact_exists": false,
+   "rank": 14,
+   "artifact_markdown": null
+  },
+  {
+   "opportunity_id": "o04",
+   "process_id": "p04",
+   "title": "Standard procedure for revising nominations on flow drift, plant status, and pipeline cuts",
+   "automation": "Write one procedure that says who revises the nomination for each trigger, a meter drifting past a set tolerance, a plant outage or restart notice, or a pipeline cut confirmation, what system entry is made, and what confirmation goes back. Pair it with a daily flag of meters whose flow deviates from the nomination beyond the tolerance so drift is caught before month end.",
+   "minutes_saved_per_instance": 5.0,
+   "rationale": "Much of the time goes to deciding who acts and how, and a fixed procedure removes that, while the volume edit itself remains. SOP because the stall is an unwritten routine that each scheduler handles differently.",
+   "evidence": [
+    {
+     "message_id": "6bbe1ee3b5aa",
+     "quote": "want to look at getting this nom revised for the rest of the month.",
+     "from": "lauri.allen@enron.com",
+     "date": "2000-02-16",
+     "subject": "Meter 9682",
+     "path": "farmer-d/logistics/802."
+    },
+    {
+     "message_id": "6fcfcde2f76c",
+     "quote": "The MTBE plant went down about 1 a.m. on Saturday morning, May 20, as a\nresult of power failure.",
+     "from": "maritta.mullet@enron.com",
+     "date": "2000-05-22",
+     "subject": "MTBE PLANT SHUT-DOWN",
+     "path": "farmer-d/logistics/1128."
+    }
+   ],
+   "artifact_type": "sop",
+   "threshold": 30,
+   "minutes_capped_to_process": false,
+   "match_count": 13,
+   "first_match": "2000-01-21",
+   "last_match": "2001-02-01",
+   "active_months": 12.4,
+   "span_months": 27.38,
+   "rate_per_hour": 85,
+   "instances_per_month": 1.05,
+   "hours_per_month": 0.09,
+   "dollars_per_month": 7.43,
+   "instances_per_month_corpus_span": 0.47,
+   "hours_per_month_corpus_span": 0.04,
+   "dollars_per_month_corpus_span": 3.36,
+   "above_threshold": false,
+   "artifact_path": null,
+   "artifact_exists": false,
+   "rank": 15,
+   "artifact_markdown": null
+  }
+ ],
+ "company": "Enron, four mailboxes",
+ "built_at": "2026-09-22T20:51:45+00:00",
+ "messages": {
+  "2ccf3e9de5dd": {
+   "from": "jackie.young@enron.com",
+   "date": "2000-02-17T08:37:00Z",
+   "subject": "98-6892 Overflow",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "833ea24c1a58": {
+   "from": "jackie.young@enron.com",
+   "date": "2000-04-03T12:04:00Z",
+   "subject": "980432",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "8f6a51a09b44": {
+   "from": "jackie.young@enron.com",
+   "date": "2000-05-31T08:54:00Z",
+   "subject": "98-6892",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "4b18dcf16fe4": {
+   "from": "aimee.lannou@enron.com",
+   "date": "2000-08-29T08:54:00Z",
+   "subject": "Meter 5593",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "bd77d5723ce5": {
+   "from": "aimee.lannou@enron.com",
+   "date": "2001-01-02T14:14:00Z",
+   "subject": "Meter 1517",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "c3fb116d26be": {
+   "from": "aimee.lannou@enron.com",
+   "date": "2001-01-09T12:52:00Z",
+   "subject": "Meter 6387 - Dec 00",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "a081ad55db4e": {
+   "from": "michael.olsen@enron.com",
+   "date": "2001-02-05T15:06:00Z",
+   "subject": "meter 986315",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "d84b70fd3ab2": {
+   "from": "aimee.lannou@enron.com",
+   "date": "2000-01-11T09:36:00Z",
+   "subject": "UA4 - 1998",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "0970428b624a": {
+   "from": "stella.morris@enron.com",
+   "date": "1999-12-27T17:16:00Z",
+   "subject": "Re: UA4 - Meter 1441 for 11/97 - Falfurrias",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "d6130ec3f858": {
+   "from": "susan.trevino@enron.com",
+   "date": "2000-02-01T09:54:00Z",
+   "subject": "Re: UA4",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "a7666e0a8721": {
+   "from": "aimee.lannou@enron.com",
+   "date": "2000-02-03T15:09:00Z",
+   "subject": "Bridgeback Error at Meter 1450 for 11/99",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "9e8670ff2498": {
+   "from": "jackie.young@enron.com",
+   "date": "2000-02-04T15:28:00Z",
+   "subject": "98-1534",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "1cf5f56c8bca": {
+   "from": "jackie.young@enron.com",
+   "date": "2000-02-18T09:57:00Z",
+   "subject": "Re: 98-6892 Overflow",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "d70dc2e00d70": {
+   "from": "jackie.young@enron.com",
+   "date": "2000-03-03T10:03:00Z",
+   "subject": "98-0432",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "73955fa8ace2": {
+   "from": "jackie.young@enron.com",
+   "date": "2000-03-06T11:20:00Z",
+   "subject": "98-1052 and 98-1534 (K extensions)",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "e85fc593962d": {
+   "from": "aimee.lannou@enron.com",
+   "date": "2000-03-06T14:47:00Z",
+   "subject": "Feedback Error - 1/00",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "76c4e6401eff": {
+   "from": "bryan.hull@enron.com",
+   "date": "2000-03-07T20:11:00Z",
+   "subject": "P&L",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "34d9730cdf58": {
+   "from": "jackie.young@enron.com",
+   "date": "2000-03-10T10:39:00Z",
+   "subject": "98-6719 and 98-9676",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "0d427a91eb88": {
+   "from": "aimee.lannou@enron.com",
+   "date": "2000-03-11T09:49:00Z",
+   "subject": "Re: Allocation Exceptions",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "efb963c9e224": {
+   "from": "rita.wynne@enron.com",
+   "date": "2000-03-15T19:50:00Z",
+   "subject": "1999 HPL Unaccounted For",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "d98a0a9c820d": {
+   "from": "lauri.allen@enron.com",
+   "date": "2000-03-21T09:04:00Z",
+   "subject": "PG&E Texoma Volumes",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "6645ccf1e244": {
+   "from": "charlotte.hawkins@enron.com",
+   "date": "2000-03-21T09:32:00Z",
+   "subject": "Re: PG&E Texoma Volumes",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "e4946958c5ec": {
+   "from": "lauri.allen@enron.com",
+   "date": "2000-03-22T08:59:00Z",
+   "subject": "Re: PG&E Texoma Volumes",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "9a5b44a43b3a": {
+   "from": "jackie.young@enron.com",
+   "date": "2000-04-05T16:04:00Z",
+   "subject": "K's needed @ 98-1534 and 98-6725",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "5b75cb17f5a9": {
+   "from": "jackie.young@enron.com",
+   "date": "2000-04-06T10:15:00Z",
+   "subject": "98-1600 & 98-6725 Needing K's",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "35bbe6fda06a": {
+   "from": "gary.anderson@enron.com",
+   "date": "2000-04-13T14:37:00Z",
+   "subject": "Re: Brandywine Meter #: 981225 ; March, 2000 Activity",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "af234c48792c": {
+   "from": "aimee.lannou@enron.com",
+   "date": "2000-04-14T09:01:00Z",
+   "subject": "Meter 1517",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "e878b070d6d1": {
+   "from": "michael.eiben@enron.com",
+   "date": "2000-05-01T10:17:00Z",
+   "subject": "Unify/Sitara Enhancements",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "a26a74a7caea": {
+   "from": "aimee.lannou@enron.com",
+   "date": "2000-05-24T16:08:00Z",
+   "subject": "MidTex",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "2ea6c24ec1dd": {
+   "from": "charlotte.hawkins@enron.com",
+   "date": "2000-06-08T09:48:00Z",
+   "subject": "Re: CP&L",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "6c6a634d91fa": {
+   "from": "charlotte.hawkins@enron.com",
+   "date": "2000-06-08T14:11:00Z",
+   "subject": "Re: CP&L",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "57c4fa7f1b77": {
+   "from": "aimee.lannou@enron.com",
+   "date": "2000-06-21T11:03:00Z",
+   "subject": "HL&P",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "faf0ee1be8c4": {
+   "from": "aimee.lannou@enron.com",
+   "date": "2000-06-22T08:41:00Z",
+   "subject": "Re: HL&P",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "a40a3551918b": {
+   "from": "ricky.ellis@enron.com",
+   "date": "2000-07-13T14:28:00Z",
+   "subject": "Deal Extended",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "649f44ea1070": {
+   "from": "ricky.ellis@enron.com",
+   "date": "2000-07-17T15:09:00Z",
+   "subject": "Extend Deal",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "6ee461104dd8": {
+   "from": "mary.poorman@enron.com",
+   "date": "2000-07-27T08:45:00Z",
+   "subject": "Extend Deal",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "c97f65a22452": {
+   "from": "thomas.engel@enron.com",
+   "date": "2000-08-29T07:24:00Z",
+   "subject": "Re: ECT - IM WAHA ???",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "d3b71d833dfd": {
+   "from": "mary.poorman@enron.com",
+   "date": "2000-09-13T10:48:00Z",
+   "subject": "deal id 109475",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "01b2a501ae1c": {
+   "from": "mary.poorman@enron.com",
+   "date": "2000-09-19T08:47:00Z",
+   "subject": "Meter Variances - UA4 Clean-Up",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "331384374f3a": {
+   "from": "julie.meyers@enron.com",
+   "date": "2000-10-16T16:53:00Z",
+   "subject": "Re: Swift - OCTOBER 2000 Vols",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "e695e22fc6cb": {
+   "from": "aimee.lannou@enron.com",
+   "date": "2000-10-26T10:01:00Z",
+   "subject": "meter 6387 & 5192",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "abe9968b4c47": {
+   "from": "susan.hadix@enron.com",
+   "date": "2000-10-30T13:32:00Z",
+   "subject": "October deals",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "3d17ee2d22f5": {
+   "from": "mary.poorman@enron.com",
+   "date": "2000-10-30T15:55:00Z",
+   "subject": "Meter 6315",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "e9db60e298c4": {
+   "from": "mary.poorman@enron.com",
+   "date": "2000-10-30T16:02:00Z",
+   "subject": "Sale to Rhone Poule meter 988078",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "b97213f58b92": {
+   "from": "aimee.lannou@enron.com",
+   "date": "2000-11-01T10:01:00Z",
+   "subject": "Re: meter 6387 & 5192",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "191e328ce931": {
+   "from": "aimee.lannou@enron.com",
+   "date": "2000-11-09T11:39:00Z",
+   "subject": "Re: meter 6387 & 5192",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "6e5bc9797547": {
+   "from": "mary.poorman@enron.com",
+   "date": "2000-11-15T14:55:00Z",
+   "subject": "Meter 6315, purch from Torch/Rally, October",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "8521253697a1": {
+   "from": "mary.poorman@enron.com",
+   "date": "2000-12-15T08:10:00Z",
+   "subject": "Gulf Plains into Tennessee for November",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "961556dcdada": {
+   "from": "victor.lamadrid@enron.com",
+   "date": "2000-12-15T11:52:00Z",
+   "subject": "Re: Enerfin meter 980439 for 10/00",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "d0451d6e0365": {
+   "from": "jackie.young@enron.com",
+   "date": "2000-12-19T08:47:00Z",
+   "subject": "Re: Enerfin meter 980439 for 10/00",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "da6d47ed4720": {
+   "from": "jackie.young@enron.com",
+   "date": "2000-12-19T09:02:00Z",
+   "subject": "Deal extension for 11/21/2000 for 98-439",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "4b9d79d9170a": {
+   "from": "victor.lamadrid@enron.com",
+   "date": "2000-12-19T09:24:00Z",
+   "subject": "Re: Deal extension for 11/21/2000 for 98-439",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "4df078892e1b": {
+   "from": "victor.lamadrid@enron.com",
+   "date": "2000-12-19T14:08:00Z",
+   "subject": "Re: Deal extension for 11/21/2000 for 98-439",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "1fa8d7048a97": {
+   "from": "jackie.young@enron.com",
+   "date": "2000-12-21T09:08:00Z",
+   "subject": "Re: Deal extension for 11/21/2000 for 98-439",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "4bd39a97e7bf": {
+   "from": "jackie.young@enron.com",
+   "date": "2000-12-21T10:46:00Z",
+   "subject": "Re: Enerfin meter 980439 for 10/00",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "de995f1a7f18": {
+   "from": "darron.giron@enron.com",
+   "date": "2000-12-21T18:16:00Z",
+   "subject": "Re: P&L",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "89274ca4a243": {
+   "from": "aimee.lannou@enron.com",
+   "date": "2001-01-09T12:43:00Z",
+   "subject": "Dec 00",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "071a1dc2a4ad": {
+   "from": "aimee.lannou@enron.com",
+   "date": "2001-01-22T16:58:00Z",
+   "subject": "meter 1386",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "0c21f6ec1008": {
+   "from": "mary.poorman@enron.com",
+   "date": "2001-01-22T18:27:00Z",
+   "subject": "Meter 8022 - Bad Scada Feedback to Sitara",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "8640d7bf1c56": {
+   "from": "mary.poorman@enron.com",
+   "date": "2001-01-25T15:09:00Z",
+   "subject": "Meter 986679; the Hughes C/P",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "9f9bdf10a8c0": {
+   "from": "mary.poorman@enron.com",
+   "date": "2001-02-05T14:16:00Z",
+   "subject": "Meter 981594 for Jan",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "0722c2238747": {
+   "from": "michael.olsen@enron.com",
+   "date": "2001-02-23T14:37:00Z",
+   "subject": "Re: meter 6884",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "3ad22a3ad33c": {
+   "from": "aimee.lannou@enron.com",
+   "date": "2001-03-06T18:06:00Z",
+   "subject": "Meter 1351 - Feb 01",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "16f3a11b90c6": {
+   "from": "david.baumbach@enron.com",
+   "date": "2001-03-29T06:05:00Z",
+   "subject": "UA4",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "5f71eca6de7a": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-07-03T21:08:36Z",
+   "subject": "IMPORTANT-PLEASE READ",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "64f28aeb06b0": {
+   "from": "megan.parker@enron.com",
+   "date": "2001-07-20T13:39:52Z",
+   "subject": "El Paso Merchant Deal 637225",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "982aa1087a6a": {
+   "from": "brandee.jackson@enron.com",
+   "date": "2001-11-02T20:46:22Z",
+   "subject": "ON CALL",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "298ab8cd07d2": {
+   "from": "brandee.jackson@enron.com",
+   "date": "2001-11-02T21:06:41Z",
+   "subject": "FW: ON CALL (REVISED)",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "89b436dc85ee": {
+   "from": "sherlyn.schumack@enron.com",
+   "date": "2001-11-08T20:02:46Z",
+   "subject": "Black Marlin ua4 meters",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "85141cb3f0e2": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2000-08-18T11:21:00Z",
+   "subject": "HPL Meter #985355 Brown Common Point",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "36912cbd53cf": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2000-11-07T15:45:00Z",
+   "subject": "HPL Meter #981525 Texoma D/P- GSU HPL",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "b7ed38f73dea": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2000-12-14T16:54:00Z",
+   "subject": "HPL Meter #980417 HPL/KMID - SEVEN OAKS",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "c4e883d4c147": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2000-12-14T17:29:00Z",
+   "subject": "HPL Meter #985369 TAFT PLANT RESID ARCO HPL",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "6267751eb549": {
+   "from": "jackie.young@enron.com",
+   "date": "2000-03-11T12:19:00Z",
+   "subject": "Re: 98-6719 and 98-9676",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "ae0cad8613a8": {
+   "from": "fred.boas@enron.com",
+   "date": "2000-06-05T15:50:00Z",
+   "subject": "Duke Energy - # 5192 - 1999 Issues",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "e6aa13b96801": {
+   "from": "fred.boas@enron.com",
+   "date": "2000-06-07T10:09:00Z",
+   "subject": "Duke Energy Deal 269123 for July & November 2000?",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "7f5feff24efa": {
+   "from": "thu.nguyen@enron.com",
+   "date": "2000-06-22T13:16:00Z",
+   "subject": "Re: Teco Gas Processing; Meter No.: 6884",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "414f4dc86cfd": {
+   "from": "jackie.young@enron.com",
+   "date": "2000-12-11T15:53:00Z",
+   "subject": "10/2000 - Days 6 and 19 (98-0439)",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "fb7988cdfc8e": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2000-12-11T16:27:00Z",
+   "subject": "HPL Meter #980074 Bammel HPL D/P to Transco",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "435aa3f570da": {
+   "from": "victor.lamadrid@enron.com",
+   "date": "2000-12-13T17:39:00Z",
+   "subject": "Re: HPL discrepancy",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "2031ec898149": {
+   "from": "victor.lamadrid@enron.com",
+   "date": "2000-12-14T09:51:00Z",
+   "subject": "Re: HPL discrepancy",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "3cc9e0461bb6": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2000-12-14T13:12:00Z",
+   "subject": "HPL Meter #985579",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "c2548feed9f5": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2000-12-18T14:42:00Z",
+   "subject": "HPL Meter #986290 INDIAN HILLS PLANT -TEJAS",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "4363c049bacb": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2000-12-19T11:29:00Z",
+   "subject": "HPL Meter #986240 EL CAMPO/SHANGHAI COMMONPOINT",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "475973244488": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2000-12-19T13:54:00Z",
+   "subject": "HPL Meter #989648 TRAM/HPL - TRANSTEXAS THOMPSON",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "abba148154c0": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2000-12-19T18:04:00Z",
+   "subject": "HPL Meter #981046 BUTANE PLANT NECHES GAS DIST H",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "6adce1893124": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2000-12-21T10:18:00Z",
+   "subject": "HPL Meter #986631TEXOMA-TEJAS HPL I/C",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "dfc277e28e4d": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2000-12-22T11:11:00Z",
+   "subject": "HPL Meter SOUTHERN UNION - LOCKHART",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "29d86e0f347d": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2000-12-22T12:26:00Z",
+   "subject": "HPL Meter #981389 MT. BELVIEU-TRIDENT NGL HPL",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "0bc114d335cf": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2000-12-27T15:55:00Z",
+   "subject": "HPL Meter #980070 RUSK D/P - LONE STAR HPL",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "61dd30531394": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2000-12-27T16:45:00Z",
+   "subject": "HPL Meter #981052 PASADENA PLANT PHILLIPS HPL",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "233dcdaf3d00": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2000-12-28T10:33:00Z",
+   "subject": "HPL Meter #989824 DECKER LAURELES FARM C/P",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "7becfe409d8c": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2000-12-28T13:53:00Z",
+   "subject": "HPL Meter #981431 TEXAS CITY MARATHON OIL HPL",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "db52c42cd1da": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2000-12-28T16:27:00Z",
+   "subject": "HPL Meter #984179 HOFF-HELLER UNIT #22 CDP",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "509b52eaee2c": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2001-01-03T09:52:00Z",
+   "subject": "HPL Meter #981295 HUNGERFORD GRAIN COMPANY",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "de8466dfff4f": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2001-01-03T14:57:00Z",
+   "subject": "HPL Meter #986679 HUGHES #1 CMP",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "0c2508e9c50b": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2001-01-08T12:32:00Z",
+   "subject": "HPL Meter #987195 Tatton Central Point",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "73179b9d9bd6": {
+   "from": "clem.cernosek@enron.com",
+   "date": "2001-01-09T12:09:00Z",
+   "subject": "HPL Meter #985892 South Katy Gas Unit No. 2 #1",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "2fc075d76f91": {
+   "from": "mark.mccoy@enron.com",
+   "date": "2001-01-09T14:21:00Z",
+   "subject": "Re: HPL Meter #985892 South Katy Gas Unit No. 2 #1",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "b1c04209c35e": {
+   "from": "robert.cotten@enron.com",
+   "date": "2001-01-12T18:59:00Z",
+   "subject": "Re: HPL Meter #986563 Texaco Fee c/P",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "0ce9ef59fe52": {
+   "from": "michael.olsen@enron.com",
+   "date": "2001-04-10T16:33:11Z",
+   "subject": "deal 83389",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "c411a56c9dc5": {
+   "from": "megan.parker@enron.com",
+   "date": "2001-10-31T19:51:29Z",
+   "subject": "HPLC - Four Square 5/01",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "e9273e5803f6": {
+   "from": "rickya@calpine.com",
+   "date": "1999-12-14T15:17:00Z",
+   "subject": "Calpine Daily Gas Nomination",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "87fa4d84ce2d": {
+   "from": "rickya@calpine.com",
+   "date": "1999-12-28T15:18:00Z",
+   "subject": "Calpine January 2000 Nomination",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "b582989db190": {
+   "from": "timpowell@txu.com",
+   "date": "1999-12-27T17:18:00Z",
+   "subject": "HPL Nominations for December 28, 1999",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "1bf6aa982b2a": {
+   "from": "timpowell@txu.com",
+   "date": "2000-01-17T16:12:00Z",
+   "subject": "HPL Nomination for January 18, 2000",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "46ffd7ec1d8f": {
+   "from": "michael.mitcham@enron.com",
+   "date": "1999-12-21T16:47:00Z",
+   "subject": "01/00 NATURAL GAS NOMINATION",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "6f8f1a18931d": {
+   "from": "rickya@calpine.com",
+   "date": "2000-04-10T08:05:00Z",
+   "subject": "Calpine Daily Gas Nomination",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "1291e4d7e37d": {
+   "from": "rickya@calpine.com",
+   "date": "2000-08-10T10:18:00Z",
+   "subject": "Calpine Daily Gas Nomination",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "573cdc6daa81": {
+   "from": "timpowell@txu.com",
+   "date": "1999-12-29T16:45:00Z",
+   "subject": "HPL Nomination for December 30, 1999",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "b2f31522f678": {
+   "from": "timpowell@txu.com",
+   "date": "2000-01-14T16:38:00Z",
+   "subject": "HPL Nomination for January 15 thru 17, 2000",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "3ce1d00cb80e": {
+   "from": "michael.mitcham@enron.com",
+   "date": "2000-01-25T16:59:00Z",
+   "subject": "02/00 NATURAL GAS NOMINATION",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "8790664c769e": {
+   "from": "timpowell@txu.com",
+   "date": "2000-01-25T17:28:00Z",
+   "subject": "HPL Nomination for January 26, 2000",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "719bcc9491e0": {
+   "from": "michael.mitcham@enron.com",
+   "date": "2000-02-24T10:02:00Z",
+   "subject": "NATURAL GAS NOMINATION FOR 03/00",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "3b719121be49": {
+   "from": "rickya@calpine.com",
+   "date": "2000-03-06T12:35:00Z",
+   "subject": "Calpine Daily Gas Nomination",
+   "mailbox": "williams-w3",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "42eaf7cb7346": {
+   "from": "rickya@calpine.com",
+   "date": "2000-03-14T11:05:00Z",
+   "subject": "Calpine Daily Gas nomiantion",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "b832d3a0db9e": {
+   "from": "rickya@calpine.com",
+   "date": "2000-05-10T05:42:00Z",
+   "subject": "Calpine Daily Gas Nomination",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "7594ae3f19c3": {
+   "from": "rickya@calpine.com",
+   "date": "2000-06-27T07:22:00Z",
+   "subject": "Calpine Daily Gas Nomination and Monthly (JULY) Nomination",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "c02c4ca7c626": {
+   "from": "rickya@calpine.com",
+   "date": "2000-07-27T07:26:00Z",
+   "subject": "Calpine Daily Gas Nomination",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "2b7f28f139fb": {
+   "from": "rickya@calpine.com",
+   "date": "2000-07-31T07:20:00Z",
+   "subject": "Calpine Daily Gas Nomination",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "5fcbc9bca9a2": {
+   "from": "rickya@calpine.com",
+   "date": "2000-08-02T07:19:00Z",
+   "subject": "Calpine Daily Gas Nomination",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "31fe2a451bc9": {
+   "from": "rickya@calpine.com",
+   "date": "2000-08-03T07:24:00Z",
+   "subject": "Calpine Daily Gas Nomination",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "bc8b9813a510": {
+   "from": "rickya@calpine.com",
+   "date": "2000-08-11T07:17:00Z",
+   "subject": "Calpine Daily Gas Nomination (weekend)",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "b1b09441b09e": {
+   "from": "rickya@calpine.com",
+   "date": "2000-08-15T07:14:00Z",
+   "subject": "Calpine Daily Gas Nomination",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "4d7236dcfcd6": {
+   "from": "rickya@calpine.com",
+   "date": "2000-08-21T07:18:00Z",
+   "subject": "Calpine Daily Gas Nomination",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "d7a0d20e4769": {
+   "from": "rickya@calpine.com",
+   "date": "2000-08-28T07:28:00Z",
+   "subject": "Calpine Daily and Monthly Gas Nomination",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "577e0b304c8f": {
+   "from": "rickya@calpine.com",
+   "date": "2000-09-18T09:05:00Z",
+   "subject": "Calpine Daily Gas Nomination",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "5ed257dee4c6": {
+   "from": "rickya@calpine.com",
+   "date": "2000-11-22T07:13:00Z",
+   "subject": "Calpine Daily Gas Nomination",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "52dac75843d4": {
+   "from": "rickya@calpine.com",
+   "date": "2000-11-27T09:34:00Z",
+   "subject": "Calpine Monthly Nomination (December)",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "9ce0bfbe246a": {
+   "from": "mjones7@txu.com",
+   "date": "2001-01-03T11:02:00Z",
+   "subject": "HPL Nom for January 4, 2001",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "f3ef4c7d2b8a": {
+   "from": "rickya@calpine.com",
+   "date": "2001-04-11T14:21:33Z",
+   "subject": "Calpine Daily Gas Nomination",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "d9e7fbe0a6d3": {
+   "from": "rickya@calpine.com",
+   "date": "2001-04-19T19:59:57Z",
+   "subject": "Calpine Daily Gas Nomination",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "6bbe1ee3b5aa": {
+   "from": "lauri.allen@enron.com",
+   "date": "2000-02-16T15:25:00Z",
+   "subject": "Meter 9682",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "b44260517fee": {
+   "from": "tom.acton@enron.com",
+   "date": "2000-02-16T15:25:00Z",
+   "subject": "Re: 1st rev Feb. 2000 Josey Ranch nom",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "820e9fcc6f02": {
+   "from": "maritta.mullet@enron.com",
+   "date": "2000-03-27T19:08:00Z",
+   "subject": "MeOH Upsets",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "6fcfcde2f76c": {
+   "from": "maritta.mullet@enron.com",
+   "date": "2000-05-22T12:44:00Z",
+   "subject": "MTBE PLANT SHUT-DOWN",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "ee63969afbb2": {
+   "from": "mark.mccoy@enron.com",
+   "date": "2000-06-07T08:25:00Z",
+   "subject": "El Paso cuts on Oasis",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "eb79a4d126dc": {
+   "from": "mark.mccoy@enron.com",
+   "date": "2000-06-13T06:12:00Z",
+   "subject": "El Paso Cuts to Oasis",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "816e51d7b91a": {
+   "from": "kenneth.seaman@enron.com",
+   "date": "2000-01-21T09:17:00Z",
+   "subject": "Valero -- Meter 8018",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "a1a05c91035b": {
+   "from": "maritta.mullet@enron.com",
+   "date": "2000-03-22T13:06:00Z",
+   "subject": "METHANOL PLANT UPSET",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "2ae5f84262da": {
+   "from": "maritta.mullet@enron.com",
+   "date": "2000-03-26T18:41:00Z",
+   "subject": "MTBE PLANT UPSET",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "23dd08673e9e": {
+   "from": "maritta.mullet@enron.com",
+   "date": "2000-03-28T13:47:00Z",
+   "subject": "MTBE UPSETS",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "8ffd4d3be85a": {
+   "from": "mark.mccoy@enron.com",
+   "date": "2000-05-23T09:36:00Z",
+   "subject": "Conoco supply cuts on Oasis 5/21-5/22",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "dae76d82962f": {
+   "from": "mark.mccoy@enron.com",
+   "date": "2000-06-19T16:50:00Z",
+   "subject": "Cuts",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "ceb059b75cb9": {
+   "from": "mark.mccoy@enron.com",
+   "date": "2001-02-01T16:36:00Z",
+   "subject": "change to tenaska iv volume",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "2e3fb8bd2b59": {
+   "from": "charlotte.hawkins@enron.com",
+   "date": "2000-02-14T18:51:00Z",
+   "subject": "Re: Sale to Shoreline",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "a6d7e21df5fe": {
+   "from": "sherlyn.schumack@enron.com",
+   "date": "2000-03-28T09:19:00Z",
+   "subject": "PG&E Texas contract 5095-037 for 2/00",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "9627c322fee7": {
+   "from": "sherlyn.schumack@enron.com",
+   "date": "2000-05-22T09:40:00Z",
+   "subject": "Re: PG&E Texas contract 5098-695 for 2/00",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "b27f5fb123c8": {
+   "from": "rebecca.griffin@enron.com",
+   "date": "2000-12-07T14:47:00Z",
+   "subject": "TXU Lone Star",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "4252f367e060": {
+   "from": "michelle.lokay@enron.com",
+   "date": "2002-01-24T21:11:51Z",
+   "subject": "Mojave Imbalances",
+   "mailbox": "lokay-m",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "df2fb4eba0bb": {
+   "from": "aimee.lannou@enron.com",
+   "date": "2000-03-22T15:04:00Z",
+   "subject": "Re: Meter 8740 Dec 99",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "848b9a0810c5": {
+   "from": "darron.giron@enron.com",
+   "date": "2001-02-16T14:00:00Z",
+   "subject": "Re: Petro-Canada Oil & Gas",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "1e5f47d1b14d": {
+   "from": "cynthia.hakemack@enron.com",
+   "date": "2001-04-12T19:24:23Z",
+   "subject": "HPL/Conoco - Teco Waha 03/23/01 Purchase",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "6b8515f6426a": {
+   "from": "cynthia.hakemack@enron.com",
+   "date": "2001-05-07T20:27:39Z",
+   "subject": "S709101 - 04/03/01",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "2dd4a40887e5": {
+   "from": "rebecca.griffin@enron.com",
+   "date": "2001-04-24T16:12:05Z",
+   "subject": "TXU Gas Distribution deal #646679",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "c69b464ea2e0": {
+   "from": "valerie.vela@enron.com",
+   "date": "2001-08-17T19:54:45Z",
+   "subject": "RE: error repairs",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "37caf7d83d0e": {
+   "from": "darron.giron@enron.com",
+   "date": "2000-07-18T13:30:00Z",
+   "subject": "Re: Peoples/North Shore - 6/00 Transportation - Sitara demand charge adjustments",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "cf856acdac89": {
+   "from": "darron.giron@enron.com",
+   "date": "2000-11-21T16:00:00Z",
+   "subject": "Re: EnerVest S# 27239",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "d00a08ab5c7c": {
+   "from": "darron.giron@enron.com",
+   "date": "2001-04-09T08:43:00Z",
+   "subject": "Re: 03/01 Price Update - # 27253",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "e8fea4b16107": {
+   "from": "mary.poorman@enron.com",
+   "date": "2000-08-28T08:58:00Z",
+   "subject": "Weekend Notes",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "ed01a0f0c821": {
+   "from": "kristen.hanson@enron.com",
+   "date": "2000-09-22T14:14:00Z",
+   "subject": "Re: Duke Energy",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "4cb59d9ffccf": {
+   "from": "darron.giron@enron.com",
+   "date": "2000-12-21T09:01:00Z",
+   "subject": "Re: Enervest S# 27239",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "6bef9c0df335": {
+   "from": "darron.giron@enron.com",
+   "date": "2001-01-23T14:39:00Z",
+   "subject": "Re: Enervest for 12/00",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "360892eb96a0": {
+   "from": "rebecca.griffin@enron.com",
+   "date": "2001-04-17T18:37:07Z",
+   "subject": "TXU Gas Distribution deal #589007",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "12a66104da87": {
+   "from": "shari.mao@enron.com",
+   "date": "2000-03-31T11:44:00Z",
+   "subject": "March Surveys",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "4edc3274cefb": {
+   "from": "james.scribner@enron.com",
+   "date": "2000-05-30T11:43:00Z",
+   "subject": "May Activity Survey",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "d8a0b9665f4a": {
+   "from": "shari.mao@enron.com",
+   "date": "2000-06-27T09:18:00Z",
+   "subject": "Activity Survey - June 2000",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "fdf8e5c374e3": {
+   "from": "james.scribner@enron.com",
+   "date": "2000-08-03T15:53:00Z",
+   "subject": "July Activity Driver Survey",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "c5bbb0fdf8e5": {
+   "from": "james.scribner@enron.com",
+   "date": "2000-10-06T09:10:00Z",
+   "subject": "OPM Survey",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "aa9da649ffc5": {
+   "from": "lisa.cousino@enron.com",
+   "date": "2000-02-22T14:53:00Z",
+   "subject": "Purchasing Computer Equipment",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "733b7d6922f6": {
+   "from": "shari.mao@enron.com",
+   "date": "2000-05-02T08:44:00Z",
+   "subject": "April Activity Surveys",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "087ce5243857": {
+   "from": "shari.mao@enron.com",
+   "date": "2000-02-29T08:22:00Z",
+   "subject": "February Surveys",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "899e3a760c0c": {
+   "from": "shari.mao@enron.com",
+   "date": "2000-02-29T13:52:00Z",
+   "subject": "Activity Driver Quantity Survey",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "22016ee5a25e": {
+   "from": "lisa.cousino@enron.com",
+   "date": "2000-06-07T20:30:00Z",
+   "subject": "EIS Invoices for May",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "ff3a0450aa0f": {
+   "from": "james.scribner@enron.com",
+   "date": "2000-10-02T15:06:00Z",
+   "subject": "OPM Survey",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "e4381fe3be96": {
+   "from": "suzanne.nicholie@enron.com",
+   "date": "2000-10-10T09:36:00Z",
+   "subject": "Re: OPM Survey",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "0c4428ce9278": {
+   "from": "robert.lloyd@enron.com",
+   "date": "2000-08-14T08:39:00Z",
+   "subject": "On Call Notes for Weekend Dated ; August 12th thru 13th",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "6d98361e6ed8": {
+   "from": "mary.poorman@enron.com",
+   "date": "2001-01-22T17:25:00Z",
+   "subject": "Weekend OnCall Notes",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "7dffc1a5ad97": {
+   "from": "michael.olsen@enron.com",
+   "date": "2001-03-05T08:21:00Z",
+   "subject": "On Call Notes",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "afb2990b7e07": {
+   "from": "mary.poorman@enron.com",
+   "date": "2001-03-26T19:33:00Z",
+   "subject": "On Call Notes",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "978821804a23": {
+   "from": "mark.mccoy@enron.com",
+   "date": "2001-04-16T13:48:38Z",
+   "subject": "On Call Notes April 13th-15th",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "a90e5e2cc93d": {
+   "from": "brenda.herod@enron.com",
+   "date": "2000-01-17T14:17:00Z",
+   "subject": "New Analysts",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "06fbe9e608fd": {
+   "from": "robert.cotten@enron.com",
+   "date": "2001-01-01T23:49:00Z",
+   "subject": "On-Call Notes",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "01a43c7da73d": {
+   "from": "robert.cotten@enron.com",
+   "date": "2001-03-12T08:43:00Z",
+   "subject": "On-Call Notes",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "72e8fa165c92": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-07-28T00:34:47Z",
+   "subject": "Generator Checkouts and Control Area Services",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "061a91d5ed81": {
+   "from": "aimee.lannou@enron.com",
+   "date": "2000-05-31T14:56:00Z",
+   "subject": "Vacation",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "71e2b417d6b9": {
+   "from": "carlos.rodriguez@enron.com",
+   "date": "2000-06-29T08:27:00Z",
+   "subject": "Vacation",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "093071741743": {
+   "from": "mark.mccoy@enron.com",
+   "date": "2001-02-06T09:23:00Z",
+   "subject": "Out of the Office 7th-9th",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "08a02ffda803": {
+   "from": "carlos.rodriguez@enron.com",
+   "date": "2001-03-14T09:09:00Z",
+   "subject": "OTO",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "dabe5d15b570": {
+   "from": "carlos.rodriguez@enron.com",
+   "date": "2001-05-09T20:18:48Z",
+   "subject": "Out of the office",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "8f80c23e12f7": {
+   "from": "aimee.lannou@enron.com",
+   "date": "1999-12-15T13:30:00Z",
+   "subject": "Meter 1431 - Nov 1999",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "5357386f5d2a": {
+   "from": "romeo.d'souza@enron.com",
+   "date": "1999-12-20T15:36:00Z",
+   "subject": "Out on vacation",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "273e24f542f3": {
+   "from": "brenda.herod@enron.com",
+   "date": "1999-12-22T16:54:00Z",
+   "subject": "Out of the Office",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "9e77aad94411": {
+   "from": "robert.lloyd@enron.com",
+   "date": "2000-01-10T12:52:00Z",
+   "subject": "Re: Valero",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "889fd1d474cd": {
+   "from": "pat.clynes@enron.com",
+   "date": "2000-01-21T16:00:00Z",
+   "subject": "Pat- out for jury duty",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "f89415abc5fb": {
+   "from": "pat.clynes@enron.com",
+   "date": "2000-02-09T11:01:00Z",
+   "subject": "Out Thurs & Friday",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "df505218aff7": {
+   "from": "robert.lloyd@enron.com",
+   "date": "2000-03-22T09:45:00Z",
+   "subject": "Vacation Scheduled",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "dfdb672f5ed1": {
+   "from": "robert.lloyd@enron.com",
+   "date": "2000-03-22T10:13:00Z",
+   "subject": "Vacation Scheduled",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "cfb48fc3ed7c": {
+   "from": "yvette.connevey@enron.com",
+   "date": "2000-04-14T10:00:00Z",
+   "subject": "Yvette OOTO",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "20aa19d37b98": {
+   "from": "robert.lloyd@enron.com",
+   "date": "2000-06-29T10:32:00Z",
+   "subject": "Vacation",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "5977bb6b1d1c": {
+   "from": "mark.mccoy@enron.com",
+   "date": "2000-07-10T16:05:00Z",
+   "subject": "Out of the Office",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "f34e719c7e23": {
+   "from": "robert.lloyd@enron.com",
+   "date": "2000-07-14T15:39:00Z",
+   "subject": "Out of the office during the week of July 17th thru July 21st",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "d77fb256220b": {
+   "from": "steve.venturatos@enron.com",
+   "date": "2000-07-14T17:26:00Z",
+   "subject": "My Vacation",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "1d29ff4e8cb2": {
+   "from": "mary.poorman@enron.com",
+   "date": "2000-07-24T12:49:00Z",
+   "subject": "Out of the Office",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "5c3d9a242324": {
+   "from": "robert.lloyd@enron.com",
+   "date": "2000-09-01T09:12:00Z",
+   "subject": "Out of the Office",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "2fd583637667": {
+   "from": "darron.giron@enron.com",
+   "date": "2000-09-14T15:14:00Z",
+   "subject": "New Books",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "dd49803de1c3": {
+   "from": "mark.mccoy@enron.com",
+   "date": "2000-10-05T15:31:00Z",
+   "subject": "Out of Office",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "28e125e44770": {
+   "from": "heather.choate@enron.com",
+   "date": "2000-10-18T09:15:00Z",
+   "subject": "Assistant - Realignment of duties",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "7f03a67c7a87": {
+   "from": "carlos.rodriguez@enron.com",
+   "date": "2000-11-08T10:17:00Z",
+   "subject": "Out of the office",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "338dd8f940c6": {
+   "from": "carlos.rodriguez@enron.com",
+   "date": "2000-12-04T11:44:00Z",
+   "subject": "Out of the office",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "c18aad4baccc": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-06-29T03:14:29Z",
+   "subject": "Out of the Office for 06/29/01",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "6786051465c6": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-07-14T02:51:43Z",
+   "subject": "Out of the office",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "aa6069b03ba8": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-08-30T22:08:47Z",
+   "subject": "EOL Deal entry and status update.",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "9f09a277aafe": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-09-26T19:09:17Z",
+   "subject": "Out of the office",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "6df6c056e52f": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-10-03T21:22:22Z",
+   "subject": "Out of the Office",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "1402a320ba3e": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-11-02T01:30:59Z",
+   "subject": "Out of the Office",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "1cc15907d6b3": {
+   "from": "alex.villarreal@enron.com",
+   "date": "2001-11-27T23:01:52Z",
+   "subject": "Out of office",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "5868136f61a4": {
+   "from": "susan.trevino@enron.com",
+   "date": "2002-01-25T20:08:34Z",
+   "subject": "Out of Office AutoReply: Book Request",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "31eb3e8bfefe": {
+   "from": "darron.giron@enron.com",
+   "date": "2000-06-14T15:02:00Z",
+   "subject": "New Tagg Book",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "3981f4d6af91": {
+   "from": "darron.giron@enron.com",
+   "date": "2000-12-07T10:13:00Z",
+   "subject": "New West Curves",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "460269329baa": {
+   "from": "darron.giron@enron.com",
+   "date": "2001-01-11T11:37:00Z",
+   "subject": "Denver in TDS",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "07a67cfb7b3f": {
+   "from": "darron.giron@enron.com",
+   "date": "2001-05-04T08:55:00Z",
+   "subject": "Updated Book Admin",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "b91e90955d7d": {
+   "from": "kam.keiser@enron.com",
+   "date": "2002-01-04T19:00:43Z",
+   "subject": "new book req",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "f1e6e6f16bcc": {
+   "from": "kam.keiser@enron.com",
+   "date": "2002-01-07T17:00:09Z",
+   "subject": "sitara mappings",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "4d81aa465ccf": {
+   "from": "kam.keiser@enron.com",
+   "date": "2002-01-11T14:08:59Z",
+   "subject": "EOL products",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "ad871179f11a": {
+   "from": "d..winfree@enron.com",
+   "date": "2002-01-30T17:52:36Z",
+   "subject": "Heads up",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "156ba70a7abe": {
+   "from": "scott.mills@enron.com",
+   "date": "2000-03-28T22:17:00Z",
+   "subject": "FYI -New Product on EOL",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "998068ef036f": {
+   "from": "darron.giron@enron.com",
+   "date": "2000-06-13T09:35:00Z",
+   "subject": "New Central Region Books",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "824f8022df7b": {
+   "from": "steve.venturatos@enron.com",
+   "date": "2000-06-23T11:11:00Z",
+   "subject": "Re: New EOL Product",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "d8c3eff015eb": {
+   "from": "steve.venturatos@enron.com",
+   "date": "2000-06-23T11:23:00Z",
+   "subject": "Re: New EOL Product",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "453132c39451": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-08-20T17:52:36Z",
+   "subject": "Website Filter",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "5c10a6f86068": {
+   "from": "m..love@enron.com",
+   "date": "2002-01-03T20:28:44Z",
+   "subject": "risk matrix",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "1881cb19a399": {
+   "from": "m..love@enron.com",
+   "date": "2002-01-04T19:26:15Z",
+   "subject": "RE: new book req",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "0d6111a4b2b8": {
+   "from": "kam.keiser@enron.com",
+   "date": "2002-01-28T19:31:29Z",
+   "subject": "EOL products",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "3b47654876ab": {
+   "from": "scott.palmer@enron.com",
+   "date": "2002-01-30T19:29:34Z",
+   "subject": "heads up",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "8bba16dea5a0": {
+   "from": "kam.keiser@enron.com",
+   "date": "2002-02-04T21:01:03Z",
+   "subject": "updates",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "c31f511e108f": {
+   "from": "darron.giron@enron.com",
+   "date": "2001-03-05T17:02:00Z",
+   "subject": "Re: Q50979.1",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "edd075957b31": {
+   "from": "darron.giron@enron.com",
+   "date": "2001-03-28T17:05:00Z",
+   "subject": "Re: G-Daily-EST book",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "3b622b6efc87": {
+   "from": "darron.giron@enron.com",
+   "date": "2001-05-02T16:31:00Z",
+   "subject": "Re: Deals to be flipped to FT-US/CAND-ERMS book right away.",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "84f9d6656bc9": {
+   "from": "stacey.richardson@enron.com",
+   "date": "2002-01-25T23:08:00Z",
+   "subject": "more deals to move to bankruptcy books",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "374338c78618": {
+   "from": "cecilia.cheung@enron.com",
+   "date": "2002-01-24T21:10:54Z",
+   "subject": "RE: 6 more counterparties to move",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "3bff55c13fd2": {
+   "from": "darron.giron@enron.com",
+   "date": "2000-10-17T09:40:00Z",
+   "subject": "Reminder",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "b974ef09ec82": {
+   "from": "darron.giron@enron.com",
+   "date": "2000-12-20T09:30:00Z",
+   "subject": "Re: confirmation of deals",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "37e8d1123e8a": {
+   "from": "darron.giron@enron.com",
+   "date": "2000-08-10T13:08:00Z",
+   "subject": "Procedures",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "eebc6d94499d": {
+   "from": "darron.giron@enron.com",
+   "date": "2000-12-22T09:21:00Z",
+   "subject": "EOL Bridge",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "76855166e6fc": {
+   "from": "darron.giron@enron.com",
+   "date": "2001-01-26T09:39:00Z",
+   "subject": "Deals to be flipped to FT-US/CAND-ERMS book by Monday",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "d6bd4ff4fc0e": {
+   "from": "darron.giron@enron.com",
+   "date": "2001-02-21T12:34:00Z",
+   "subject": "Re: OneOK storage deal",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "61aad4260cbe": {
+   "from": "darron.giron@enron.com",
+   "date": "2001-02-26T10:20:00Z",
+   "subject": "Friendly Reminder",
+   "mailbox": "giron-d",
+   "folder": "sent",
+   "raw_available": true
+  },
+  "c9fb746c080e": {
+   "from": "scott.palmer@enron.com",
+   "date": "2001-12-14T15:41:29Z",
+   "subject": "FW: auto-termination deal listing - part 3",
+   "mailbox": "farmer-d",
+   "folder": "logistics",
+   "raw_available": true
+  },
+  "dcaeedb14be3": {
+   "from": "stacey.richardson@enron.com",
+   "date": "2002-01-19T00:15:05Z",
+   "subject": "more terminated deals to move",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "1ca622d825e7": {
+   "from": "stacey.richardson@enron.com",
+   "date": "2002-01-22T23:35:31Z",
+   "subject": "deals to move",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "8ef3ad5a859a": {
+   "from": "cyndie.balfour-flanagan@enron.com",
+   "date": "2002-01-23T02:01:27Z",
+   "subject": "Deals to be moved to Bankruptcy Books (From Russell's Exposure Report)",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "8d711ce7b013": {
+   "from": "m..love@enron.com",
+   "date": "2002-01-23T21:54:31Z",
+   "subject": "FW: termination list for deals to be moved to bankruptcy book",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "56f4c1f8a99c": {
+   "from": "stacey.richardson@enron.com",
+   "date": "2002-01-23T22:37:06Z",
+   "subject": "More deals to move",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "20a285af1149": {
+   "from": "m..love@enron.com",
+   "date": "2002-01-24T16:33:36Z",
+   "subject": "terminated financial CPs still in NG-PRice",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "3144838be86b": {
+   "from": "cyndie.balfour-flanagan@enron.com",
+   "date": "2002-01-28T21:22:39Z",
+   "subject": "Deals to be \"re-activated\" for MIDLANDCOGEN (Midland Cogeneration Venture Limited Partnership)",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "1ab32515f63b": {
+   "from": "stacey.richardson@enron.com",
+   "date": "2002-01-28T23:12:58Z",
+   "subject": "bankruptcy book deals",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "1059914da808": {
+   "from": "cyndie.balfour-flanagan@enron.com",
+   "date": "2002-01-30T22:30:52Z",
+   "subject": "Additional deals to move to Bankruptcy Books - Phy Gas",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "cc97b98a4d8a": {
+   "from": "m..love@enron.com",
+   "date": "2002-01-31T14:29:02Z",
+   "subject": "RE: new script for moving books",
+   "mailbox": "giron-d",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "affa2dd11baa": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-06-27T02:24:17Z",
+   "subject": "Length for Wednesday",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "3593d0497185": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-07-11T02:27:08Z",
+   "subject": "Short for 07/11/01 at SP-15",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "439d7e125bd2": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-08-13T17:07:47Z",
+   "subject": "Lending at PV and SP",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "6789811edc8d": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-10-17T17:38:21Z",
+   "subject": "Short, Long",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "5845610dc77c": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-10-15T16:55:55Z",
+   "subject": "Lending for 10/16/01",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "464380bf8dd4": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-06-12T02:23:06Z",
+   "subject": "Length for 06/12/01",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "78acf74975c5": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-06-13T02:55:55Z",
+   "subject": "Length and Short for 06/13/ SERVICES PROCEDURES",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "edeeb14a3ee3": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-06-15T18:50:55Z",
+   "subject": "Length for Monday",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "0a5285e8d676": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-07-12T23:46:56Z",
+   "subject": "Short for Friday and Saturday",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "c61aebbefd59": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-07-14T04:33:38Z",
+   "subject": "Real Time Length for Sunday and Monday.",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "ad0d1600ceea": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-07-23T17:12:37Z",
+   "subject": "Position manager",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "a3a5930ea0cd": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-07-24T19:34:19Z",
+   "subject": "Lending (Short) for 07/25/01",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "9e9ed973e1d8": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-07-30T20:46:51Z",
+   "subject": "Short in SP-15 (ST-Cali is long off-peak)",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "9f38bc39dba6": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-08-01T22:47:00Z",
+   "subject": "Fastest Way to Handle Colstrip Cuts",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "93939ee3eede": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-08-17T20:04:51Z",
+   "subject": "Short Stuff",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "39c7b428c338": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-09-05T04:17:11Z",
+   "subject": "Short for HE 21 through HE 23",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "e1a90c73e034": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-10-26T00:38:04Z",
+   "subject": "Long 10 mws flat in SP-15--",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "e73725e7949c": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-11-01T04:26:30Z",
+   "subject": "FC #5 outage",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "5226bfec407f": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-11-14T03:33:07Z",
+   "subject": "Positions for 11/13",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "038407f3df33": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-08-07T20:30:23Z",
+   "subject": "Congestion",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "d963c25b9710": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-08-08T15:43:42Z",
+   "subject": "Congestion for 08-07",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "0365cbab23e0": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-08-15T16:05:51Z",
+   "subject": "Congestion for Saturday",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "4debc9c2f9cc": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-10-08T21:02:43Z",
+   "subject": "Congestion Revenue for 10/05",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "d908e32bce60": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-07-06T23:01:44Z",
+   "subject": "PMA's",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "d2933ba141a4": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-06-29T03:00:35Z",
+   "subject": "Adjustments for ST-WBOM for 06/27/01",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "cd021560b0d1": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-07-03T16:31:22Z",
+   "subject": "PMA's",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "85543dff4916": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-07-10T21:35:50Z",
+   "subject": "Congestion revenue for 07/09/01",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "2bf23b5872ec": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-07-20T15:59:57Z",
+   "subject": "RT congestion for 07/19",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "83b622674d2f": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-07-21T01:08:50Z",
+   "subject": "",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "a4f2e6e743b1": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-07-24T16:18:46Z",
+   "subject": "New Deal Summary",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "237aa65cd92f": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-08-30T20:20:08Z",
+   "subject": "Hour Ahead Congestion Charges",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "7cc075b316f3": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-11-14T03:35:19Z",
+   "subject": "Congestion Management Revenue for Tuesday",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "0093a2b108a7": {
+   "from": "bill.williams@enron.com",
+   "date": "2001-11-15T11:27:50Z",
+   "subject": "RE: Congestion Management Revenue for Tuesday",
+   "mailbox": "williams-w3",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "86c805170e90": {
+   "from": "michelle.lokay@enron.com",
+   "date": "2001-10-26T14:22:26Z",
+   "subject": "California Capacity Report for Week of 10/22-10/26",
+   "mailbox": "lokay-m",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "a5fb48e9c2c6": {
+   "from": "michelle.lokay@enron.com",
+   "date": "2001-12-14T19:37:51Z",
+   "subject": "California Capacity Report for Week of 12/10-12/14",
+   "mailbox": "lokay-m",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "b16581b00998": {
+   "from": "michelle.lokay@enron.com",
+   "date": "2002-03-22T15:22:48Z",
+   "subject": "California Capacity Report for Week of 03/18-03/22",
+   "mailbox": "lokay-m",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "84e4da1d95b5": {
+   "from": "michelle.lokay@enron.com",
+   "date": "2001-12-21T17:22:54Z",
+   "subject": "California Capacity Report for Week of 12/17-12/21",
+   "mailbox": "lokay-m",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "aa6500eea824": {
+   "from": "michelle.lokay@enron.com",
+   "date": "2001-12-28T15:08:49Z",
+   "subject": "California Capacity Report for Week of 12/26-12/28",
+   "mailbox": "lokay-m",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "8692bc3347b1": {
+   "from": "michelle.lokay@enron.com",
+   "date": "2002-01-04T16:42:43Z",
+   "subject": "California Capacity Report for Week of 12/31-01/04",
+   "mailbox": "lokay-m",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "f846d37fa8a1": {
+   "from": "michelle.lokay@enron.com",
+   "date": "2002-01-11T14:30:39Z",
+   "subject": "FW: California Capacity Report for Week of 12/31-01/04",
+   "mailbox": "lokay-m",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "d88fbf82c0b9": {
+   "from": "michelle.lokay@enron.com",
+   "date": "2002-01-18T20:02:50Z",
+   "subject": "California Capacity Report for Week of 01/14-01/18",
+   "mailbox": "lokay-m",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "5add4afaa304": {
+   "from": "michelle.lokay@enron.com",
+   "date": "2002-01-24T15:22:04Z",
+   "subject": "California Capacity Report for Week of 01/21-01/25",
+   "mailbox": "lokay-m",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "927df30838ea": {
+   "from": "michelle.lokay@enron.com",
+   "date": "2002-02-01T16:17:21Z",
+   "subject": "California Capacity Report for Week of 01/28-02/01",
+   "mailbox": "lokay-m",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "dcb884e59f4d": {
+   "from": "michelle.lokay@enron.com",
+   "date": "2002-02-08T15:26:16Z",
+   "subject": "California Capacity Report for Week of 02/04-02/08",
+   "mailbox": "lokay-m",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "2e97be5cde00": {
+   "from": "michelle.lokay@enron.com",
+   "date": "2002-02-14T14:50:40Z",
+   "subject": "California Capacity Report for Week of 02/11-02/15",
+   "mailbox": "lokay-m",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "0a8ab81323a5": {
+   "from": "michelle.lokay@enron.com",
+   "date": "2002-02-22T14:49:19Z",
+   "subject": "California Capacity Report for Week of 02/19-02/22",
+   "mailbox": "lokay-m",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "9ca9c242541e": {
+   "from": "michelle.lokay@enron.com",
+   "date": "2002-03-01T15:42:09Z",
+   "subject": "California Capacity Report for Week of 02/25-03/01",
+   "mailbox": "lokay-m",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "e800bfa76bf5": {
+   "from": "michelle.lokay@enron.com",
+   "date": "2002-03-08T14:58:48Z",
+   "subject": "California Capacity Report for Week of 03/04-03/08",
+   "mailbox": "lokay-m",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "2d68b14ed0c2": {
+   "from": "michelle.lokay@enron.com",
+   "date": "2002-03-15T14:53:48Z",
+   "subject": "California Capacity Report for Week of 03/11-03/15",
+   "mailbox": "lokay-m",
+   "folder": "sent_items",
+   "raw_available": true
+  },
+  "1c3b3d510170": {
+   "from": "jill.chatterton@enron.com",
+   "date": "2002-01-30T20:15:43Z",
+   "subject": "FW: Energy Market Report - 01/29/02",
+   "mailbox": "williams-w3",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "8e2e1e5ce651": {
+   "from": "jill.chatterton@enron.com",
+   "date": "2002-01-31T22:18:20Z",
+   "subject": "FW: Energy Market Report - 01/30/02",
+   "mailbox": "williams-w3",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "309449405256": {
+   "from": "jill.chatterton@enron.com",
+   "date": "2002-02-05T20:57:10Z",
+   "subject": "FW: Energy Market Report - 02/04/02",
+   "mailbox": "williams-w3",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "c8376d50b73d": {
+   "from": "jill.chatterton@enron.com",
+   "date": "2002-02-06T20:22:14Z",
+   "subject": "FW: Energy Market Report - 02/05/02",
+   "mailbox": "williams-w3",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "2d3284c5fee8": {
+   "from": "jill.chatterton@enron.com",
+   "date": "2002-01-29T20:18:17Z",
+   "subject": "FW: Energy Market Report - 1/28/02",
+   "mailbox": "williams-w3",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "8d3ae817d78d": {
+   "from": "jill.chatterton@enron.com",
+   "date": "2002-02-01T20:31:26Z",
+   "subject": "FW: Energy Market Report - 01/31/02",
+   "mailbox": "williams-w3",
+   "folder": "inbox",
+   "raw_available": true
+  },
+  "82aacfb3d79d": {
+   "from": "jill.chatterton@enron.com",
+   "date": "2002-02-04T20:09:17Z",
+   "subject": "FW: Energy Market Report - 02/01/02",
+   "mailbox": "williams-w3",
+   "folder": "inbox",
+   "raw_available": true
+  }
+ }
+}
