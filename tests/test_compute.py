@@ -39,7 +39,7 @@ MESSAGES = [
 
 
 def test_constants():
-    assert compute.ARTIFACT_THRESHOLD == 1500
+    assert compute.ARTIFACT_THRESHOLD == 30
     assert compute.RATE == 85
 
 
@@ -159,7 +159,7 @@ def test_build_report_counts_and_money():
     # span: 2001-01-01 to 2001-03-02 = 60 days = 1.97 months
     assert report["span_months"] == 1.97
     assert report["rate_per_hour"] == 85
-    assert report["artifact_threshold"] == 1500
+    assert report["artifact_threshold"] == 30
     assert report["generated_at"] == "2026-01-01T00:00:00Z"
     assert report["corpus_hash"] == "abc"
 
@@ -169,7 +169,9 @@ def test_build_report_counts_and_money():
     assert p01["expected_matches"] == ["m1", "m2", "m3"]
     assert p01["expected_matches_missed"] == ["m3"]
     assert p01["minutes_per_instance"] == 20
-    assert p01["instances_per_month"] == round(2 / (60 / 30.44), 2)
+    assert p01["instances_per_month_corpus_span"] == round(2 / (60 / 30.44), 2)
+    assert p01["active_months"] == 1.0
+    assert p01["instances_per_month"] == 2.0
     assert p01["evidence"][0]["from"] == "alice@x"
     assert p01["evidence"][0]["date"] == "2001-01-01"
 
@@ -191,13 +193,15 @@ def test_opportunities_are_ranked_capped_and_thresholded():
     assert o01["minutes_saved_per_instance"] == 20  # capped from 30 to the process's 20
     assert o01["minutes_capped_to_process"] is True
     assert o01["match_count"] == 2
-    assert o01["instances_per_month"] == round(2 / span, 2)
-    assert o01["hours_per_month"] == round(2 / span * 20 / 60, 2)
-    assert o01["dollars_per_month"] == round(2 / span * 20 / 60 * 85, 2)
-    assert o01["threshold"] == 1500
+    assert o01["instances_per_month_corpus_span"] == round(2 / span, 2)
+    assert o01["instances_per_month"] == 2.0
+    assert o01["hours_per_month"] == round(2 / 1.0 * 20 / 60, 2)
+    assert o01["dollars_per_month"] == round(2 / 1.0 * 20 / 60 * 85, 2)
+    assert o01["threshold"] == 30
     assert o01["artifact_type"] == "sop"
-    assert o01["above_threshold"] is False
-    assert o01["artifact_path"] is None
+    # 2 matches in a 1 month window at 20 minutes is $56.67, above the $30 payback threshold
+    assert o01["above_threshold"] is True
+    assert o01["artifact_path"].startswith("run/artifacts/o01-")
     assert o01["evidence"][0]["subject"] == "daily nomination"
 
     assert opps["o02"]["minutes_capped_to_process"] is False
@@ -207,7 +211,8 @@ def test_opportunities_are_ranked_capped_and_thresholded():
 
     totals = report["totals"]
     assert totals["opportunities"] == 4
-    assert totals["above_threshold"] == 0
+    assert totals["above_threshold"] == sum(1 for o in report["opportunities"] if o["above_threshold"])
+    assert totals["above_threshold"] >= 1
     assert totals["dollars_per_month"] == round(sum(o["dollars_per_month"] for o in report["opportunities"]), 2)
     assert totals["messages"] == 6 and totals["unique"] == 5 and totals["duplicates"] == 1
 
@@ -276,6 +281,8 @@ def test_run_end_to_end_and_cached(parsed, rows, data_dir):
         "processes": 1, "opportunities": 1, "above_threshold": 0,
         "hours_per_month": report["opportunities"][0]["hours_per_month"],
         "dollars_per_month": report["opportunities"][0]["dollars_per_month"],
+        "hours_per_month_corpus_span": report["opportunities"][0]["hours_per_month_corpus_span"],
+        "dollars_per_month_corpus_span": report["opportunities"][0]["dollars_per_month_corpus_span"],
     }
     # Fixture dates span 8 Jan to 10 Jan 2001, so the span floors at 1 month.
     assert report["span_months"] == 1.0
@@ -305,6 +312,6 @@ def test_main_prints_summary(parsed, rows, data_dir, capsys):
     cache.write_json_atomic(data_dir / "synthesis.json", {"processes": [], "opportunities": []})
     assert compute.main(["--data", str(data_dir)]) == 0
     out = json.loads(capsys.readouterr().out)
-    assert out["artifact_threshold"] == 1500
+    assert out["artifact_threshold"] == 30
     assert out["rate_per_hour"] == 85
     assert out["totals"]["opportunities"] == 0

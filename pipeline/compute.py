@@ -7,9 +7,16 @@ and a rule with all three empty matches nothing. That last clause is why AND is 
 reading: under OR an all-empty rule would match nothing anyway and the spec would not
 need to say so.
 
-    instances_per_month = matches / span_months
+    active_months       = (last match minus first match) / 30.44, floored at 1
+    instances_per_month = matches / active_months
     hours_per_month     = instances_per_month * minutes_saved_per_instance / 60
     dollars_per_month   = hours_per_month * RATE
+
+Frequency is rated over each process's own active window, first match to last match,
+because the four mailboxes span 27 months but no single process runs for all of them.
+Dividing by the whole span would say a daily process that ran for six months happens
+five times a month. The conservative figure, matches over the full corpus span, is
+kept beside every headline number as ``*_corpus_span`` so a reviewer can see both.
 
 Extra process fields the synthesizer may send, ``minutes_per_instance`` and
 ``expected_matches``, are copied through. ``expected_matches_missed`` lists the
@@ -33,7 +40,12 @@ from pipeline.parse import open_db
 
 log = logging.getLogger("compute")
 
-ARTIFACT_THRESHOLD = 1500
+# Payback rule, not a round number. An artifact costs about an hour of a person's time
+# to adopt, $85 at the blended rate, and it has to pay that back within a quarter on
+# the hours visible in these four mailboxes alone: 85 / 3 = 28.33, rounded up to 30.
+# The archive is four inboxes out of a company of thousands, so every dollar figure
+# here is a floor on the company-wide number, and the threshold is scaled to match.
+ARTIFACT_THRESHOLD = 30
 RATE = 85
 DAYS_PER_MONTH = 30.44
 MAX_MATCHED_IDS = 200
@@ -214,6 +226,7 @@ def build_report(
 ) -> dict:
     span = span_months([m["date_iso"] for m in messages])
     span_rounded = round(span, 2)
+    date_by_id = {m["id"]: m["date_iso"] for m in messages}
     processes_in = synthesis.get("processes") if isinstance(synthesis.get("processes"), list) else []
     opportunities_in = (
         synthesis.get("opportunities") if isinstance(synthesis.get("opportunities"), list) else []
@@ -229,6 +242,10 @@ def build_report(
         expected = [e for e in (p.get("expected_matches") or []) if isinstance(e, str)]
         matched_set = set(matched)
         minutes = p.get("minutes_per_instance")
+        matched_dates = [date_by_id[i] for i in matched if date_by_id.get(i)]
+        active = span_months(matched_dates)
+        first_match = min(matched_dates)[:10] if matched_dates else None
+        last_match = max(matched_dates)[:10] if matched_dates else None
         entry = {
             **p,
             "match_rule": {
@@ -239,7 +256,11 @@ def build_report(
             "match_rule_error": rule["error"],
             "match_count": len(matched),
             "matched_message_ids": matched[:MAX_MATCHED_IDS],
-            "instances_per_month": round(len(matched) / span, 2),
+            "first_match": first_match,
+            "last_match": last_match,
+            "active_months": round(active, 2),
+            "instances_per_month": round(len(matched) / active, 2),
+            "instances_per_month_corpus_span": round(len(matched) / span, 2),
             "minutes_per_instance": as_number(minutes) if minutes is not None else None,
             "expected_matches": expected,
             "expected_matches_missed": [e for e in expected if e not in matched_set],
@@ -260,7 +281,9 @@ def build_report(
         capped = False
         if cap is not None and minutes > cap:
             minutes, capped = cap, True
-        figures = money(matches, span, minutes)
+        active = proc["active_months"] if proc else 1.0
+        figures = money(matches, active, minutes)
+        figures_span = money(matches, span, minutes)
         artifact_type = o.get("artifact_type") or "none"
         above = figures["dollars_per_month"] >= ARTIFACT_THRESHOLD and artifact_type != "none"
         oid = o.get("opportunity_id") or slugify(o.get("title", ""))
@@ -277,9 +300,15 @@ def build_report(
                 "minutes_saved_per_instance": minutes,
                 "minutes_capped_to_process": capped,
                 "match_count": matches,
+                "first_match": proc["first_match"] if proc else None,
+                "last_match": proc["last_match"] if proc else None,
+                "active_months": round(active, 2),
                 "span_months": span_rounded,
                 "rate_per_hour": RATE,
                 **figures,
+                "instances_per_month_corpus_span": figures_span["instances_per_month"],
+                "hours_per_month_corpus_span": figures_span["hours_per_month"],
+                "dollars_per_month_corpus_span": figures_span["dollars_per_month"],
                 "above_threshold": above,
                 "artifact_path": artifact_rel,
                 "artifact_exists": artifact_exists,
@@ -297,6 +326,11 @@ def build_report(
         "rate_per_hour": RATE,
         "artifact_threshold": ARTIFACT_THRESHOLD,
         "span_months": span_rounded,
+        "frequency_basis": "active_window",
+        "frequency_note": (
+            "Each process is rated over its own active window, first matching message to "
+            "last. The conservative figure divides by the full archive span instead."
+        ),
         "totals": {
             "messages": totals["messages"],
             "unique": totals["unique"],
@@ -307,6 +341,12 @@ def build_report(
             "above_threshold": sum(1 for o in opportunities if o["above_threshold"]),
             "hours_per_month": round(sum(o["hours_per_month"] for o in opportunities), 2),
             "dollars_per_month": round(sum(o["dollars_per_month"] for o in opportunities), 2),
+            "hours_per_month_corpus_span": round(
+                sum(o["hours_per_month_corpus_span"] for o in opportunities), 2
+            ),
+            "dollars_per_month_corpus_span": round(
+                sum(o["dollars_per_month_corpus_span"] for o in opportunities), 2
+            ),
         },
         "processes": processes,
         "opportunities": opportunities,

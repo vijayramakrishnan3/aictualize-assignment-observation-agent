@@ -160,13 +160,15 @@ on synthesis.json before compute.
 
 ## Stage 6, compute (`pipeline/compute.py`)
 
-For each process, count non-duplicate messages matching `match_rule` (regex on
-subject_norm, any keyword in body_clean lowercased, from_addr in list; a rule with all
-three empty matches nothing). Corpus span in months = (max date minus min date over dated
+For each process, count non-duplicate messages matching `match_rule`. The non-empty
+parts are ANDed: the regex must match subject_norm, any keyword must appear in
+body_clean lowercased, and from_addr must be in the list, for whichever parts are
+filled in. An empty part is skipped. A rule with all three empty matches nothing. Corpus span in months = (max date minus min date over dated
 non-duplicate messages) / 30.44, floored at 1.
 
 ```
-instances_per_month = matches / span_months
+active_months       = (last match minus first match) / 30.44, floored at 1
+instances_per_month = matches / active_months
 hours_per_month     = instances_per_month * minutes_saved_per_instance / 60
 dollars_per_month   = hours_per_month * 85
 ```
@@ -182,8 +184,9 @@ Writes `data/report.json`:
                      instances_per_month, evidence (with from, date, subject resolved), artifact_path or null … ]}
 ```
 
-The threshold for producing an artifact is `dollars_per_month >= 1500`. It is a constant
-in compute.py and is printed in the report.
+The threshold for producing an artifact is `dollars_per_month >= 30`, a payback rule: an
+artifact costs about an hour to adopt and must pay that back within a quarter on the hours
+visible in four mailboxes. It is a constant in compute.py and is printed in the report.
 
 ## Stage 7, act (model, subagent `drafter`)
 

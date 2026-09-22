@@ -25,12 +25,12 @@ Write `data/synthesis.json`:
   {"process_id": "p01", "name": "…", "description": "…", "actors": ["…"],
    "stall": "…",
    "match_rule": {"subject_regex": "nomination|nom\\b", "body_any": ["nominat"], "from_any": []},
+   "minutes_per_instance": 20,
    "expected_matches": ["3f2a…", "9c1e…", "b04d…"],
    "evidence": [{"message_id": "…", "quote": "…"}]}],
  "opportunities": [
   {"opportunity_id": "o01", "process_id": "p01", "title": "…",
    "automation": "what to build, one paragraph",
-   "minutes_per_instance": 20,
    "minutes_saved_per_instance": 15, "rationale": "…",
    "evidence": [{"message_id": "…", "quote": "…"}],
    "artifact_type": "sop"}]}
@@ -69,9 +69,11 @@ The rule has three parts and code applies them like this:
 - `from_any`: a list of lowercase email addresses. A message matches if `from_addr` is
   in the list.
 
-A message is an instance if it matches any part that is non-empty. A rule with all
-three parts empty matches nothing. Write the parts so that together they catch the
-process and nothing else.
+The non-empty parts are combined with AND. A message is an instance only if it passes
+every part you filled in. An empty part is skipped. A rule with all three parts empty
+matches nothing. So `subject_regex` plus `body_any` means the subject must match and
+the body must contain one of the keywords. Use that to make rules tight. When you want
+a broad net, fill in one part and leave the others empty.
 
 What makes a good rule:
 

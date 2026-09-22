@@ -62,6 +62,10 @@ a.num { font-variant-numeric: tabular-nums; }
 .figure .value a { color: var(--ink); }
 .figure .value a:hover { color: var(--accent); text-decoration: none; }
 .figure .note { font-size: 13px; color: var(--ink-soft); margin-top: 4px; }
+.figure .conservative { font-size: 13px; color: var(--ink-faint); margin-top: 2px; font-variant-numeric: tabular-nums; }
+.masthead .sub.note { margin-top: 6px; font-size: 14px; color: var(--ink-faint); }
+.equation .row.conservative-row { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line); color: var(--ink-soft); font-size: 13px; }
+.equation .row.conservative-row .rhs { font-weight: 500; font-size: 13px; }
 
 .stats { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 24px; font-size: 13px; color: var(--ink-soft); }
 .stats span b { color: var(--ink); font-weight: 600; }

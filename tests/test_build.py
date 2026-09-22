@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from datetime import datetime
 import sqlite3
 import sys
 import threading
@@ -252,6 +253,12 @@ def _message_id(raw: str) -> str:
     return hashlib.sha1(raw.encode("utf-8")).hexdigest()[:12]
 
 
+def _active_months(first_iso: str, last_iso: str) -> float:
+    first = datetime.fromisoformat(first_iso)
+    last = datetime.fromisoformat(last_iso)
+    return round(max(1.0, (last - first).days / 30.44), 4)
+
+
 def _norm_subject(subject: str) -> str:
     s = subject.strip().lower()
     while True:
@@ -319,6 +326,8 @@ def build_fixture(root: Path) -> dict:
             ],
             "match_count": 612,
             "matched_message_ids": [ids[0], ids[1], ids[2], ids[3], ids[10]],
+            "first_match": "2001-05-14T13:02:00+00:00",
+            "last_match": "2002-04-30T21:40:12+00:00",
         },
         {
             "process_id": "p02",
@@ -334,6 +343,8 @@ def build_fixture(root: Path) -> dict:
             ],
             "match_count": 388,
             "matched_message_ids": [ids[4], ids[5], ids[6], ids[11]],
+            "first_match": "2001-08-01T15:11:09+00:00",
+            "last_match": "2002-03-15T19:03:44+00:00",
         },
         {
             "process_id": "p03",
@@ -348,11 +359,15 @@ def build_fixture(root: Path) -> dict:
             ],
             "match_count": 290,
             "matched_message_ids": [ids[7], ids[8], ids[9]],
+            "first_match": "2001-09-10T14:20:31+00:00",
+            "last_match": "2002-01-31T22:58:05+00:00",
         },
     ]
 
     for p in processes:
-        p["instances_per_month"] = round(p["match_count"] / SPAN_MONTHS, 4)
+        p["active_months"] = _active_months(p["first_match"], p["last_match"])
+        p["instances_per_month"] = round(p["match_count"] / p["active_months"], 4)
+        p["instances_per_month_corpus_span"] = round(p["match_count"] / SPAN_MONTHS, 4)
 
     opp_specs = [
         ("o01", "p01", "Log nominations and confirmations in one sheet, flag late confirms", 30, "sop",
@@ -384,9 +399,12 @@ def build_fixture(root: Path) -> dict:
     opportunities = []
     for oid, pid, title, minutes, atype, automation, rationale, evidence in opp_specs:
         proc = next(p for p in processes if p["process_id"] == pid)
-        inst = proc["match_count"] / SPAN_MONTHS
+        inst = proc["match_count"] / proc["active_months"]
         hours = inst * minutes / 60
         dollars = hours * RATE
+        inst_span = proc["match_count"] / SPAN_MONTHS
+        hours_span = inst_span * minutes / 60
+        dollars_span = hours_span * RATE
         artifact_path = None
         if oid in ARTIFACTS and dollars >= THRESHOLD:
             fname, _, text = ARTIFACTS[oid]
@@ -398,7 +416,11 @@ def build_fixture(root: Path) -> dict:
             "automation": automation, "minutes_saved_per_instance": minutes,
             "rationale": rationale, "evidence": evidence, "artifact_type": atype,
             "instances_per_month": round(inst, 4), "hours_per_month": round(hours, 4),
-            "dollars_per_month": round(dollars, 2), "artifact_path": artifact_path,
+            "dollars_per_month": round(dollars, 2),
+            "instances_per_month_corpus_span": round(inst_span, 4),
+            "hours_per_month_corpus_span": round(hours_span, 4),
+            "dollars_per_month_corpus_span": round(dollars_span, 2),
+            "artifact_path": artifact_path,
         })
     opportunities.sort(key=lambda o: o["dollars_per_month"], reverse=True)
 
@@ -408,10 +430,14 @@ def build_fixture(root: Path) -> dict:
         "rate_per_hour": RATE,
         "artifact_threshold": THRESHOLD,
         "span_months": SPAN_MONTHS,
+        "frequency_basis": "active_window",
+        "frequency_note": "Headline rates use each process's active window, first match to last match. The conservative figure spreads the same matches over the full corpus span.",
         "totals": {
             "messages": 3240, "unique": 3011, "duplicates": 229, "undated": 14,
             "hours_per_month": round(sum(o["hours_per_month"] for o in opportunities), 4),
             "dollars_per_month": round(sum(o["dollars_per_month"] for o in opportunities), 2),
+            "hours_per_month_corpus_span": round(sum(o["hours_per_month_corpus_span"] for o in opportunities), 4),
+            "dollars_per_month_corpus_span": round(sum(o["dollars_per_month_corpus_span"] for o in opportunities), 2),
         },
         "processes": processes,
         "opportunities": opportunities,
@@ -545,7 +571,41 @@ def test_report_md_contents(built):
     for p in report["processes"]:
         assert f"### {p['name']} ({p['process_id']})" in md
     assert "## Threshold" in md and "## Methodology" in md
-    assert "612 matched messages / 14.2 months" in md
+    # both frequency bases, per opportunity and in totals
+    assert "612 matched messages, 2001-05-14 to 2002-04-30 = 11.5 active months" in md
+    assert "- 612 / 11.5 = 53.1 instances per month" in md
+    for o in report["opportunities"]:
+        assert f"{o['hours_per_month_corpus_span']:,.1f} hours, ${o['dollars_per_month_corpus_span']:,.0f} per month" in md
+    t = report["totals"]
+    assert f"| Dollars per month, all opportunities (active window) | ${t['dollars_per_month']:,.0f} |" in md
+    assert f"| Dollars per month, over the full corpus span | ${t['dollars_per_month_corpus_span']:,.0f} |" in md
+    assert report["frequency_note"] in md
+
+
+def test_headline_exceeds_corpus_span_figures(built):
+    """Active windows are shorter than the corpus span, so headline rates are higher."""
+    for o in built["report"]["opportunities"]:
+        assert o["dollars_per_month"] > o["dollars_per_month_corpus_span"]
+    t = built["report"]["totals"]
+    assert t["dollars_per_month"] > t["dollars_per_month_corpus_span"]
+    assert built["data"]["frequency_basis"] == "active_window"
+    assert built["data"]["frequency_note"]
+
+
+def test_null_match_window_still_builds(tmp_path: Path):
+    report = build_fixture(tmp_path)
+    for p in report["processes"]:
+        if p["process_id"] == "p03":
+            p["first_match"] = None
+            p["last_match"] = None
+            p["active_months"] = 1.0
+    (tmp_path / "data" / "report.json").write_text(json.dumps(report), encoding="utf-8")
+    build.build(tmp_path / "data", tmp_path / "run", TEMPLATE_DIR)
+    md = (tmp_path / "run" / "report.md").read_text(encoding="utf-8")
+    assert "290 matched messages, no dated matches, window floored at 1 month = 1.0 active months" in md
+    data = json.loads((tmp_path / "run" / "dashboard" / "data.json").read_text(encoding="utf-8"))
+    p03 = next(p for p in data["processes"] if p["process_id"] == "p03")
+    assert p03["first_match"] is None and p03["last_match"] is None
 
 
 def test_missing_report_is_a_clear_error(tmp_path: Path, capsys):

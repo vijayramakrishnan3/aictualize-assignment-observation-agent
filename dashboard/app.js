@@ -38,6 +38,24 @@
     if (!iso) return "undated";
     return String(iso).slice(0, 10);
   }
+  function spanLabel() {
+    var s = Number(DATA.span_months);
+    if (!isFinite(s)) s = 0;
+    return (Math.abs(s - Math.round(s)) < 0.05 ? num(s, 0) : num(s, 1)) + " month";
+  }
+  function windowText(p) {
+    var first = p.first_match ? dateOnly(p.first_match) : null;
+    var last = p.last_match ? dateOnly(p.last_match) : null;
+    if (first && last) return esc(first) + " to " + esc(last);
+    if (first || last) return "dated from " + esc(first || last) + " only";
+    return "no dated matches, window floored at 1 month";
+  }
+  function corpusInstances(p, o) {
+    if (o && o.instances_per_month_corpus_span != null) return Number(o.instances_per_month_corpus_span);
+    if (p && p.instances_per_month_corpus_span != null) return Number(p.instances_per_month_corpus_span);
+    var s = Number(DATA.span_months || 1);
+    return s ? Number((p || {}).match_count || 0) / s : 0;
+  }
 
   function oppHref(id) { return "#/opportunity/" + encodeURIComponent(id); }
   function procHref(id) { return "#/process/" + encodeURIComponent(id); }
@@ -251,9 +269,12 @@
       "<h1>" + esc(DATA.company || "Enron, four mailboxes") + "</h1>" +
       '<p class="sub">' + int(t.messages) + " messages read, " + int(t.unique) + " unique, over " + num(DATA.span_months, 1) + " months. " +
       "Every figure below links to the messages it came from.</p>" +
+      (DATA.frequency_note ? '<p class="sub note">' + esc(DATA.frequency_note) + "</p>" : "") +
       '<div class="figures">' +
-      figure("Hours per month", '<a href="' + hoursHref + '">' + num(t.hours_per_month, 0) + "</a>", "across " + opps.length + " opportunities") +
-      figure("Dollars per month", '<a href="' + hoursHref + '">' + money(t.dollars_per_month) + "</a>", "at " + money(rate()) + " per hour, blended") +
+      figure("Hours per month", '<a href="' + hoursHref + '">' + num(t.hours_per_month, 0) + "</a>", "across " + opps.length + " opportunities, active windows",
+        num(t.hours_per_month_corpus_span, 0) + " over the full " + spanLabel() + " archive") +
+      figure("Dollars per month", '<a href="' + hoursHref + '">' + money(t.dollars_per_month) + "</a>", "at " + money(rate()) + " per hour, blended",
+        money(t.dollars_per_month_corpus_span) + " over the full " + spanLabel() + " archive") +
       figure("Corpus span", num(DATA.span_months, 1), "months, first to last dated message") +
       figure("Artifact threshold", money(threshold()), "per month, drafted above this line") +
       "</div>" +
@@ -285,8 +306,11 @@
       "Minutes saved per instance is a judgment, not a measurement.</p>";
   }
 
-  function figure(label, value, note) {
-    return '<div class="figure"><div class="label">' + esc(label) + '</div><div class="value">' + value + '</div><div class="note">' + esc(note) + "</div></div>";
+  function figure(label, value, note, conservative) {
+    return '<div class="figure"><div class="label">' + esc(label) + '</div><div class="value">' + value + '</div>' +
+      '<div class="note">' + esc(note) + "</div>" +
+      (conservative ? '<div class="conservative">' + esc(conservative) + "</div>" : "") +
+      "</div>";
   }
 
   function processTable() {
@@ -316,10 +340,15 @@
     var p = processById(o.process_id) || {};
     var matches = Number(p.match_count || 0);
     var span = Number(DATA.span_months || 1);
+    var active = Number(p.active_months);
+    if (!isFinite(active) || active < 1) active = 1;
     var minutes = Number(o.minutes_saved_per_instance || 0);
     var inst = Number(o.instances_per_month || 0);
     var hours = Number(o.hours_per_month || 0);
     var dollars = Number(o.dollars_per_month || 0);
+    var instSpan = corpusInstances(p, o);
+    var hoursSpan = o.hours_per_month_corpus_span != null ? Number(o.hours_per_month_corpus_span) : instSpan * minutes / 60;
+    var dollarsSpan = o.dollars_per_month_corpus_span != null ? Number(o.dollars_per_month_corpus_span) : hoursSpan * rate();
     var r = rankOf(id);
     var above = dollars >= threshold();
     var matched = o.matched_message_ids || p.matched_message_ids || [];
@@ -335,11 +364,14 @@
       "<div>" +
       "<h2>The math</h2>" +
       '<div class="equation">' +
-      eqRow('<a href="' + procHref(o.process_id) + '#matched">' + int(matches) + " matched messages</a> / " + num(span, 2) + " months", num(inst, 2) + " per month") +
+      eqRow('<a href="' + procHref(o.process_id) + '#matched">' + int(matches) + " matches</a>, " + windowText(p), num(active, 1) + " active months") +
+      eqRow(int(matches) + " / " + num(active, 1) + " months", num(inst, 2) + " per month") +
       eqRow(num(inst, 2) + " per month x " + num(minutes, 0) + " min saved / 60", num(hours, 2) + " hours per month") +
       eqRow(num(hours, 2) + " hours x " + money(rate()) + " per hour", money(dollars) + " per month", true) +
+      '<div class="row conservative-row"><span class="lhs">Over the full ' + spanLabel() + " corpus span: " + num(instSpan, 2) + " per month, " + num(hoursSpan, 2) + " hours</span>" +
+      '<span class="rhs">' + money(dollarsSpan) + " per month</span></div>" +
       "</div>" +
-      '<p class="small muted" style="margin-top:10px">Matches are counted by code against the rule below. Minutes saved per instance (' + num(minutes, 0) + ") is the model's estimate and the one figure here with no ground truth.</p>" +
+      '<p class="small muted" style="margin-top:10px">Matches are counted by code against the rule below. The active window runs from the first matched message to the last, floored at one month. Minutes saved per instance (' + num(minutes, 0) + ") is the model's estimate and the one figure here with no ground truth.</p>" +
       "<h2>Match rule</h2>" + ruleBlock(p.match_rule) +
       "</div>" +
       "<div>" +
@@ -384,7 +416,8 @@
 
     return crumbs([{ text: "Process" }]) +
       '<p class="lede">' + esc(p.name) + "</p>" +
-      '<p class="lede-sub">' + int(p.match_count) + " matched messages, " + num(p.instances_per_month, 1) + " per month over " + num(DATA.span_months, 1) + " months.</p>" +
+      '<p class="lede-sub">' + int(p.match_count) + " matched messages, " + windowText(p) + ", " + num(Math.max(1, Number(p.active_months) || 1), 1) + " active months. " +
+      num(p.instances_per_month, 1) + " per month over the active window, " + num(corpusInstances(p, null), 1) + " per month over the full " + spanLabel() + " corpus span.</p>" +
       '<div class="two-col">' +
       "<div>" +
       "<h2>What happens</h2><p>" + esc(p.description || "") + "</p>" +

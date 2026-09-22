@@ -169,6 +169,29 @@ def _cell(text) -> str:
     return str(text if text is not None else "").replace("|", "\\|").replace("\n", " ")
 
 
+def _date_only(value) -> str | None:
+    return str(value)[:10] if value else None
+
+
+def _window_text(proc: dict) -> str:
+    """'2001-10-04 to 2002-06-20', or a plain note when the window is unknown."""
+    first = _date_only(proc.get("first_match"))
+    last = _date_only(proc.get("last_match"))
+    if first and last:
+        return f"{first} to {last}"
+    if first or last:
+        return f"dated from {first or last} only"
+    return "no dated matches, window floored at 1 month"
+
+
+def _corpus_instances(proc: dict, opp: dict, span: float) -> float:
+    if opp.get("instances_per_month_corpus_span") is not None:
+        return _num(opp["instances_per_month_corpus_span"])
+    if proc.get("instances_per_month_corpus_span") is not None:
+        return _num(proc["instances_per_month_corpus_span"])
+    return _num(proc.get("match_count")) / span if span else 0.0
+
+
 def _rule_text(rule: dict | None) -> str:
     if not rule:
         return "no rule"
@@ -210,15 +233,22 @@ def render_report_md(report: dict, artifacts: dict[str, str], msg_index: dict[st
     w(f"| Undated messages | {int(_num(totals.get('undated'))):,} |")
     w(f"| Corpus span | {_fmt_num(span)} months |")
     w(f"| Blended rate | {_fmt_money(rate)} per hour |")
-    w(f"| Hours per month, all opportunities | {_fmt_num(totals.get('hours_per_month'))} |")
-    w(f"| Dollars per month, all opportunities | {_fmt_money(totals.get('dollars_per_month'))} |")
+    w(f"| Hours per month, all opportunities (active window) | {_fmt_num(totals.get('hours_per_month'))} |")
+    w(f"| Dollars per month, all opportunities (active window) | {_fmt_money(totals.get('dollars_per_month'))} |")
+    w(f"| Hours per month, over the full corpus span | {_fmt_num(totals.get('hours_per_month_corpus_span'))} |")
+    w(f"| Dollars per month, over the full corpus span | {_fmt_money(totals.get('dollars_per_month_corpus_span'))} |")
     w(f"| Artifact threshold | {_fmt_money(threshold)} per month |")
+    w("")
+    w(f"Frequency basis: {report.get('frequency_basis') or 'active_window'}. "
+      + str(report.get("frequency_note") or
+            "Headline figures use each process's active window, first match to last match. "
+            "The conservative figures spread the same matches over the full corpus span."))
     w("")
 
     w("## Ranked opportunities")
     w("")
-    w("| Rank | Opportunity | Process | Instances / month | Hours / month | Dollars / month | Running total | Artifact |")
-    w("|---|---|---|---|---|---|---|---|")
+    w("| Rank | Opportunity | Process | Instances / month | Hours / month | Dollars / month | Running total | Dollars / month, full span | Artifact |")
+    w("|---|---|---|---|---|---|---|---|---|")
     running = 0.0
     for rank, opp in enumerate(opps, start=1):
         dollars = _num(opp.get("dollars_per_month"))
@@ -230,7 +260,8 @@ def render_report_md(report: dict, artifacts: dict[str, str], msg_index: dict[st
             f"| {_cell(proc.get('name') or opp.get('process_id'))} "
             f"| {_fmt_num(opp.get('instances_per_month'))} "
             f"| {_fmt_num(opp.get('hours_per_month'))} "
-            f"| {_fmt_money(dollars)} | {_fmt_money(running)} | {has_artifact} |"
+            f"| {_fmt_money(dollars)} | {_fmt_money(running)} "
+            f"| {_fmt_money(opp.get('dollars_per_month_corpus_span'))} | {has_artifact} |"
         )
     w("")
 
@@ -239,6 +270,7 @@ def render_report_md(report: dict, artifacts: dict[str, str], msg_index: dict[st
         proc = procs.get(opp.get("process_id")) or {}
         matches = _num(proc.get("match_count"))
         minutes = _num(opp.get("minutes_saved_per_instance"))
+        active = _num(proc.get("active_months"), 1) or 1.0
         w(f"## {rank}. {opp.get('title')} ({oid})")
         w("")
         w(f"Process: {proc.get('name') or opp.get('process_id')} ({opp.get('process_id')})")
@@ -251,12 +283,17 @@ def render_report_md(report: dict, artifacts: dict[str, str], msg_index: dict[st
             w("")
         w("The math.")
         w("")
-        w(f"- {int(matches):,} matched messages / {_fmt_num(span)} months = "
+        w(f"- {int(matches):,} matched messages, {_window_text(proc)} = {_fmt_num(active)} active months")
+        w(f"- {int(matches):,} / {_fmt_num(active)} = "
           f"{_fmt_num(opp.get('instances_per_month'))} instances per month")
         w(f"- {_fmt_num(opp.get('instances_per_month'))} instances x {_fmt_num(minutes, 0)} minutes / 60 = "
           f"{_fmt_num(opp.get('hours_per_month'))} hours per month")
         w(f"- {_fmt_num(opp.get('hours_per_month'))} hours x {_fmt_money(rate)} = "
           f"{_fmt_money(opp.get('dollars_per_month'))} per month")
+        w(f"- Over the full {_fmt_num(span)} month corpus span: "
+          f"{_fmt_num(_corpus_instances(proc, opp, span))} instances, "
+          f"{_fmt_num(opp.get('hours_per_month_corpus_span'))} hours, "
+          f"{_fmt_money(opp.get('dollars_per_month_corpus_span'))} per month")
         w(f"- Match rule: {_rule_text(proc.get('match_rule'))}")
         w("")
         evidence = opp.get("evidence") or []
@@ -295,8 +332,11 @@ def render_report_md(report: dict, artifacts: dict[str, str], msg_index: dict[st
         if proc.get("stall"):
             w(f"Where it stalls. {proc['stall']}")
             w("")
-        w(f"Matched {int(_num(proc.get('match_count'))):,} messages, "
-          f"{_fmt_num(proc.get('instances_per_month'))} per month. "
+        w(f"Matched {int(_num(proc.get('match_count'))):,} messages, {_window_text(proc)}, "
+          f"{_fmt_num(proc.get('active_months'), 1)} active months. "
+          f"{_fmt_num(proc.get('instances_per_month'))} per month over the active window, "
+          f"{_fmt_num(proc.get('instances_per_month_corpus_span'))} per month over the full "
+          f"{_fmt_num(span)} month corpus span. "
           f"Rule: {_rule_text(proc.get('match_rule'))}")
         w("")
         for ev in proc.get("evidence") or []:
@@ -324,8 +364,10 @@ def render_report_md(report: dict, artifacts: dict[str, str], msg_index: dict[st
         "of the message it cites, and quotes that failed were dropped rather than repaired. "
         "For each process the model proposed a deterministic match rule (a subject regex, "
         "body keywords, sender list) and code counted the non-duplicate messages that match "
-        f"it over the {_fmt_num(span)} month corpus span. Instances per month is that count "
-        "divided by the span. Hours per month is instances times the model's minutes saved "
+        "it. The headline instances per month divides that count by the process's active "
+        "window, the months between its first and last matched message, floored at one. The "
+        f"conservative figure divides the same count by the full {_fmt_num(span)} month corpus "
+        "span and is shown beside every headline number. Hours per month is instances times the model's minutes saved "
         f"per instance, divided by 60. Dollars per month is hours times the {_fmt_money(rate)} "
         "blended rate. The minutes per instance figure is a judgment with no ground truth in "
         "an email archive, so everything downstream of it is arithmetic on an estimate. "
