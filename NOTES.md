@@ -19,8 +19,9 @@ regular code, not AI. That covers cleaning the emails, removing duplicates, chec
 quotes, counting, the math, and the dashboard.
 
 My computer's safety settings blocked one Claude session from launching another, so
-the run in this repo was started step by step from my build session, using the same
-helpers and instructions /run uses.
+the full run was started step by step from my build session with the same helpers
+and instructions. Running /run afterwards from a terminal reused all of it, started
+no AI helpers, and finished in 1.3 minutes.
 
 ## What I handed to AI helpers and why
 
