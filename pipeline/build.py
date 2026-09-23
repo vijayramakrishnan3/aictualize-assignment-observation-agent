@@ -161,6 +161,12 @@ def _fmt_money(value) -> str:
     return f"${_num(value):,.0f}"
 
 
+def _fmt_money_down(value) -> str:
+    """Per-task figures round down, so $29.75 never displays as the $30 threshold."""
+    import math
+    return f"${math.floor(_num(value)):,}"
+
+
 def _fmt_num(value, places=1) -> str:
     return f"{_num(value):,.{places}f}"
 
@@ -232,7 +238,7 @@ def _cost_sentence(opp: dict) -> str:
         f"Happens about {_fmt_num(opp.get('instances_per_month'))} times a month, takes about "
         f"{_fmt_num(opp.get('minutes_saved_per_instance'), 0)} minutes each time, so about "
         f"{_fmt_num(opp.get('hours_per_month'))} hours and "
-        f"{_fmt_money(opp.get('dollars_per_month'))} a month."
+        f"{_fmt_money_down(opp.get('dollars_per_month'))} a month."
     )
 
 
@@ -290,7 +296,7 @@ def render_report_md(report: dict, artifacts: dict[str, str], msg_index: dict[st
             f"| {rank} | {_cell(opp.get('title'))} ({oid})<br>"
             f"<small>{_cell(proc.get('name') or opp.get('process_id'))}</small> "
             f"| {_fmt_num(opp.get('instances_per_month'))} "
-            f"| {_fmt_money(dollars)} | {_fmt_money(running)} | {doc} |"
+            f"| {_fmt_money_down(dollars)} | {_fmt_money(running)} | {doc} |"
         )
     w("")
 

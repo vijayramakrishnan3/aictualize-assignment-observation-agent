@@ -9,19 +9,19 @@ We read 3,240 emails from four Enron employees and found the work they repeat. E
 | Rank | Task | Times a month | Dollars a month | Running total | Document |
 |---|---|---|---|---|---|
 | 1 | Auto-generated weekly California Capacity Report (o14)<br><small>Weekly California Capacity Report</small> | 3.3 | $117 | $117 | ready |
-| 2 | Morning pre-flash reconciliation checklist for congestion and deal entries (o13)<br><small>Reconciling real-time congestion revenue and Enpower deals against settlements</small> | 3.1 | $52 | $169 | ready |
-| 3 | Nightly flow-without-deal exception report with a prefilled extension request (o01)<br><small>Extending or creating a Sitara deal ticket for meter flow with no covering deal</small> | 3.0 | $43 | $212 | ready |
-| 4 | Prefilled monthly activity and hours survey (o07)<br><small>Monthly activity driver and hours survey for the cost model</small> | 1.6 | $34 | $246 | ready |
+| 2 | Morning pre-flash reconciliation checklist for congestion and deal entries (o13)<br><small>Reconciling real-time congestion revenue and Enpower deals against settlements</small> | 3.1 | $51 | $169 | ready |
+| 3 | Nightly flow-without-deal exception report with a prefilled extension request (o01)<br><small>Extending or creating a Sitara deal ticket for meter flow with no covering deal</small> | 3.0 | $42 | $212 | ready |
+| 4 | Prefilled monthly activity and hours survey (o07)<br><small>Monthly activity driver and hours survey for the cost model</small> | 1.6 | $33 | $246 | ready |
 | 5 | Routed digital writeoff approval for small Strangers Gas volumes (o02)<br><small>Unaccounted for Gas writeoff approvals for stray meter volumes</small> | 1.8 | $31 | $277 | ready |
-| 6 | Auto-forward the Energy Market Report to the West desk list (o15)<br><small>Daily Energy Market Report forward to the West power desk</small> | 7.0 | $30 | $307 |  |
+| 6 | Auto-forward the Energy Market Report to the West desk list (o15)<br><small>Daily Energy Market Report forward to the West power desk</small> | 7.0 | $29 | $307 |  |
 | 7 | Parse nomination attachments straight into the scheduling system (o03)<br><small>Counterparty and plant nominations received as attachments and re-keyed</small> | 1.9 | $18 | $325 |  |
 | 8 | Deal entry checklist for book assignment and cross-system links (o11)<br><small>Moving deals between books and linking deal numbers across Tagg, Sitara, SCI, and EOL</small> | 1.3 | $18 | $344 |  |
 | 9 | Position notice email template generated from Enpower and CAPS (o12)<br><small>Real-time power desk short and long position notices</small> | 1.0 | $14 | $358 |  |
-| 10 | Structured on-call log filled in during the shift (o08)<br><small>Weekend and holiday on-call notes written up after the shift</small> | 0.5 | $14 | $372 |  |
-| 11 | Single book, curve, and access request form (o10)<br><small>Trading book, curve, and access setup requests in Tagg, TDS, and RiskTrac</small> | 0.8 | $14 | $386 |  |
+| 10 | Structured on-call log filled in during the shift (o08)<br><small>Weekend and holiday on-call notes written up after the shift</small> | 0.5 | $13 | $372 |  |
+| 11 | Single book, curve, and access request form (o10)<br><small>Trading book, curve, and access setup requests in Tagg, TDS, and RiskTrac</small> | 0.8 | $13 | $386 |  |
 | 12 | Standard price verification request with invoice to Sitara match (o06)<br><small>Correcting Sitara deal prices and charges to match invoices and statements</small> | 0.9 | $13 | $399 |  |
-| 13 | Coverage notice email template backed by a standing roster (o09)<br><small>Out of office coverage handoff notices</small> | 1.3 | $13 | $412 |  |
-| 14 | Open variance log with age, owner, and automatic resend (o05)<br><small>Reconciling volume imbalances and variances with counterparties and interconnects</small> | 0.4 | $8 | $419 |  |
+| 13 | Coverage notice email template backed by a standing roster (o09)<br><small>Out of office coverage handoff notices</small> | 1.3 | $12 | $412 |  |
+| 14 | Open variance log with age, owner, and automatic resend (o05)<br><small>Reconciling volume imbalances and variances with counterparties and interconnects</small> | 0.4 | $7 | $419 |  |
 | 15 | Standard procedure for revising nominations on flow drift, plant status, and pipeline cuts (o04)<br><small>Revising nominations when actual flow, plant output, or pipeline cuts change</small> | 1.1 | $7 | $427 |  |
 
 ## 1. Auto-generated weekly California Capacity Report (o14)
@@ -48,7 +48,7 @@ Michelle Lokay compiles Transwestern and El Paso delivery volumes by point, capa
 
 Bill Williams hand-calculates CAISO congestion relief revenue and checks it against the inc sheet and the flash, and separately compares Enpower deal entries with the PMA sheet, the DPR, and the SAR to get double entries, wrong prices, and counterparty changes corrected by settlements.
 
-**What it costs.** Happens about 3.1 times a month, takes about 12 minutes each time, so about 0.6 hours and $52 a month.
+**What it costs.** Happens about 3.1 times a month, takes about 12 minutes each time, so about 0.6 hours and $51 a month.
 
 **What to do about it.** Before the morning flash, run a fixed checklist backed by an automated diff, CAISO congestion awards against the inc sheet and CAPS finals, Enpower new deals against the DPR and SAR for duplicates and price outliers, and PMA sheet lines against Enpower deal history, and send settlements one exception list with computed revenue.
 
@@ -70,7 +70,7 @@ We had two wheels that were not in the inc sheet but were awarded by the CAISO a
 
 Schedulers and volume management analysts find gas flowing at a meter that no active Sitara deal covers, because the ticket expired, the evergreen flag was never set, or no deal was ever entered, and email Daren Farmer to extend the prior deal or create a new one so the volume can be allocated and paid.
 
-**What it costs.** Happens about 3.0 times a month, takes about 10 minutes each time, so about 0.5 hours and $43 a month.
+**What it costs.** Happens about 3.0 times a month, takes about 10 minutes each time, so about 0.5 hours and $42 a month.
 
 **What to do about it.** Run a nightly job that joins metered flow by meter and day against active and evergreen Sitara deals, lists every meter with flow and no covering deal, and prefills a request with the meter, the flow dates and volumes, the last deal number, and the counterparty. Daren gets one morning queue and approves an extend or a new deal from it, instead of schedulers finding each gap by eye and writing a fresh email.
 
@@ -96,7 +96,7 @@ This meter flowed 556 MMBTU's on April 1, 2000.
 
 Financial Operations sends every RC manager a monthly activity driver survey and hours survey, plus an RC report review, with a hard return date, then sends reminders and follow-up questions to whoever is late or unclear.
 
-**What it costs.** Happens about 1.6 times a month, takes about 15 minutes each time, so about 0.4 hours and $34 a month.
+**What it costs.** Happens about 1.6 times a month, takes about 15 minutes each time, so about 0.4 hours and $33 a month.
 
 **What to do about it.** Prefill each RC's survey with last month's answers, headcount from the Org Database, and deal and ticket counts from Sitara and Unify, so managers only confirm or correct the exceptions. Track returns in the same sheet and send reminders automatically to RCs that have not responded by the deadline.
 
@@ -143,7 +143,7 @@ approval to writeoff these volumes to Unaccounted for Gas.
 
 Jill Chatterton opens the Economic Insight Energy Market Report PDF each trading day and forwards it unchanged to the same West Desk distribution list.
 
-**What it costs.** Happens about 7.0 times a month, takes about 3 minutes each time, so about 0.3 hours and $30 a month.
+**What it costs.** Happens about 7.0 times a month, takes about 3 minutes each time, so about 0.3 hours and $29 a month.
 
 **What to do about it.** Add a mail rule that forwards the Economic Insight Energy Market Report to the West Desk distribution list the moment it arrives, so no one has to open and forward it each morning.
 
@@ -230,7 +230,7 @@ Bill Williams emails the real-time group whenever the desk is short or long for 
 
 The scheduler who covered the weekend or holiday on-call shift writes a call-by-call narrative of gas control pages, cuts, and well issues and emails it to the desk on Monday, and recipients then check each meter it mentions against the system.
 
-**What it costs.** Happens about 0.5 times a month, takes about 20 minutes each time, so about 0.2 hours and $14 a month.
+**What it costs.** Happens about 0.5 times a month, takes about 20 minutes each time, so about 0.2 hours and $13 a month.
 
 **What to do about it.** Give the on-call scheduler a shared log with one row per call, time, caller, meter, action taken, and system updated, filled in as calls come in. The Monday note is generated from the log and each meter row links to its system entry so recipients verify by exception instead of reading a narrative.
 
@@ -248,7 +248,7 @@ The scheduler who covered the weekend or holiday on-call shift writes a call-by-
 
 Desk controllers and traders email the Tagg, TDS, and RiskTrac administrators to create books and curves, map books to traders and EOL products, update the Book Admin list, and grant access, and during the Netco and UBS transition they rebuilt access matrices and curve mappings and re-pointed macros after each rename.
 
-**What it costs.** Happens about 0.8 times a month, takes about 12 minutes each time, so about 0.2 hours and $14 a month.
+**What it costs.** Happens about 0.8 times a month, takes about 12 minutes each time, so about 0.2 hours and $13 a month.
 
 **What to do about it.** Replace ad hoc emails with one request form that captures region, entity, book or curve name, trader, mapped books, and users, generates names by the naming convention, and routes to the admin who owns that system. Keep the trader to book to product mapping in one table that macros and hedgestrips read, so a rename updates everywhere at once.
 
@@ -287,7 +287,7 @@ $5.811329?
 
 Before a vacation or absence, each scheduler writes a note naming who covers their meters, pipelines, or accounts, with extensions and pager numbers, and sends it to the desk.
 
-**What it costs.** Happens about 1.3 times a month, takes about 7 minutes each time, so about 0.1 hours and $13 a month.
+**What it costs.** Happens about 1.3 times a month, takes about 7 minutes each time, so about 0.1 hours and $12 a month.
 
 **What to do about it.** Keep a standing roster of each scheduler's meters, pipelines, and default backups with extensions and pagers, and generate the out of office notice from it so the sender only enters dates and confirms the backup.
 
@@ -306,7 +306,7 @@ please direct any questions or issues to these people.
 
 HPL Logistics and Transwestern staff chase volume, allocation, and imbalance differences between MOPS and POPS, and with counterparties and interconnecting pipelines such as PG&E Texas, TXU Lone Star, Hesco, and El Paso at Mojave, by re-sending allocation data, spreadsheets, and faxes until each variance closes.
 
-**What it costs.** Happens about 0.4 times a month, takes about 15 minutes each time, so about 0.1 hours and $8 a month.
+**What it costs.** Happens about 0.4 times a month, takes about 15 minutes each time, so about 0.1 hours and $7 a month.
 
 **What to do about it.** Keep every open interconnect or counterparty variance in one log with the meter, contract, amount, owner, and date opened, and have it resend the allocation data to the counterparty contact and escalate internally once an item passes a set age. A daily MOPS to POPS diff feeds new variances into the log the day they appear.
 
