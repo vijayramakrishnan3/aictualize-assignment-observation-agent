@@ -548,11 +548,16 @@ def test_quotes_are_substrings_of_copied_raw_files(built):
 def test_report_md_contents(built):
     md = built["md"]
     report = built["report"]
-    assert md.startswith("# Observation report, Enron, four mailboxes")
-    assert "| Messages in corpus | 3,240 |" in md
-    assert f"| Artifact threshold | ${THRESHOLD:,} per month |" in md
-    assert "| Blended rate | $85 per hour |" in md
-    # ranked table in dollar order with a running total column
+    t = report["totals"]
+    assert md.startswith("# Where Enron loses time")
+    # plain-English summary with both totals and the conservative figure up top
+    summary = md.split("## ", 1)[0]
+    assert "We read 3,240 emails from four Enron employees" in summary
+    assert f"**${t['dollars_per_month']:,.0f} a month**" in summary
+    assert f"**{t['hours_per_month']:,.1f} hours a month**" in summary
+    assert f"${t['dollars_per_month_corpus_span']:,.0f} if averaged over the full one year archive" in summary
+    # ranked table with the dashboard's columns, in dollar order, with a running total
+    assert "| Rank | Task | Times a month | Dollars a month | Running total | Document |" in md
     table_rows = [ln for ln in md.splitlines() if ln.startswith("| ") and "(o0" in ln]
     assert len(table_rows) == 5
     order = [ln.split("(o0")[1][0] for ln in table_rows]
@@ -562,24 +567,71 @@ def test_report_md_contents(built):
     for ln, o in zip(table_rows, report["opportunities"]):
         running += o["dollars_per_month"]
         assert f"${running:,.0f}" in ln
-    # every evidence quote appears with its message id
+        assert ln.rstrip().endswith("| ready |") == (o["opportunity_id"] in ARTIFACTS)
+    # per task: cost sentence, what to do, two quotes, document link
+    for o in report["opportunities"]:
+        assert build._cost_sentence(o) in md
+        assert f"**What to do about it.** {o['automation']}" in md
+        if o["opportunity_id"] in ARTIFACTS:
+            name = Path(o["artifact_path"]).name
+            assert f"[{name}](artifacts/{name})" in md
+    # every evidence quote still appears with its message id somewhere
     for section in ("processes", "opportunities"):
         for item in report[section]:
             for e in item["evidence"]:
                 assert f"> {e['quote']}" in md
                 assert f"`{e['message_id']}`" in md
-    for p in report["processes"]:
-        assert f"### {p['name']} ({p['process_id']})" in md
-    assert "## Threshold" in md and "## Methodology" in md
-    # both frequency bases, per opportunity and in totals
-    assert "612 matched messages, 2001-05-14 to 2002-04-30 = 11.5 active months" in md
-    assert "- 612 / 11.5 = 53.1 instances per month" in md
+    # the method and conservative figures sit in a final section
+    method = md.split("## How the numbers were calculated", 1)
+    assert len(method) == 2
+    tail = method[1]
+    assert "## " not in tail.replace("### ", "")
+    assert "| Emails in the archive | 3,240 |" in tail
+    assert f"| Document threshold | ${THRESHOLD:,} per month |" in tail
+    assert "| Blended rate | $85 per hour |" in tail
+    assert f"| Dollars per month, active windows | ${t['dollars_per_month']:,.0f} |" in tail
+    assert f"| Dollars per month, full archive span | ${t['dollars_per_month_corpus_span']:,.0f} |" in tail
+    assert report["frequency_note"] in tail
+    assert "612 matched messages, 2001-05-14 to 2002-04-30 = 11.5 active months" in tail
+    assert "- 612 / 11.5 = 53.1 instances per month" in tail
     for o in report["opportunities"]:
-        assert f"{o['hours_per_month_corpus_span']:,.1f} hours, ${o['dollars_per_month_corpus_span']:,.0f} per month" in md
-    t = report["totals"]
-    assert f"| Dollars per month, all opportunities (active window) | ${t['dollars_per_month']:,.0f} |" in md
-    assert f"| Dollars per month, over the full corpus span | ${t['dollars_per_month_corpus_span']:,.0f} |" in md
-    assert report["frequency_note"] in md
+        assert f"{o['hours_per_month_corpus_span']:,.1f} hours, ${o['dollars_per_month_corpus_span']:,.0f} per month" in tail
+    for p in report["processes"]:
+        assert f"**{p['name']} ({p['process_id']})**" in tail
+
+
+def test_report_md_helpers():
+    assert build._first_sentence("One thing. Then another.") == "One thing."
+    assert build._first_sentence("No stop") == "No stop"
+    assert build._first_sentence("Version 1.5 ships. Next.") == "Version 1.5 ships."
+    assert build._span_words(27.38) == "two year"
+    assert build._span_words(14.2) == "one year"
+    assert build._span_words(3) == "3 month"
+    o = {"instances_per_month": 3.31, "minutes_saved_per_instance": 25, "hours_per_month": 1.38, "dollars_per_month": 117.32}
+    assert build._cost_sentence(o) == (
+        "Happens about 3.3 times a month, takes about 25 minutes each time, so about 1.4 hours and $117 a month."
+    )
+
+
+def test_dashboard_template_has_the_simplified_structure():
+    js = (TEMPLATE_DIR / "app.js").read_text(encoding="utf-8")
+    for text in (
+        "Where Enron loses time",
+        "Click any number to see the emails behind it.",
+        "if averaged over the full ",
+        "Document ready",
+        "What it costs",
+        "What to do about it",
+        "The proof",
+        "Ready-to-use document",
+        "How this was calculated",
+        "<details",
+        "Running total",
+    ):
+        assert text in js, text
+    # the dropped home page clutter stays dropped
+    for text in ("Corpus span", "Artifact threshold", "Undated <b>"):
+        assert text not in js, text
 
 
 def test_headline_exceeds_corpus_span_figures(built):

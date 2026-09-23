@@ -208,6 +208,49 @@ def _rule_text(rule: dict | None) -> str:
 # ---------------------------------------------------------------- report.md
 
 
+_YEAR_WORDS = ("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten")
+
+
+def _span_words(span: float) -> str:
+    """'two year' for a 27 month span, else '27 month'."""
+    years = round(span / 12)
+    if 1 <= years < len(_YEAR_WORDS):
+        return f"{_YEAR_WORDS[years]} year"
+    return f"{_fmt_num(span, 0)} month"
+
+
+def _first_sentence(text) -> str:
+    s = str(text or "").strip()
+    for i, ch in enumerate(s):
+        if ch in ".!?" and (i + 1 == len(s) or s[i + 1].isspace()):
+            return s[: i + 1]
+    return s
+
+
+def _cost_sentence(opp: dict) -> str:
+    return (
+        f"Happens about {_fmt_num(opp.get('instances_per_month'))} times a month, takes about "
+        f"{_fmt_num(opp.get('minutes_saved_per_instance'), 0)} minutes each time, so about "
+        f"{_fmt_num(opp.get('hours_per_month'))} hours and "
+        f"{_fmt_money(opp.get('dollars_per_month'))} a month."
+    )
+
+
+def _artifact_name(opp: dict) -> str:
+    return Path(opp.get("artifact_path") or "").name or f"{opp.get('opportunity_id')}.md"
+
+
+def _quote_lines(ev: dict, msg_index: dict[str, dict], with_subject: bool = True) -> list[str]:
+    mid = ev.get("message_id")
+    meta = msg_index.get(mid) or {}
+    who = ev.get("from") or meta.get("from") or "unknown sender"
+    when = _date_only(ev.get("date") or meta.get("date")) or "undated"
+    cite = f"{who}, {when}"
+    if with_subject:
+        cite += f", {_cell(ev.get('subject') or meta.get('subject') or 'no subject')}"
+    return [f"> {ev.get('quote', '')}", ">", f"> {cite}. Email `{mid}`.", ""]
+
+
 def render_report_md(report: dict, artifacts: dict[str, str], msg_index: dict[str, dict]) -> str:
     rate = _rate(report)
     threshold = _threshold(report)
@@ -218,70 +261,116 @@ def render_report_md(report: dict, artifacts: dict[str, str], msg_index: dict[st
     lines: list[str] = []
     w = lines.append
 
-    w(f"# Observation report, {COMPANY}")
+    # ---- summary
+    w("# Where Enron loses time")
     w("")
-    w(f"Generated {report.get('generated_at', 'unknown')}. Corpus hash "
-      f"`{report.get('corpus_hash', 'unknown')}`.")
+    w(f"We read {int(_num(totals.get('messages'))):,} emails from four Enron employees and found "
+      "the work they repeat. Every figure below traces to the emails behind it.")
     w("")
-    w("## Totals")
-    w("")
-    w("| Measure | Value |")
-    w("|---|---|")
-    w(f"| Messages in corpus | {int(_num(totals.get('messages'))):,} |")
-    w(f"| Unique messages | {int(_num(totals.get('unique'))):,} |")
-    w(f"| Duplicates removed | {int(_num(totals.get('duplicates'))):,} |")
-    w(f"| Undated messages | {int(_num(totals.get('undated'))):,} |")
-    w(f"| Corpus span | {_fmt_num(span)} months |")
-    w(f"| Blended rate | {_fmt_money(rate)} per hour |")
-    w(f"| Hours per month, all opportunities (active window) | {_fmt_num(totals.get('hours_per_month'))} |")
-    w(f"| Dollars per month, all opportunities (active window) | {_fmt_money(totals.get('dollars_per_month'))} |")
-    w(f"| Hours per month, over the full corpus span | {_fmt_num(totals.get('hours_per_month_corpus_span'))} |")
-    w(f"| Dollars per month, over the full corpus span | {_fmt_money(totals.get('dollars_per_month_corpus_span'))} |")
-    w(f"| Artifact threshold | {_fmt_money(threshold)} per month |")
-    w("")
-    w(f"Frequency basis: {report.get('frequency_basis') or 'active_window'}. "
-      + str(report.get("frequency_note") or
-            "Headline figures use each process's active window, first match to last match. "
-            "The conservative figures spread the same matches over the full corpus span."))
+    w(f"**{_fmt_money(totals.get('dollars_per_month'))} a month** and "
+      f"**{_fmt_num(totals.get('hours_per_month'))} hours a month** across "
+      f"{len(opps)} repeated tasks. "
+      f"{_fmt_money(totals.get('dollars_per_month_corpus_span'))} if averaged over the full "
+      f"{_span_words(span)} archive.")
     w("")
 
-    w("## Ranked opportunities")
+    # ---- ranked table
+    w("## The repeated tasks, biggest first")
     w("")
-    w("| Rank | Opportunity | Process | Instances / month | Hours / month | Dollars / month | Running total | Dollars / month, full span | Artifact |")
-    w("|---|---|---|---|---|---|---|---|---|")
+    w("| Rank | Task | Times a month | Dollars a month | Running total | Document |")
+    w("|---|---|---|---|---|---|")
     running = 0.0
     for rank, opp in enumerate(opps, start=1):
         dollars = _num(opp.get("dollars_per_month"))
         running += dollars
         proc = procs.get(opp.get("process_id")) or {}
-        has_artifact = "yes" if opp.get("opportunity_id") in artifacts else "no"
+        oid = opp.get("opportunity_id")
+        doc = "ready" if oid in artifacts else ""
         w(
-            f"| {rank} | {_cell(opp.get('title'))} ({opp.get('opportunity_id')}) "
-            f"| {_cell(proc.get('name') or opp.get('process_id'))} "
+            f"| {rank} | {_cell(opp.get('title'))} ({oid})<br>"
+            f"<small>{_cell(proc.get('name') or opp.get('process_id'))}</small> "
             f"| {_fmt_num(opp.get('instances_per_month'))} "
-            f"| {_fmt_num(opp.get('hours_per_month'))} "
-            f"| {_fmt_money(dollars)} | {_fmt_money(running)} "
-            f"| {_fmt_money(opp.get('dollars_per_month_corpus_span'))} | {has_artifact} |"
+            f"| {_fmt_money(dollars)} | {_fmt_money(running)} | {doc} |"
         )
     w("")
 
+    # ---- per task
     for rank, opp in enumerate(opps, start=1):
         oid = opp.get("opportunity_id")
+        proc = procs.get(opp.get("process_id")) or {}
+        w(f"## {rank}. {opp.get('title')} ({oid})")
+        w("")
+        desc = _first_sentence(proc.get("description"))
+        if desc:
+            w(desc)
+            w("")
+        w(f"**What it costs.** {_cost_sentence(opp)}")
+        w("")
+        if opp.get("automation"):
+            w(f"**What to do about it.** {opp['automation']}")
+            w("")
+        evidence = (opp.get("evidence") or [])[:2]
+        if evidence:
+            w("**The proof.**")
+            w("")
+            for ev in evidence:
+                lines.extend(_quote_lines(ev, msg_index))
+        if oid in artifacts:
+            name = _artifact_name(opp)
+            w(f"**Ready-to-use document.** [{name}](artifacts/{name})")
+            w("")
+
+    # ---- method
+    w("## How the numbers were calculated")
+    w("")
+    w(
+        "Code parsed, deduplicated, and dated every email. A model read the archive in batches "
+        "and proposed the repeated tasks, each with word for word quotes as evidence. Every "
+        "quote was checked as an exact substring of the email it cites, and quotes that failed "
+        "were dropped rather than repaired. For each task the model proposed a match rule "
+        "(a subject pattern, body keywords, or a sender list) and code counted the "
+        "non-duplicate emails that match it. Times a month is that count divided by the task's "
+        "active window, the months between its first and last matching email, floored at one. "
+        "Hours a month is times a month multiplied by the minutes saved each time, divided by 60. "
+        f"Dollars a month is hours multiplied by the {_fmt_money(rate)} blended rate. The "
+        "minutes per time is a judgment with no ground truth in an email archive, so "
+        "everything downstream of it is arithmetic on an estimate."
+    )
+    w("")
+    w(str(report.get("frequency_note") or
+          "Each task is rated over its own active window. The conservative figure divides by "
+          "the full archive span instead."))
+    w("")
+    w(f"Documents are drafted for every task worth {_fmt_money(threshold)} a month or more. "
+      "Below that, the effort of adopting a new document outweighs what it saves in the "
+      "first quarter.")
+    w("")
+    w("| Measure | Value |")
+    w("|---|---|")
+    w(f"| Emails in the archive | {int(_num(totals.get('messages'))):,} |")
+    w(f"| Unique emails | {int(_num(totals.get('unique'))):,} |")
+    w(f"| Duplicates removed | {int(_num(totals.get('duplicates'))):,} |")
+    w(f"| Undated emails | {int(_num(totals.get('undated'))):,} |")
+    w(f"| Archive span | {_fmt_num(span)} months |")
+    w(f"| Blended rate | {_fmt_money(rate)} per hour |")
+    w(f"| Document threshold | {_fmt_money(threshold)} per month |")
+    w(f"| Hours per month, active windows | {_fmt_num(totals.get('hours_per_month'))} |")
+    w(f"| Dollars per month, active windows | {_fmt_money(totals.get('dollars_per_month'))} |")
+    w(f"| Hours per month, full archive span | {_fmt_num(totals.get('hours_per_month_corpus_span'))} |")
+    w(f"| Dollars per month, full archive span | {_fmt_money(totals.get('dollars_per_month_corpus_span'))} |")
+    w("")
+    w(f"Generated {report.get('generated_at', 'unknown')}. Corpus hash "
+      f"`{report.get('corpus_hash', 'unknown')}`.")
+    w("")
+
+    w("### The math for each task")
+    w("")
+    for rank, opp in enumerate(opps, start=1):
         proc = procs.get(opp.get("process_id")) or {}
         matches = _num(proc.get("match_count"))
         minutes = _num(opp.get("minutes_saved_per_instance"))
         active = _num(proc.get("active_months"), 1) or 1.0
-        w(f"## {rank}. {opp.get('title')} ({oid})")
-        w("")
-        w(f"Process: {proc.get('name') or opp.get('process_id')} ({opp.get('process_id')})")
-        w("")
-        if opp.get("automation"):
-            w(str(opp["automation"]))
-            w("")
-        if opp.get("rationale"):
-            w(f"Rationale. {opp['rationale']}")
-            w("")
-        w("The math.")
+        w(f"**{rank}. {opp.get('title')} ({opp.get('opportunity_id')})**")
         w("")
         w(f"- {int(matches):,} matched messages, {_window_text(proc)} = {_fmt_num(active)} active months")
         w(f"- {int(matches):,} / {_fmt_num(active)} = "
@@ -290,92 +379,38 @@ def render_report_md(report: dict, artifacts: dict[str, str], msg_index: dict[st
           f"{_fmt_num(opp.get('hours_per_month'))} hours per month")
         w(f"- {_fmt_num(opp.get('hours_per_month'))} hours x {_fmt_money(rate)} = "
           f"{_fmt_money(opp.get('dollars_per_month'))} per month")
-        w(f"- Over the full {_fmt_num(span)} month corpus span: "
+        w(f"- Over the full {_fmt_num(span)} month archive span: "
           f"{_fmt_num(_corpus_instances(proc, opp, span))} instances, "
           f"{_fmt_num(opp.get('hours_per_month_corpus_span'))} hours, "
           f"{_fmt_money(opp.get('dollars_per_month_corpus_span'))} per month")
         w(f"- Match rule: {_rule_text(proc.get('match_rule'))}")
         w("")
-        evidence = opp.get("evidence") or []
-        if evidence:
-            w("Evidence.")
-            w("")
-            for ev in evidence:
-                mid = ev.get("message_id")
-                meta = msg_index.get(mid) or {}
-                who = ev.get("from") or meta.get("from") or "unknown sender"
-                when = ev.get("date") or meta.get("date") or "undated"
-                subj = ev.get("subject") or meta.get("subject") or "no subject"
-                w(f"> {ev.get('quote', '')}")
-                w(f">")
-                w(f"> {who}, {when}, {_cell(subj)}. Message `{mid}`.")
-                w("")
-        if oid in artifacts:
-            w(f"Artifact: `run/artifacts/{Path(opp.get('artifact_path') or '').name or oid}` "
-              f"(rendered on the dashboard).")
-        else:
-            w(f"No artifact. Below the {_fmt_money(threshold)} per month threshold "
-              "or none was drafted.")
-        w("")
+        for ev in (opp.get("evidence") or [])[2:]:
+            lines.extend(_quote_lines(ev, msg_index))
 
-    w("## Processes")
+    w("### The processes behind the tasks")
     w("")
     for proc in report.get("processes") or []:
-        w(f"### {proc.get('name')} ({proc.get('process_id')})")
+        w(f"**{proc.get('name')} ({proc.get('process_id')})**")
         w("")
         if proc.get("description"):
             w(str(proc["description"]))
             w("")
-        if proc.get("actors"):
-            w("Actors: " + ", ".join(proc["actors"]))
-            w("")
         if proc.get("stall"):
-            w(f"Where it stalls. {proc['stall']}")
+            w(f"Where it gets stuck. {proc['stall']}")
+            w("")
+        if proc.get("actors"):
+            w("Who does it. " + ", ".join(proc["actors"]))
             w("")
         w(f"Matched {int(_num(proc.get('match_count'))):,} messages, {_window_text(proc)}, "
           f"{_fmt_num(proc.get('active_months'), 1)} active months. "
           f"{_fmt_num(proc.get('instances_per_month'))} per month over the active window, "
           f"{_fmt_num(proc.get('instances_per_month_corpus_span'))} per month over the full "
-          f"{_fmt_num(span)} month corpus span. "
-          f"Rule: {_rule_text(proc.get('match_rule'))}")
+          f"{_fmt_num(span)} month archive span. Rule: {_rule_text(proc.get('match_rule'))}")
         w("")
         for ev in proc.get("evidence") or []:
-            mid = ev.get("message_id")
-            meta = msg_index.get(mid) or {}
-            who = ev.get("from") or meta.get("from") or "unknown sender"
-            when = ev.get("date") or meta.get("date") or "undated"
-            w(f"> {ev.get('quote', '')}")
-            w(">")
-            w(f"> {who}, {when}. Message `{mid}`.")
-            w("")
-
-    w("## Threshold")
-    w("")
-    w(f"An artifact (SOP, email template, checklist, or template) is drafted for every "
-      f"opportunity at or above {_fmt_money(threshold)} per month. Below that, the "
-      "attention cost of adopting a new document exceeds what it saves in the first quarter.")
-    w("")
-    w("## Methodology")
-    w("")
-    w(
-        "Every message in the corpus was parsed, deduplicated, and dated by deterministic "
-        "code. A model read the corpus in batches and proposed recurring processes, each "
-        "with verbatim quotes as evidence. Every quote was checked as an exact substring "
-        "of the message it cites, and quotes that failed were dropped rather than repaired. "
-        "For each process the model proposed a deterministic match rule (a subject regex, "
-        "body keywords, sender list) and code counted the non-duplicate messages that match "
-        "it. The headline instances per month divides that count by the process's active "
-        "window, the months between its first and last matched message, floored at one. The "
-        f"conservative figure divides the same count by the full {_fmt_num(span)} month corpus "
-        "span and is shown beside every headline number. Hours per month is instances times the model's minutes saved "
-        f"per instance, divided by 60. Dollars per month is hours times the {_fmt_money(rate)} "
-        "blended rate. The minutes per instance figure is a judgment with no ground truth in "
-        "an email archive, so everything downstream of it is arithmetic on an estimate. "
-        "The matched message list for every process is on the dashboard so over-matching "
-        "can be seen directly."
-    )
-    w("")
-    return "\n".join(lines)
+            lines.extend(_quote_lines(ev, msg_index, with_subject=False))
+    return "\n".join(lines).rstrip() + "\n"
 
 
 # ---------------------------------------------------------------- build
