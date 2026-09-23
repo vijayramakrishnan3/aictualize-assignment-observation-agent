@@ -18,10 +18,13 @@ The rule underneath all of it was simple. Anything that has to be exactly right 
 regular code, not AI. That covers cleaning the emails, removing duplicates, checking
 quotes, counting, the math, and the dashboard.
 
-My computer's safety settings blocked one Claude session from launching another, so
-the full run was started step by step from my build session with the same helpers
-and instructions. Running /run afterwards from a terminal reused all of it, started
-no AI helpers, and finished in 1.3 minutes.
+The submitted run was started step by step from my build session, because my
+computer's safety settings blocked one Claude session from launching another. I then
+tested /run twice from a terminal. On this repo it reused everything, started no AI
+helpers, and finished in 1.3 minutes. On a fresh download from GitHub it ran every
+step from scratch, unattended, in 16 minutes, and its quote checker caught and threw
+out two quotes that were not word for word. That log is
+run/logs/fresh-download-run-20260923-145026.md.
 
 ## What I handed to AI helpers and why
 

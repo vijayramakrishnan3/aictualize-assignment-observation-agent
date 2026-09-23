@@ -201,3 +201,11 @@ data/synthesis.json 27 seconds after the second run completed. Caught by compari
 against a backup taken before the fix. Restored, and the report still matches the
 original exactly. Worth knowing for anyone driving Claude Code: stopping the parent
 does not stop a background agent it already launched.
+
+**Result. A full /run from a fresh GitHub download, 16 minutes, unattended.** Vijay
+ran it in a separate clone so the submitted results stayed intact. Extraction 9.2
+minutes, synthesis 4.3, drafting 1.5. The validator rejected 2 of 267 quotes, the first
+rejects of the project, which is the safety net working. The merge came out different
+from the submitted run, $559 a month, 15 processes, 3 artifacts, which is the expected
+run to run variation of model judgment, and the reason the submission keeps one run
+fixed. Log copied to run/logs/fresh-download-run-20260923-145026.md.
