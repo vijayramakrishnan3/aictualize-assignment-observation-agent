@@ -200,3 +200,5 @@ mark { background: var(--mark); color: var(--ink); padding: 2px 0; border-radius
   .equation .row { flex-direction: column; gap: 2px; }
   .equation .rhs { text-align: left; }
 }
+
+.doc.soft, .doc.soft:hover { background: transparent; color: #6b7280; border: 1px solid #e5e7eb; }

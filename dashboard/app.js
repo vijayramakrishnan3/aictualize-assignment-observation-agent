@@ -280,13 +280,14 @@
       running += Number(o.dollars_per_month || 0);
       var p = processById(o.process_id) || {};
       var href = oppHref(o.opportunity_id);
-      var doc = o.artifact_markdown ? ' <a class="doc" href="' + href + '#artifact">Document ready</a>' : "";
+      var doc = o.artifact_markdown ? ' <a class="doc" href="' + href + '#artifact">Document ready</a>'
+        : (o.artifact_type === "none" ? ' <span class="doc soft">Software fix, no document needed</span>' : "");
       return "<tr>" +
         '<td class="rank">' + (i + 1) + "</td>" +
-        '<td class="task"><a class="task-title" href="' + href + '">' + esc(o.title) + "</a>" + doc +
-        '<a class="task-proc" href="' + procHref(o.process_id) + '">' + esc(p.name || o.process_id) + "</a></td>" +
+        '<td class="task"><a class="task-title" href="' + href + '">' + esc(p.name || o.title) + "</a>" + doc +
+        '<span class="task-proc">Fix: ' + esc(o.title) + "</span></td>" +
         '<td class="num times"><a href="' + href + '#matched">' + num(o.instances_per_month, 1) + "</a></td>" +
-        '<td class="num"><a class="dollars" href="' + href + '">' + moneyDown(o.dollars_per_month) + "</a></td>" +
+        '<td class="num"><a class="dollars" href="' + href + '">' + money(o.dollars_per_month) + "</a></td>" +
         '<td class="num running">' + money(running) + "</td>" +
         "</tr>";
     }).join("");
@@ -297,15 +298,15 @@
       '<p class="lead">We read ' + int(t.messages) + " emails from four Enron employees and found the work they repeat. " +
       "Click any number to see the emails behind it.</p>" +
       '<div class="figures">' +
-      '<div class="figure"><a class="big" href="#/#ranked">' + money(t.dollars_per_month) + '</a><div class="label">per month</div>' +
+      '<div class="figure"><a class="big" href="#/#ranked">' + money(t.dollars_per_month) + '</a><div class="label">a month spent on repeated work</div>' +
       '<div class="aside">' + money(t.dollars_per_month_corpus_span) + " if averaged over the full " + spanYearsWord() + " archive</div></div>" +
-      '<div class="figure"><a class="big" href="#/#ranked">' + num(t.hours_per_month, 1) + '</a><div class="label">hours per month</div></div>' +
+      '<div class="figure"><a class="big" href="#/#ranked">' + num(t.hours_per_month, 1) + '</a><div class="label">hours a month of repeated work</div></div>' +
       "</div>" +
       "</header>" +
       '<section id="ranked">' +
       "<h2>The repeated tasks, biggest first</h2>" +
       '<div class="table-wrap"><table class="ranked"><thead><tr>' +
-      '<th class="rank">#</th><th>Task</th><th class="num times">Times a month</th><th class="num">Per month</th><th class="num">Running total</th>' +
+      '<th class="rank">#</th><th>Repeated task</th><th class="num times">Times a month</th><th class="num">Cost a month</th><th class="num">Running total</th>' +
       "</tr></thead><tbody>" + rows + "</tbody></table></div>" +
       "</section>" +
       footer();
@@ -331,8 +332,9 @@
 
     return backLink("#/", "All tasks") +
       '<p class="eyebrow">Task ' + (rankOf(id) || "") + " of " + (DATA.opportunities || []).length + "</p>" +
-      "<h1>" + esc(o.title) + "</h1>" +
+      "<h1>" + esc(p.name || o.title) + "</h1>" +
       '<p class="lead">' + esc(firstSentence(p.description)) + "</p>" +
+      '<p class="lead"><strong>The fix:</strong> ' + esc(o.title) + "</p>" +
 
       "<h2>What it costs</h2>" +
       '<p class="cost">Happens about <a href="#matched" data-anchor="matched">' + num(inst, 1) + " times a month</a>, takes about " +

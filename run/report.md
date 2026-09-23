@@ -6,23 +6,23 @@ We read 3,240 emails from four Enron employees and found the work they repeat. E
 
 ## The repeated tasks, biggest first
 
-| Rank | Task | Times a month | Dollars a month | Running total | Document |
+| Rank | Repeated task | Times a month | Cost a month | Running total | Document |
 |---|---|---|---|---|---|
-| 1 | Auto-generated weekly California Capacity Report (o14)<br><small>Weekly California Capacity Report</small> | 3.3 | $117 | $117 | ready |
-| 2 | Morning pre-flash reconciliation checklist for congestion and deal entries (o13)<br><small>Reconciling real-time congestion revenue and Enpower deals against settlements</small> | 3.1 | $51 | $169 | ready |
-| 3 | Nightly flow-without-deal exception report with a prefilled extension request (o01)<br><small>Extending or creating a Sitara deal ticket for meter flow with no covering deal</small> | 3.0 | $42 | $212 | ready |
-| 4 | Prefilled monthly activity and hours survey (o07)<br><small>Monthly activity driver and hours survey for the cost model</small> | 1.6 | $33 | $246 | ready |
-| 5 | Routed digital writeoff approval for small Strangers Gas volumes (o02)<br><small>Unaccounted for Gas writeoff approvals for stray meter volumes</small> | 1.8 | $31 | $277 | ready |
-| 6 | Auto-forward the Energy Market Report to the West desk list (o15)<br><small>Daily Energy Market Report forward to the West power desk</small> | 7.0 | $29 | $307 |  |
-| 7 | Parse nomination attachments straight into the scheduling system (o03)<br><small>Counterparty and plant nominations received as attachments and re-keyed</small> | 1.9 | $18 | $325 |  |
-| 8 | Deal entry checklist for book assignment and cross-system links (o11)<br><small>Moving deals between books and linking deal numbers across Tagg, Sitara, SCI, and EOL</small> | 1.3 | $18 | $344 |  |
-| 9 | Position notice email template generated from Enpower and CAPS (o12)<br><small>Real-time power desk short and long position notices</small> | 1.0 | $14 | $358 |  |
-| 10 | Structured on-call log filled in during the shift (o08)<br><small>Weekend and holiday on-call notes written up after the shift</small> | 0.5 | $13 | $372 |  |
-| 11 | Single book, curve, and access request form (o10)<br><small>Trading book, curve, and access setup requests in Tagg, TDS, and RiskTrac</small> | 0.8 | $13 | $386 |  |
-| 12 | Standard price verification request with invoice to Sitara match (o06)<br><small>Correcting Sitara deal prices and charges to match invoices and statements</small> | 0.9 | $13 | $399 |  |
-| 13 | Coverage notice email template backed by a standing roster (o09)<br><small>Out of office coverage handoff notices</small> | 1.3 | $12 | $412 |  |
-| 14 | Open variance log with age, owner, and automatic resend (o05)<br><small>Reconciling volume imbalances and variances with counterparties and interconnects</small> | 0.4 | $7 | $419 |  |
-| 15 | Standard procedure for revising nominations on flow drift, plant status, and pipeline cuts (o04)<br><small>Revising nominations when actual flow, plant output, or pipeline cuts change</small> | 1.1 | $7 | $427 |  |
+| 1 | Weekly California Capacity Report (o14)<br><small>Fix: Auto-generated weekly California Capacity Report</small> | 3.3 | $117 | $117 | ready |
+| 2 | Reconciling real-time congestion revenue and Enpower deals against settlements (o13)<br><small>Fix: Morning pre-flash reconciliation checklist for congestion and deal entries</small> | 3.1 | $52 | $169 | ready |
+| 3 | Extending or creating a Sitara deal ticket for meter flow with no covering deal (o01)<br><small>Fix: Nightly flow-without-deal exception report with a prefilled extension request</small> | 3.0 | $43 | $212 | ready |
+| 4 | Monthly activity driver and hours survey for the cost model (o07)<br><small>Fix: Prefilled monthly activity and hours survey</small> | 1.6 | $34 | $246 | ready |
+| 5 | Unaccounted for Gas writeoff approvals for stray meter volumes (o02)<br><small>Fix: Routed digital writeoff approval for small Strangers Gas volumes</small> | 1.8 | $31 | $277 | ready |
+| 6 | Daily Energy Market Report forward to the West power desk (o15)<br><small>Fix: Auto-forward the Energy Market Report to the West desk list</small> | 7.0 | $30 | $307 | software fix |
+| 7 | Counterparty and plant nominations received as attachments and re-keyed (o03)<br><small>Fix: Parse nomination attachments straight into the scheduling system</small> | 1.9 | $18 | $325 | software fix |
+| 8 | Moving deals between books and linking deal numbers across Tagg, Sitara, SCI, and EOL (o11)<br><small>Fix: Deal entry checklist for book assignment and cross-system links</small> | 1.3 | $18 | $344 |  |
+| 9 | Real-time power desk short and long position notices (o12)<br><small>Fix: Position notice email template generated from Enpower and CAPS</small> | 1.0 | $14 | $358 |  |
+| 10 | Weekend and holiday on-call notes written up after the shift (o08)<br><small>Fix: Structured on-call log filled in during the shift</small> | 0.5 | $14 | $372 |  |
+| 11 | Trading book, curve, and access setup requests in Tagg, TDS, and RiskTrac (o10)<br><small>Fix: Single book, curve, and access request form</small> | 0.8 | $14 | $386 |  |
+| 12 | Correcting Sitara deal prices and charges to match invoices and statements (o06)<br><small>Fix: Standard price verification request with invoice to Sitara match</small> | 0.9 | $13 | $399 |  |
+| 13 | Out of office coverage handoff notices (o09)<br><small>Fix: Coverage notice email template backed by a standing roster</small> | 1.3 | $13 | $412 |  |
+| 14 | Reconciling volume imbalances and variances with counterparties and interconnects (o05)<br><small>Fix: Open variance log with age, owner, and automatic resend</small> | 0.4 | $8 | $419 |  |
+| 15 | Revising nominations when actual flow, plant output, or pipeline cuts change (o04)<br><small>Fix: Standard procedure for revising nominations on flow drift, plant status, and pipeline cuts</small> | 1.1 | $7 | $427 |  |
 
 ## 1. Auto-generated weekly California Capacity Report (o14)
 

@@ -283,7 +283,7 @@ def render_report_md(report: dict, artifacts: dict[str, str], msg_index: dict[st
     # ---- ranked table
     w("## The repeated tasks, biggest first")
     w("")
-    w("| Rank | Task | Times a month | Dollars a month | Running total | Document |")
+    w("| Rank | Repeated task | Times a month | Cost a month | Running total | Document |")
     w("|---|---|---|---|---|---|")
     running = 0.0
     for rank, opp in enumerate(opps, start=1):
@@ -291,12 +291,12 @@ def render_report_md(report: dict, artifacts: dict[str, str], msg_index: dict[st
         running += dollars
         proc = procs.get(opp.get("process_id")) or {}
         oid = opp.get("opportunity_id")
-        doc = "ready" if oid in artifacts else ""
+        doc = "ready" if oid in artifacts else ("software fix" if opp.get("artifact_type") == "none" else "")
         w(
-            f"| {rank} | {_cell(opp.get('title'))} ({oid})<br>"
-            f"<small>{_cell(proc.get('name') or opp.get('process_id'))}</small> "
+            f"| {rank} | {_cell(proc.get('name') or opp.get('title'))} ({oid})<br>"
+            f"<small>Fix: {_cell(opp.get('title'))}</small> "
             f"| {_fmt_num(opp.get('instances_per_month'))} "
-            f"| {_fmt_money_down(dollars)} | {_fmt_money(running)} | {doc} |"
+            f"| {_fmt_money(dollars)} | {_fmt_money(running)} | {doc} |"
         )
     w("")
 

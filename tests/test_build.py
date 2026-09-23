@@ -557,7 +557,7 @@ def test_report_md_contents(built):
     assert f"**{t['hours_per_month']:,.1f} hours a month**" in summary
     assert f"${t['dollars_per_month_corpus_span']:,.0f} if averaged over the full one year archive" in summary
     # ranked table with the dashboard's columns, in dollar order, with a running total
-    assert "| Rank | Task | Times a month | Dollars a month | Running total | Document |" in md
+    assert "| Rank | Repeated task | Times a month | Cost a month | Running total | Document |" in md
     table_rows = [ln for ln in md.splitlines() if ln.startswith("| ") and "(o0" in ln]
     assert len(table_rows) == 5
     order = [ln.split("(o0")[1][0] for ln in table_rows]
