@@ -43,8 +43,9 @@ committed. Tests are `uv run pytest` and never call a model.
   paraphrased. Copied character for character from the message body, and copied again
   exactly when they move from extraction to synthesis to artifact.
 - **The model never states a frequency.** It proposes a `match_rule`. Code counts.
-- **Every stage is idempotent.** Outputs are keyed by content hash. Re-running on an
-  unchanged corpus does no work.
+- **Every stage is idempotent.** Outputs are keyed by content hash. The two model
+  stages after validation are checked with `uv run python -m pipeline.status` before
+  any agent is spawned. Re-running on an unchanged corpus dispatches no agents.
 - **Standard library only** in `pipeline/`. Python 3.12 through `uv`. Never the system
   `python3`.
 - **No em dashes anywhere.** Code, comments, docs, generated text.

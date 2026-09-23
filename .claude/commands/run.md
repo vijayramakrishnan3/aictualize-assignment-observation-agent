@@ -4,9 +4,11 @@ allowed-tools: Bash(uv run:*), Read, Write, Glob, Grep, Agent
 ---
 
 Run the full pipeline from SPEC.md Stage 9, start to finish, without asking questions.
-Every step below is mandatory and in order. Do not skip a step because its output
-already exists, the stages are cached and will return quickly on their own. Do not stop
-to ask for confirmation. The only reason to stop early is the reject-rate gate in step 4.
+Every step below is mandatory and in order. The code stages cache themselves and return
+in seconds when their output is current. The two model stages, synthesis and drafting,
+are checked with `pipeline.status` first and skipped when already done, so a re-run on
+an unchanged corpus dispatches no agents at all. Do not stop to ask for confirmation.
+The only reason to stop early is the reject-rate gate in step 4.
 
 Record the wall-clock time at the start of every step so the log in step 9 is accurate.
 Get timestamps with `uv run python -c "import datetime;print(datetime.datetime.now().isoformat(timespec='seconds'))"`.
@@ -71,9 +73,16 @@ running more of the pipeline.
 
 If every batch is at or under 40 percent, continue.
 
-## Step 5, synthesize
+## Step 5, synthesize, only if not already done
 
-Spawn one `synthesizer` subagent with `subagent_type: synthesizer` and this prompt:
+Run `uv run python -m pipeline.status synthesis`. If it prints `synthesis: done`, the
+existing `data/synthesis.json` was built from exactly the validated extractions on disk.
+Record "synthesis cached, 0 agents dispatched" and go to step 6. Do not spawn the
+synthesizer. Re-running it would spend tokens and could produce a different merge of
+the same observations, which would change every number downstream.
+
+If it prints `synthesis: pending`, spawn one `synthesizer` subagent with
+`subagent_type: synthesizer` and this prompt:
 
 ```
 Read every file matching data/validated/batch_*.json, merge the observations into
@@ -81,8 +90,9 @@ distinct processes, and write data/synthesis.json. Follow your instructions exac
 ```
 
 Wait for it. Record its one-line reply and the elapsed time. If `data/synthesis.json`
-does not exist afterwards, spawn it once more. If it still does not exist, stop, write
-the log, and report.
+was not rewritten, spawn it once more. If it still was not, stop, write the log, and
+report. When it succeeds, run `uv run python -m pipeline.status stamp-synthesis` so the
+next run knows this synthesis is current.
 
 ## Step 6, validate the synthesis and compute
 
@@ -97,20 +107,24 @@ process, `match_count` and whether every id in `expected_matches` is in
 `matched_message_ids`. A process whose expected ids do not match is a match-rule bug and
 goes in the log.
 
-## Step 7, draft artifacts in parallel
+## Step 7, draft artifacts in parallel, only the missing ones
 
-From `data/report.json`, collect every opportunity whose `dollars_per_month` is at or
-above the threshold and whose `artifact_type` is not `none`. Spawn one `drafter`
-subagent per opportunity, all in one message so they run concurrently, using
-`subagent_type: drafter` and this prompt with the real id:
+Run `uv run python -m pipeline.status drafts`. It lists the id of every opportunity at
+or above the threshold, with an artifact type other than `none`, whose artifact file
+does not exist yet. If it prints `drafts: done`, record "drafts cached, 0 agents
+dispatched" and go to step 8.
+
+Otherwise spawn one `drafter` subagent per listed id, all in one message so they run
+concurrently, using `subagent_type: drafter` and this prompt with the real id:
 
 ```
 Write the artifact for opportunity <opportunity_id>. Follow your instructions exactly.
 ```
 
-Wait for all of them. Each replies with the path it wrote. Record the paths. If a
-drafter returns without a path, dispatch it once more. Record the count of artifacts
-written and the elapsed time.
+Wait for all of them. Each replies with the path it wrote. If a drafter returns without
+a path, dispatch it once more. Then run `uv run python -m pipeline.compute` again so
+the report marks the new artifacts as present. Record the count of artifacts written
+and the elapsed time.
 
 ## Step 8, build and serve
 
