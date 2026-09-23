@@ -181,3 +181,23 @@ under "most likely wrong," and say which direction: low, not high.
 eight days rates as seven per month. That is arithmetically right and practically thin.
 It ranked sixth with artifact type none, so nothing was built on it. With another week,
 require a minimum active window or a minimum match count before an opportunity ranks.
+
+## 2026-09-23, the first real /run
+
+**Finding. /run re-ran synthesis on an unchanged corpus.** The code stages cached
+themselves, but nothing told the command that the synthesizer and drafters were
+already done, so it spawned the synthesizer again. That broke the re-run requirement
+and would have changed every number, because a second merge of the same observations
+is not identical. Fixed with pipeline/status.py: synthesis is current when a stamp
+matches the hash of the validated extractions, a draft is done when its file exists.
+
+**Result. Second /run, started by Vijay from a terminal, 1.3 minutes, zero agents.**
+Every stage reported cached, the report matched the original to the cent, and the log
+is run/logs/run-20260923-143505.md.
+
+**Finding. An interrupted session's subagent keeps running.** The first /run was
+stopped mid-synthesis, but its synthesizer finished anyway and overwrote
+data/synthesis.json 27 seconds after the second run completed. Caught by comparing
+against a backup taken before the fix. Restored, and the report still matches the
+original exactly. Worth knowing for anyone driving Claude Code: stopping the parent
+does not stop a background agent it already launched.
